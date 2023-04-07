@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="custom_treport_header_footer">
+    <div class="header">
+      <div class="row" t-att-style="report_header_style">
+      <h3>My Company</h3>
+      </div>
+      <div class="article o_report_layout_standard" >
+      <t t-out="0"/>
+      </div>
+      <div class="footer o_standard_footer">
+      <div class="row">
+        <h3>custom footer</h3>
+      </div>
+      </div>
+
+<!--      <img src="https://images-platform.99static.com//Xhp6w89XJvRiOrJjtX_K6P_QapA=/0x0:1000x1000/fit-in/500x500/99designs-contests-attachments/90/90012/attachment_90012485" />-->
+
+<!--      <p>123 Main Street, Anytown USA</p>-->
+    </div>
+  </template>
+
+
+
+<!--shop standard header-->
+  <template id="external_layout_standard_new">
+        <div t-attf-class="header " t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="o.shop_id.shop_logo" t-att-src="image_data_uri(o.shop_id.shop_logo)" style="max-height: 45px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="o.company_id.report_header" name="moto"/>
+            </div>
+            <div t-if="o.shop_id.shop_logo or o.company_id.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <span t-if="o.company_id.company_details" t-field="o.company_id.company_details"></span>
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard  {{  'o_layout_background' if o.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % o.company_id.layout_background_image.decode('utf-8') if o.company_id.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if o.company_id.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div t-field="o.company_id.report_footer"/>
+                </ul>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+<!--    shop bold header-->
+    <template id="external_layout_bold_new">
+        <div t-attf-class="header o_company_#{o.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="o_clean_header">
+            <div class="row">
+                <div class="col-6">
+                    <img t-if="o.shop_id.shop_logo" t-att-src="image_data_uri(o.shop_id.shop_logo)" alt="Logo"/>
+                </div>
+                <div class="col-5 offset-1" name="company_address">
+                    <ul class="list-unstyled">
+                        <strong><li t-if="o.company_id.name"><span t-field="o.company_id.name"/></li></strong>
+                        <li t-if="forced_vat or o.company_id.vat">
+                            <t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-if="forced_vat" t-esc="forced_vat"/>
+                            <span t-else="" t-field="o.company_id.vat"/>
+                        </li>
+                        <li t-if="o.company_id.phone">Tel: <span class="o_force_ltr" t-field="o.company_id.phone"/></li>
+                        <li t-if="o.company_id.email"><span t-field="o.company_id.email"/></li>
+                        <li t-if="o.company_id.website"><span t-field="o.company_id.website"/></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_bold o_company_#{o.company_id.id}_layout {{  'o_layout_background' if o.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % o.company_id.layout_background_image.decode('utf-8') if o.company_id.layout_background_image and o.company_id.layout_background == 'Custom' else ('/base/static/img/bg_background_template.jpg' if o.company_id.layout_background == 'Geometric' else '') }});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_clean_footer o_company_#{o.company_id.id}_layout">
+            <div class="row">
+                <div class="col-4">
+                    <span t-field="o.company_id.report_footer"/>
+                </div>
+                <div class="col-4">
+                    <span t-if="o.company_id.company_details" t-field="o.company_id.company_details"/>
+                </div>
+                <div class="col-3">
+                    <h5 class="mt0 mb0" t-field="o.company_id.report_header"/>
+                </div>
+                <div class="col-1">
+                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-right text-center">
+                        <li class="list-inline-item"><strong><span class="page"/></strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+registry_app.access_registry_app_shop,access_registry_app_shop,registry_app.model_registry_app_shop,base.group_user,1,1,1,1
+registry_app.access_registry_app_sales,access_registry_app_sales,registry_app.model_registry_app_sales,base.group_user,1,1,1,1
+registry_app.access_registry_app_registry_app,access_registry_app_registry_app,registry_app.model_registry_app_registry_app,base.group_user,1,1,1,1
+registry_app.access_registry_app_purchase,access_registry_app_purchase,registry_app.model_registry_app_purchase,base.group_user,1,1,1,1
+registry_app.access_registry_app_client,access_registry_app_client,registry_app.model_registry_app_client,base.group_user,1,1,1,1
+registry_app.access_registry_app_cooperatives,access_registry_app_cooperatives,registry_app.model_registry_app_cooperatives,base.group_user,1,1,1,1
+registry_app.access_regsmsbroadcast,access_regsmsbroadcast,registry_app.model_regsmsbroadcast,base.group_user,1,1,1,1

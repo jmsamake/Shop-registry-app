@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- category -->
+        <record model="ir.module.category" id="module_category_registry_app">
+            <field name="name">Registry App</field>
+            <field name="description">This is to enable Registry App user groups </field>
+            <field name="sequence">1</field>
+        </record>
+
+        <!-- group 1. Global User -->
+        <record id="registry_app_global_user" model="res.groups">
+            <field name="name">Global user</field>
+            <field name="category_id" ref="module_category_registry_app"/>
+        </record>
+
+
+          <!-- group 2.Cooperative Owner -->
+        <record id="registry_app_cooperative_owner" model="res.groups">
+            <field name="name">Cooperative Owner</field>
+            <field name="comment">Cooperative Owners</field>
+            <field name="category_id" ref="module_category_registry_app"/>
+        </record>
+
+         <!-- group 3. Shop Owner -->
+        <record id="registry_app_shop_owner" model="res.groups">
+            <field name="name">Shop Owner</field>
+            <field name="comment">Shop Owners</field>
+            <field name="category_id" ref="module_category_registry_app"/>
+        </record>
+
+        <!-- group 4. User -->
+        <record id="registry_app_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="comment">Users</field>
+            <field name="category_id" ref="module_category_registry_app"/>
+        </record>
+
+    </data>
+</odoo>
