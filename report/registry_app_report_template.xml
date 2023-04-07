@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_registry_log">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="registry_app.external_layout_bold_new">
+                        <div class="page">
+                            <div class="row mt-3">
+                                <div class="col-md-3 col-sm-12 mb-3">
+                                    <h3>Registry Report</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h4><span t-field="o.name"></span></h4>
+                                    <ul class="list-unstyled">
+                                        <li>Salesperson: <strong><span
+                                                t-field="o.registry_user_id.name"/></strong></li>
+                                        <li>Shop: <strong><span
+                                                t-field="o.shop_id.name"/></strong></li>
+<!--                                        <li>Total Sales: <strong><span-->
+<!--                                                t-field="o.total_sales"/></strong></li>-->
+<!--                                        <li>Total Purchase: <strong><span-->
+<!--                                                t-field="o.total_purchase"/></strong></li>-->
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <hr></hr>
+                                    <h4 class="pt-1">Sales</h4>
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark text-white">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Client</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr t-foreach="o.sale_app_ids"
+                                                t-as="sale">
+                                                <td><span
+                                                        t-field="sale.product_id"/></td>
+                                                <td><span
+                                                        t-field="sale.quantity"/></td>
+                                                <td><span
+                                                        t-field="sale.client_id"/></td>
+                                                <td><span
+                                                        t-field="sale.price"/></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="table-secondary">
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td scope="row" class="text-right"><strong>Total Sales</strong></td>
+                                                <td><strong><span
+                                                t-field="o.total_sales"/></strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <h4 class="pt-1">Purchases</h4>
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark text-white">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Cost</th>
+                                                <!--    <th>Amount</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.purchase_app_ids"
+                                                t-as="purchase">
+                                                <td><span
+                                                        t-field="purchase.product_id"/></td>
+                                                <td><span
+                                                        t-field="purchase.cost"/></td>
+                                                <!--                                            <td>[[ purchase.amount ]]</td>-->
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="table-secondary">
+                                            <tr>
+                                                <td scope="row" class="text-right"><strong>Total Purchase</strong></td>
+                                                <td><strong><span
+                                                t-field="o.total_purchase"/></strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

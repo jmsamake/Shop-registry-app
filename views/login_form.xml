@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tmp_sales_data" name="Sale Details">
+<!--        <t t-call="website.layout">-->
+		<link rel="stylesheet" href="/registry_app/static/src/css/style.css"></link>
+      <div class="login-box">
+		<h1>Login</h1>
+		<form action="/my/cus/login">
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" />
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" />
+			<input type="submit" value="Login"/>
+		</form>
+	</div>
+
+<!--        </t>-->
+    </template>
+</odoo>
