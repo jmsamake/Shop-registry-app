@@ -1,22 +1,22 @@
-from odoo import models, fields,api
+from odoo import models, fields,api,_
 
 
 class RegistryAppClient(models.Model):
     _name = 'registry_app.client'
     _description = 'TPE Member'
 
-    client_number = fields.Char(string='Client Number', )
+    client_number = fields.Char(string=_('Client Number'), )
     # name = fields.Char(string='Name', required=True)
     partner_id = fields.Many2one('res.partner', delegate=True,
                                  ondelete='cascade', required=True)
-    phone = fields.Char(related='partner_id.phone', store=True, readonly=False)
-    email = fields.Char(related='partner_id.email', store=True, readonly=False)
-    street = fields.Char(related='partner_id.street', store=True,
+    phone = fields.Char(related='partner_id.phone', store=True, readonly=False,string=_('Phone'))
+    email = fields.Char(related='partner_id.email', store=True, readonly=False,string=_('Email'))
+    street = fields.Char(related='partner_id.street', store=True,string=_('Street'),
                          readonly=False)
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
-    active = fields.Boolean(string='Active', default=True)
+    active = fields.Boolean(string=_('Active'), default=True)
 
 
 # class SaleCustom(models.Model):

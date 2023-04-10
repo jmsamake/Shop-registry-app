@@ -8,16 +8,16 @@ class RegistryAppShop(models.Model):
     _name = 'registry_app.shop'
     _description = 'Registry App Shop'
 
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string=_('Name'), required=True)
     user_id = fields.Many2one('res.users', string='Shop Owner',
                               help="If set,the shop is only visible for this user for this user.")
-    shop_users_ids = fields.Many2many('res.users', copy=False, string="Users")
+    shop_users_ids = fields.Many2many('res.users', copy=False, string=_("Users"))
     cooperative_id = fields.Many2one('registry_app.cooperatives', help="This shop belongs to this particular cooperative")
-    shop_logo = fields.Image(string="Logo")
-    company_id = fields.Many2one('res.company', string='Company',
+    shop_logo = fields.Image(string=_("Logo"))
+    company_id = fields.Many2one('res.company', string=_('Company'),
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
-    active = fields.Boolean(string='Active', default=True)
+    active = fields.Boolean(string=_('Active'), default=True)
 
     # user_name = fields.Char(string='User Name',
     #                         help="Provide a user name for login")

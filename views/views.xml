@@ -45,7 +45,7 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button string="test" type="object"
+                        <button string="Close Input" type="object"
                                 name="close_input" data-hotkey="z"
                                 class="oe_highlight"
                         />
@@ -55,9 +55,6 @@
                         <button string="Send SMS" type="object"
                                 name="send_sms" class="oe_highlight"
                                 attrs="{'invisible': [('state', '=', 'opened')]}"
-                        />
-                        <button string="Close" type="object"
-                                name="closed" class="oe_highlight"
                         />
                         <button string="Cancel" type="object"
                                 name="cancel"/>
@@ -305,86 +302,6 @@
 
 
 
-        <!--registry_app.shop kanban -->
-        <record id='registry_app_shop_view_kanban' model='ir.ui.view'>
-            <field name="name">registry_app.shop.kanban</field>
-            <field name="model">registry_app.shop</field>
-            <field name="arch" type="xml">
-                <kanban class="o_kanban_dashboard">
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div>
-                                <div>
-                                    <div class="o_kanban_card_header">
-                                        <div class="o_kanban_card_header_title mb16">
-                                            <div class="o_primary">
-                                                <strong>
-                                                    <field name="name"/>
-                                                </strong>
-                                            </div>
-                                        </div>
-                                        <div class="o_kanban_manage_button_section">
-                                            <a class="o_kanban_manage_toggle_button"
-                                               href="#"><i
-                                                    class="fa fa-ellipsis-v"
-                                                    role="img"
-                                                    aria-label="Manage"
-                                                    title="Manage"/></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container o_kanban_card_content">
-                                    <div class="row">
-                                        <!--                                        <button class="btn btn-primary"-->
-                                        <!--                                                name="login_btn"-->
-                                        <!--                                                type="object">Login-->
-                                        <!--                                        </button>-->
-                                        <button class="btn btn-primary"
-                                                name="open_registry_shop"
-                                                type="object">Open shop
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="container o_kanban_card_manage_pane dropdown-menu"
-                                     role="menu">
-                                    <div class="row">
-                                        <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
-                                            <div role="menuitem"
-                                                 class="o_kanban_card_manage_title">
-                                                <span>View</span>
-                                            </div>
-                                            <div role="menuitem">
-                                                <a name="%(registry_app_filtered_action_window)d"
-                                                   type="action">Orders</a>
-                                            </div>
-                                            <div role="menuitem">
-                                                <a href="#">Sessions</a>
-                                            </div>
-                                        </div>
-                                        <!--                                        <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">-->
-                                        <!--                                            <div role="menuitem"-->
-                                        <!--                                                 class="o_kanban_card_manage_title">-->
-                                        <!--                                                <span>Reporting</span>-->
-                                        <!--                                            </div>-->
-                                        <!--                                            <div role="menuitem">-->
-                                        <!--                                                <a href="#">Orders</a>-->
-                                        <!--                                            </div>-->
-                                        <!--                                        </div>-->
-                                    </div>
-                                    <div t-if="widget.editable"
-                                         class="o_kanban_card_manage_settings row" style="padding-top: 3px;margin-bottom: 0px;">
-                                        <div role="menuitem" class="col-12">
-                                            <button name="open_settings"
-                                                type="object" class="btn btn-link">Settings</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
 
 
 
@@ -459,6 +376,74 @@
             <field name="name">Broadcast SMS</field>
             <field name="res_model">regsmsbroadcast</field>
             <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--registry_app.shop kanban -->
+        <record id='registry_app_shop_view_kanban' model='ir.ui.view'>
+            <field name="name">registry_app.shop.kanban</field>
+            <field name="model">registry_app.shop</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_dashboard">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div>
+                                <div>
+                                    <div class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title mb16">
+                                            <div class="o_primary">
+                                                <strong>
+                                                    <field name="name"/>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="o_kanban_manage_button_section">
+                                            <a class="o_kanban_manage_toggle_button"
+                                               href="#"><i
+                                                    class="fa fa-ellipsis-v"
+                                                    role="img"
+                                                    aria-label="Manage"
+                                                    title="Manage"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <div class="row">
+                                        <button class="btn btn-primary"
+                                                name="open_registry_shop"
+                                                type="object">Open shop
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_manage_pane dropdown-menu"
+                                     role="menu">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                            <div role="menuitem"
+                                                 class="o_kanban_card_manage_title">
+                                                <span>View</span>
+                                            </div>
+                                            <div role="menuitem">
+                                                <a name="%(registry_app_filtered_action_window)d"
+                                                   type="action">Orders</a>
+                                            </div>
+                                            <div role="menuitem">
+                                                <a href="#">Sessions</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div t-if="widget.editable"
+                                         class="o_kanban_card_manage_settings row" style="padding-top: 3px;margin-bottom: 0px;">
+                                        <div role="menuitem" class="col-12">
+                                            <button name="open_settings"
+                                                type="object" class="btn btn-link">Settings</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
         </record>
 
         <!--action registry app shop-->
@@ -572,13 +557,7 @@
         <menuitem name="SMS Log" id="registry_app_sms"
                   parent="registry_app.menu_root"
                   action="sms_broadcast"/>
-        <!-- actions -->
 
-
-        <!--    <menuitem name="List" id="registry_app.menu_1_list" parent="registry_app.registries"-->
-        <!--              action="registry_app.action_window"/>-->
-        <!--    <menuitem name="Server to list" id="registry_app" parent="registry_app.menu_2"-->
-        <!--              action="registry_app.action_server"/>-->
 
     </data>
 </odoo>

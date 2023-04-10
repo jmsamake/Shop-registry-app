@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-import mysql.connector
+from odoo import models, fields, api,_
 
 
 class RegistryApp(models.Model):
@@ -9,49 +8,37 @@ class RegistryApp(models.Model):
     _description = 'Registry App'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name', required=True, tracking=True)
+    name = fields.Char(string=_('Name'), required=True, tracking=True)
     shop_id = fields.Many2one('registry_app.shop')
     sale_app_ids = fields.One2many('registry_app.sales', 'registry_app_id')
     purchase_app_ids = fields.One2many('registry_app.purchase',
                                        'registry_app_id')
-    total_sales = fields.Float(string='Total Sales',
+    total_sales = fields.Float(string=_('Total Sales'),
                                compute='_compute_registry_sale_total',
                                store=True)
-    total_purchase = fields.Float(string='Total Purchase',
+    total_purchase = fields.Float(string=_('Total Purchase'),
                                   compute='_compute_registry_purchase_total',
                                   store=True)
     description = fields.Text()
     state = fields.Selection(selection=[
-        ('opened', 'Opened'),
-        ('validated', 'Validated'),
-        ('closed', 'Closed'),
-        ('cancelled', 'Cancelled'),
+        ('opened', _('Opened')),
+        ('validated', _('Validated')),
+        ('closed', _('Closed')),
+        ('cancelled', _('Cancelled')),
         # ('archived', 'Archived'),
     ], string="State",
         default='opened')
     registry_user_id = fields.Many2one('res.users', copy=False, tracking=True,
-                                       string='Salesperson',
+                                       string=_('Salesperson'),
                                        default=lambda self: self.env.user)
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged user Company")
-    active = fields.Boolean(string='Active', default=True)
+    active = fields.Boolean(string=_('Active'), default=True)
 
     def close_input(self):
         print('entereed')
-        cnx = mysql.connector.connect(
-            host='127.0.0.1',
-            port=3306,
-            database='mysql',
-            user='root',
-            password='Qwerty@123')
-        print('Cnx', cnx)
-        cursor = cnx.cursor(dictionary=True, buffered=True)
-        cursor.execute("SELECT * FROM movies;")
-        row = cursor.fetchone()
-        print('row', row)
-        print('Current')
-        cnx.close()
+        self.state = 'closed'
 
     def validate(self):
         self.state = 'validated'
@@ -74,9 +61,6 @@ class RegistryApp(models.Model):
 
     def cancel(self):
         self.state = 'cancelled'
-
-    def closed(self):
-        self.state = 'closed'
 
     def reset(self):
         self.state = 'opened'

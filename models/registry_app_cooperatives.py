@@ -7,13 +7,13 @@ class RegistryAppCooperatives(models.Model):
     _name = 'registry_app.cooperatives'
     _description = 'Cooperatives'
 
-    name = fields.Char(string='Name', required=True,
-                       help='Name of the Cooperative')
-    shop_ids = fields.Many2many('registry_app.shop', copy=False, string="Shops",
-                                help='List of shops that comes under this cooperatives')
-    user_id = fields.Many2one('res.users', string='Cooperative Admin',
-                              help="Set the admin user for this cooperative")
-    active = fields.Boolean(string='Active', default=True)
+    name = fields.Char(string=_('Name'), required=True,
+                       help=_('Name of the Cooperative'))
+    shop_ids = fields.Many2many('registry_app.shop', copy=False, string=_('Shops'),
+                                help=_('List of shops that comes under this cooperatives'))
+    user_id = fields.Many2one('res.users', string=_('Cooperative Admin'),
+                              help=_('Set the admin user for this cooperative'))
+    active = fields.Boolean(string=_('Active'), default=True)
 
     def goto_registry_shop(self):
         """Open all shops interface."""
@@ -66,18 +66,22 @@ inner join product_template as pdp on pdp.id = rp.product_id"""
             sale_list.clear()
             purchase_list.clear()
             for item in rec.sale_app_ids:
-                sale_list.append((item.product_id.display_name, item.price, item.quantity, item.client_id.name))
+                sale_list.append((item.product_id.display_name, item.price,
+                                  item.quantity, item.client_id.name))
             for exp in rec.purchase_app_ids:
                 purchase_list.append((exp.product_id.display_name, exp.cost))
             print(sale_list, "sale_list")
             print(purchase_list, "purchase_list")
             reg_dict = {
                 'name': rec.name,
-                'sale_app_ids':sale_list,
-                'purchase_app_ids': rec.purchase_app_ids,
+                'sale_app_ids': sale_list,
+                'purchase_app_ids': purchase_list,
+                'total_sales': rec.total_sales,
+                'total_purchase': rec.total_purchase,
+                'shop_owner': rec.registry_user_id.name,
+                'shop': rec.shop_id.name
 
             }
             ret_list.append(reg_dict)
         print(ret_list)
         return ret_list
-
