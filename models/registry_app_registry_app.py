@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api,_
+from odoo import models, fields, api, _
+from datetime import datetime
+
+from odoo.exceptions import ValidationError
 
 
 class RegistryApp(models.Model):
@@ -8,7 +11,15 @@ class RegistryApp(models.Model):
     _description = 'Registry App'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string=_('Name'), required=True, tracking=True)
+    name = fields.Char(string=_('Name'), required=True, tracking=True,
+                       readonly=True, copy=False,
+                       default=lambda self: 'Registry Log - ' +
+                                            fields.Date.context_today(
+                                                self).strftime('%d-%m-%Y'))
+
+    date = fields.Date(string=_('Date'), default=fields.Date.context_today,
+                       readonly=True, copy=False, required=True)
+
     shop_id = fields.Many2one('registry_app.shop')
     sale_app_ids = fields.One2many('registry_app.sales', 'registry_app_id')
     purchase_app_ids = fields.One2many('registry_app.purchase',
@@ -106,7 +117,25 @@ class RegistryApp(models.Model):
         print(values, 'values')
         return super(RegistryApp, self).create(values)
 
+    @api.constrains('date')
+    def _check_unique_per_day(self):
+        """Restrict One record per day"""
+        for record in self:
+            domain = [
+                ('date', '=', record.date),
+                ('id', '!=', record.id),
+                ('shop_id', '=', record.shop_id.id),
+            ]
+            count = self.search_count(domain)
+            if count > 0:
+                raise ValidationError('Only one record allowed per day.')
+
     # def my_server_action(self):
     #     action_values = self.env.ref('product.product_template_action').read()[0]
     #
     #     return action_values
+
+    def get_context_today(self):
+        print('get_context_date')
+        print(fields.Date.context_today(self))
+        return fields.Date.context_today(self)

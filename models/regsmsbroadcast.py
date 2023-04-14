@@ -9,10 +9,10 @@ class SmsBroadcast(models.Model):
     _rec_name = 'name'
     _description = 'SMS Notification'
 
-    name = fields.Char(string="SMS Notification", required=True)
+    name = fields.Char(string=_("SMS Notification"), required=True)
     broadcast_date = fields.Datetime(string="Broadcast Date")
 
-    clients_ids = fields.Many2many('res.users', string=_('Clients'),
+    clients_ids = fields.Many2many('registry_app.client', string=_('Clients'),
                                    required=True)
     message = fields.Text(string=_("Message"), required=True)
     active = fields.Boolean(string=_("Active"), default=True)

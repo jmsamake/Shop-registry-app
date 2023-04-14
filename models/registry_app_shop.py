@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api,_
-from odoo.exceptions import ValidationError
+from odoo import models, fields, api, _
 
 
 class RegistryAppShop(models.Model):
@@ -11,8 +10,10 @@ class RegistryAppShop(models.Model):
     name = fields.Char(string=_('Name'), required=True)
     user_id = fields.Many2one('res.users', string='Shop Owner',
                               help="If set,the shop is only visible for this user for this user.")
-    shop_users_ids = fields.Many2many('res.users', copy=False, string=_("Users"))
-    cooperative_id = fields.Many2one('registry_app.cooperatives', help="This shop belongs to this particular cooperative")
+    shop_users_ids = fields.Many2many('res.users', copy=False,
+                                      string=_("Users"))
+    cooperative_id = fields.Many2one('registry_app.cooperatives',default=lambda self: self.env.context.get('cooperative_id', None),
+                                     help="This shop belongs to this particular cooperative")
     shop_logo = fields.Image(string=_("Logo"))
     company_id = fields.Many2one('res.company', string=_('Company'),
                                  default=lambda self: self.env.user.company_id,
@@ -33,11 +34,32 @@ class RegistryAppShop(models.Model):
         return {
             'res_model': 'registry_app.registry_app',
             'type': 'ir.actions.act_window',
-            'view_mode': 'form',
+            'view_mode': 'tree',
             'target': 'current',
             'view_id': view_id,
             'context': {'shop_id': self.id},
         }
+
+    def open_tree_view(self):
+        context = {'shop_id': self.id}
+        domain = [('shop_id', '=', self.id)]
+        name = f'Registries for %s' % self.name
+        action = self.env.ref('registry_app.registry_app_action_window').read()[0]
+        action['context'] = context
+        action['domain'] = domain
+        action['name'] = name
+        return action
+        # view_id = self.env.ref('registry_app.registry_app_list').id,
+        # return {
+        #     'name': f'Registries for {self.name}' or 'Registries',
+        #     'res_model': 'registry_app.registry_app',
+        #     'type': 'ir.actions.act_window',
+        #     'view_mode': 'tree',
+        #     'target': 'current',
+        #     'view_id': view_id,
+        #     'context': {'shop_id': self.id},
+        #     'domain': [('shop_id', '=', self.id)]
+        # }
 
     @api.model
     def create(self, values):
@@ -61,24 +83,24 @@ class RegistryAppShop(models.Model):
         }
 
 # def login_btn(self):
-    #     view_id = self.env.ref('registry_app.login_wizard_view').id
-    #     return {
-    #         'name': '',
-    #         'res_model': 'login.wizard',
-    #         'type': 'ir.actions.act_window',
-    #         'view_mode': 'form',
-    #         'target': 'new',
-    #         'view_id': view_id,
-    #         'context': {'shop_id': self.id},
-    #     }
+#     view_id = self.env.ref('registry_app.login_wizard_view').id
+#     return {
+#         'name': '',
+#         'res_model': 'login.wizard',
+#         'type': 'ir.actions.act_window',
+#         'view_mode': 'form',
+#         'target': 'new',
+#         'view_id': view_id,
+#         'context': {'shop_id': self.id},
+#     }
 
-    # @api.constrains('password')
-    # def check_password_strength(self):
-    #     """password length check"""
-    #     if self.password:
-    #         if len(self.password) < 5:
-    #             raise ValidationError(
-    #                 'Please provide a password with at least 5 characters')
+# @api.constrains('password')
+# def check_password_strength(self):
+#     """password length check"""
+#     if self.password:
+#         if len(self.password) < 5:
+#             raise ValidationError(
+#                 'Please provide a password with at least 5 characters')
 
 
 # class LoginWizard(models.TransientModel):
@@ -107,6 +129,5 @@ class RegistryAppShop(models.Model):
 #             return action
 #         else:
 #             raise ValidationError(_('Invalid username or password'))
-
 
 

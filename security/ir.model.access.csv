@@ -6,3 +6,6 @@ registry_app.access_registry_app_purchase,access_registry_app_purchase,registry_
 registry_app.access_registry_app_client,access_registry_app_client,registry_app.model_registry_app_client,base.group_user,1,1,1,1
 registry_app.access_registry_app_cooperatives,access_registry_app_cooperatives,registry_app.model_registry_app_cooperatives,base.group_user,1,1,1,1
 registry_app.access_regsmsbroadcast,access_regsmsbroadcast,registry_app.model_regsmsbroadcast,base.group_user,1,1,1,1
+registry_app.access_registry_app_product,access_registry_app_product,registry_app.model_registry_app_product,base.group_user,1,1,1,1
+registry_app.access_registry_app_users,access_registry_app_users,registry_app.model_registry_app_users,base.group_user,1,1,1,1
+access_menu_password,access_menu_password,model_menu_password,base.group_user,1,1,1,1

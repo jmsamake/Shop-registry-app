@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registry_app_website_shops" name="Shops">
+    <t t-call="website.layout">
+        <div class="container">
+            <h1 class="text-center p-2">Shops</h1>
+            <div class="row">
+                <t t-foreach="shops" t-as="shop">
+                    <div class="col-sm-4 mb-3">
+                        <div class="card h-100 border" t-att-data-coop-id="shop.id">
+                             <div class="card-header p-0 bg-transparent" >
+                                <div class="text-right">
+                                    <a t-attf-href="/shop_settings/{{ shop.id }}/registries" class="btn btn-link"><i class="fa fa-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" t-esc="shop.name"></h5>
+                                <div>
+                                    <a class="btn btn-primary" t-attf-href="/shops/{{ shop.id }}/registries">Open Registry</a>
+                                    <a class="btn btn-primary" t-attf-href="/registry_app_shop/form/{{ shop.id }}">Open s</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+<!--         <style>-->
+<!--        -->
+<!--    </style>-->
+</template>
+
+
+<template id="registry_app_shop_form_template" name="Registry App Shop Form">
+    <t t-call="website.layout">
+   <form method="post" action="/registry_app/shop/create" class="container">
+    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+    <div class="form-group">
+      <label class="col-form-label">Name</label>
+        <div>
+        <input type="text" name="date" class="form-control" t-att-value="date" required="required"/>
+      </div>
+    </div>
+
+       <div class="form-group">
+      <label class="col-form-label">Date</label>
+
+        <div>
+        <input type="text" name="date" class="form-control" t-att-value="date" required="required"/>
+      </div>
+    </div>
+
+       <div class="form-group">
+      <label class="col-form-label">Shop Id</label>
+      <div>
+        <select name="shop" class="form-control" required="required">
+            <option t-att-value="shop.id"><t t-esc="shop.name"/></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Shop Owner</label>
+      <div>
+        <select name="user_id" class="form-control" required="required">
+          <t t-foreach="users" t-as="user">
+            <option t-att-value="user.id"><t t-esc="user.name"/></option>
+          </t>
+        </select>
+      </div>
+    </div>
+<!--    <div class="form-group">-->
+<!--      <label class="col-form-label">Users</label>-->
+<!--      <div>-->
+<!--        <select multiple="multiple" name="shop_users_ids" class="form-control" required="required">-->
+<!--          <t t-foreach="users" t-as="user">-->
+<!--            <option t-att-value="user.id"><t t-esc="user.name"/></option>-->
+<!--          </t>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
+         <div class="form-group">
+      <label class="col-form-label">State</label>
+      <div>
+        <select name="state" class="form-control">
+            <option value="opened">Opened</option>
+            <option value="validated">Validated</option>
+            <option value="closed">Closed</option>
+            <option value="draft">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Cooperative</label>
+      <div>
+        <select name="cooperative_id" class="form-control" required="required">
+          <option t-att-value="shop.cooperative_id"><t t-esc="shop.cooperative_id.name"/></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+    </t>
+</template>
+
+
+
+
+</odoo>

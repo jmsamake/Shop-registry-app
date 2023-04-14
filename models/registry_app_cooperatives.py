@@ -17,20 +17,28 @@ class RegistryAppCooperatives(models.Model):
 
     def goto_registry_shop(self):
         """Open all shops interface."""
-        self.ensure_one()
-        view_id = self.env.ref(
-            'registry_app.registry_app_shop_view_kanban').id
-        print('view_id', view_id)
-        context = self._context.copy()
-        return {
-            'name': _('Shops'),
-            'res_model': 'registry_app.shop',
-            'type': 'ir.actions.act_window',
-            'view_mode': 'kanban',
-            'target': 'current',
-            'view_id': view_id,
-            'context': {'cooperative_id': self.id},
-        }
+        view_id = self.env.ref('registry_app.registry_app_shop_action_window').id
+        action = self.env.ref('registry_app.registry_app_shop_action_window').read()[0]
+        action['target'] = 'current'
+        action['view_mode'] = 'tree,kanban,form'
+        action['context'] = {'cooperative_id': self.id}
+        action['domain'] = [('cooperative_id', '=', self.id)]
+        return action
+
+        # self.ensure_one()
+        # view_id = self.env.ref(
+        #     'registry_app.registry_app_shop_view_kanban').id
+        # print('view_id', view_id)
+        # context = self._context.copy()
+        # return {
+        #     'name': _('Shops'),
+        #     'res_model': 'registry_app.shop',
+        #     'type': 'ir.actions.act_window',
+        #     'view_mode': 'kanban',
+        #     'target': 'current',
+        #     'view_id': view_id,
+        #     'context': {'cooperative_id': self.id},
+        # }
 
 
 class SaleCustom(models.Model):

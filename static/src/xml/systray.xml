@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+  <t t-name="registry_app.SwitchLanguageMenu" owl="1">
+    <Dropdown class="o_switch_language_menu" >
+
+        <t t-set-slot="toggler">
+            <span>
+                <i class="fa fa-language" style="font-size: 1.5rem;"></i>
+            </span>
+        </t>
+        <t t-foreach="languages"  t-as="lang" t-key="lang.id">
+            <t t-set="language" t-value="lang"/>
+            <t t-call="registry_app.SwitchLanguageItem"/>
+
+        </t>
+    </Dropdown>
+</t>
+    <t t-name="registry_app.SwitchLanguageItem" owl="1">
+    <DropdownItem t-on-dropdown-item-selected="logIntoLanguage(language)">
+        <t t-set="isCurrent" t-value="language['code'] === currentLanguage"/>
+        <div class="d-flex" data-menu="language">
+            <div
+                role="button"
+                t-att-aria-pressed="isCurrent"
+                tabindex="0"
+                class="d-flex flex-grow-1 align-items-center p-2"
+                t-att-class="isCurrent ? 'alert-primary ml-1 mr-2' : 'btn btn-font-weight-bold border-0'"
+                >
+                <span class='company_label pr-3'
+                    t-att-class="isCurrent ? 'text-900 font-weight-bold' : 'ml-1'">
+                    <t t-set="code" t-value="language['code']"/>
+                    <img  t-att-src="'registry_app/static/src/img/flags/'+code+'.png'" style="height: 15%; width: 25px;"/>  <t t-esc="language['name']"/>
+                </span>
+            </div>
+        </div>
+    </DropdownItem>
+</t>
+
+</templates>

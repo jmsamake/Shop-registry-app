@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!--security pin modal dialog box template-->
+    <div t-name="menuLockPopup" style="background-color: #71639e;">
+        <div class="row justify-center q-pa-lg" >
+                <div class="row" style="margin-top: 50px; margin-bottom: 30px ; ">
+                   <form>
+                      <div class="form-group">
+                          <div class="position-relative">
+                              <input type="password" class="link-style reg_app_password" id="password" placeholder="Enter Password"/>
+                              <a type="button" class="fa fa-eye toggle_eye" onclick="myFunction()"/>
+                          </div>
+                      </div>
+                       <div class="wrong_password_alert" style="display:none;" id="wrong_password_alert">
+                           <div id="wrap">
+                                <div class="container">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger">
+                                            Wrong Password !!!!
+                                            Please enter correct password.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                  </form>
+               </div>
+        </div>
+    </div>
+</templates>
