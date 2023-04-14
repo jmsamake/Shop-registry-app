@@ -8,7 +8,8 @@ class RegistryAppUsers(models.Model):
 
     # name = fields.Char(string='Name', required=True)
     user_id = fields.Many2one('res.users', delegate=True, ondelete='cascade',
-                              required=True, string=_("Name"))
+                              required=True, string=_("Name"),
+                              domain="[('id','=',0)]")
     login = fields.Char(related='user_id.login', store=True, readonly=False,
                         string='Email', required=True)
     password = fields.Char(related='user_id.password', store=True,
@@ -24,7 +25,9 @@ class RegistryAppUsers(models.Model):
     login_pswd = fields.Char(related='user_id.login_pswd', store=True,
                              readonly=False, string='Registry App Password')
     menus_to_lock = fields.Many2many('ir.ui.menu', string="Menus to lock",
-                                     domain="[('parent_id','=',False)]" ,related='user_id.menus_to_lock')
+                                     domain="[('parent_id','=',False)]",
+                                     related='user_id.menus_to_lock',
+                                     readonly=False, )
     # multi_lock_ids = fields.One2many('menu.password', 'password_id', string=" ")
 
     # @api.model
