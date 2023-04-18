@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
+from odoo import models, fields, api, _, Command
+
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop',
+                              default=False)
 
 
 class RegistryAppShop(models.Model):
@@ -12,7 +19,9 @@ class RegistryAppShop(models.Model):
                               help="If set,the shop is only visible for this user for this user.")
     shop_users_ids = fields.Many2many('res.users', copy=False,
                                       string=_("Users"))
-    cooperative_id = fields.Many2one('registry_app.cooperatives',default=lambda self: self.env.context.get('cooperative_id', None),
+    cooperative_id = fields.Many2one('registry_app.cooperatives',
+                                     default=lambda self: self.env.context.get(
+                                         'cooperative_id', None),
                                      help="This shop belongs to this particular cooperative")
     shop_logo = fields.Image(string=_("Logo"))
     company_id = fields.Many2one('res.company', string=_('Company'),
@@ -44,7 +53,9 @@ class RegistryAppShop(models.Model):
         context = {'shop_id': self.id}
         domain = [('shop_id', '=', self.id)]
         name = f'Registries for %s' % self.name
-        action = self.env.ref('registry_app.registry_app_action_window').read()[0]
+        action = \
+            self.env.ref(
+                'registry_app.registry_app_action_window').sudo().read()[0]
         action['context'] = context
         action['domain'] = domain
         action['name'] = name
@@ -64,12 +75,24 @@ class RegistryAppShop(models.Model):
     @api.model
     def create(self, values):
         """Override default Odoo create function and extend."""
-        print('context', self._context.get('cooperative_id'))
+        res = super().create(values)
+        if res.user_id:
+            res.user_id.write({
+                'shop_id': res.id
+            })
+        if res.shop_users_ids:
+            for user in res.shop_users_ids:
+                user.write({
+                    'shop_id': res.id
+                })
+        cooperative = self.env['registry_app.cooperatives'].browse(
+            self._context.get('cooperative_id'))
         values.update({
             'cooperative_id': self._context.get('cooperative_id')
         })
-        print(values, 'values')
-        return super(RegistryAppShop, self).create(values)
+        # cooperative.shop_ids = [(4, 0, res.id)]
+        cooperative.write({'shop_ids': [Command.link(res.id)]})
+        return res
 
     def open_settings(self):
         return {
@@ -81,6 +104,21 @@ class RegistryAppShop(models.Model):
             'res_id': self.id,
             'target': 'current'
         }
+
+    def write(self, vals):
+        """Adding the shop_id to users model"""
+        if self.user_id:
+            self.user_id.write({
+                'shop_id': self.id
+            })
+        if self.shop_users_ids:
+            for user in self.shop_users_ids:
+                user.write({
+                    'shop_id': self.id
+                })
+        return super(RegistryAppShop, self).write(vals)
+
+
 
 # def login_btn(self):
 #     view_id = self.env.ref('registry_app.login_wizard_view').id
@@ -129,5 +167,3 @@ class RegistryAppShop(models.Model):
 #             return action
 #         else:
 #             raise ValidationError(_('Invalid username or password'))
-
-

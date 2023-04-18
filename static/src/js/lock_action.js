@@ -23,7 +23,6 @@ patch(DropdownItem.prototype, "menu_lock", {
         // var currentMenu = this.props.dataset.section
         var currentMenu = this.props.payload.id
         console.log(currentMenu,'menu')
-
         //rpc query to get values about password lock from res.users
         await rpc.query({
             model: 'res.users',
@@ -56,6 +55,7 @@ patch(DropdownItem.prototype, "menu_lock", {
                         },
                     ],
                 });
+                cosole.log('asdsadsa')
                 dialog.opened().then(() => {
                     //dialog box confirm button function
                     dialog.buttons[0].click = function(event) {
@@ -76,6 +76,3 @@ patch(DropdownItem.prototype, "menu_lock", {
         })
     }
 });
-
-
-

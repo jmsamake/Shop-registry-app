@@ -19,6 +19,7 @@ class RegistryAppClient(models.Model):
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
+    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop')
     active = fields.Boolean(string=_('Active'), default=True)
 
     def send_sms(self):
@@ -35,3 +36,18 @@ class RegistryAppClient(models.Model):
             'target': 'new',
             'view_id': view_id,
         }
+
+    @api.model
+    def create(self, values):
+        """Override default Odoo create function and extend."""
+        # shop_id = self.env['registry_app.shop'].search(
+        #     ['|',('create_uid', '=', self.env.user.id),
+        #      ('id', '=', self.env.user.shop_id),
+        #      ], limit=1).id
+        print('shop_id', self.env.user.shop_id)
+        # values['shop_id'] = shop_id
+        values.update({
+            'shop_id': self.env.user.shop_id.id
+        })
+        print(values, 'values')
+        return super(RegistryAppClient, self).create(values)

@@ -9,4 +9,4 @@ from . import registry_app_cooperatives
 from . import registry_app_product
 from . import registry_app_users
 from . import regsmsbroadcast
-from . import user_inherit
+# from . import user_inherit

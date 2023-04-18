@@ -18,7 +18,7 @@ class RegistryAppCooperatives(models.Model):
     def goto_registry_shop(self):
         """Open all shops interface."""
         view_id = self.env.ref('registry_app.registry_app_shop_action_window').id
-        action = self.env.ref('registry_app.registry_app_shop_action_window').read()[0]
+        action = self.env.ref('registry_app.registry_app_shop_action_window').sudo().read()[0]
         action['target'] = 'current'
         action['view_mode'] = 'tree,kanban,form'
         action['context'] = {'cooperative_id': self.id}

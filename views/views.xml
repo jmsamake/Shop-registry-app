@@ -173,12 +173,10 @@
                                 <!--add new field if needed-->
                             </group>
                         </group>
-
                     </sheet>
                 </form>
             </field>
         </record>
-
 
         <!--        registry_app.client form view-->
         <record model="ir.ui.view" id="registry_app_users_form_view">
@@ -193,25 +191,21 @@
                                 <field name="user_id" class="o_bold"/>
                                 <field name="login"/>
                                 <field name="password"/>
-                                <!--                                <field name="phone"/>-->
+                                <!--<field name="phone"/>-->
                             </group>
                             <group>
-
                                 <field name="password_lock" widget="radio"/>
                                 <field name="login_pswd"
                                        attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
                                 <field name="menus_to_lock"
                                        widget="many2many_tags"
                                        attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
-
                             </group>
                         </group>
-
                     </sheet>
                 </form>
             </field>
         </record>
-
 
         <!--        registry_app.shop form view-->
         <record model="ir.ui.view" id="registry_app_shop_form_view">
@@ -229,7 +223,6 @@
                                 <field name="name"/>
                             </h1>
                         </div>
-
                         <br/>
                         <group>
                             <!--                                <field name="name" class="o_bold"/>-->
@@ -348,8 +341,11 @@
                 id="registry_app_cooperatives_action_window">
             <field name="name">Cooperatives</field>
             <field name="res_model">registry_app.cooperatives</field>
-            <field name="domain">[('user_id', '=', uid)]</field>
+<!--            <field name="domain">['|',('create_uid', '=', uid),('shop_ids', 'in', [uid.shop_id])]</field>-->
+<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+<!--            <field name="domain">['|',('create_uid', '=', uid), ('user_id', '=', uid),('shop_ids', 'in', uid.shop_id)]</field>-->
             <!--            <field name="context">{'create': False}</field>-->
+
             <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -366,7 +362,7 @@
         <record model="ir.actions.act_window" id="registry_app_action_window">
             <field name="name">Registries</field>
             <field name="res_model">registry_app.registry_app</field>
-            <field name="domain">[('registry_user_id', '=', uid)]</field>
+<!--            <field name="domain">[('registry_user_id', '=', uid)]</field>-->
             <!--            <field name="context">{'create': False}</field>-->
             <field name="view_mode">tree,kanban,form</field>
             <field name="help" type="html">
@@ -401,6 +397,12 @@
                 id="registry_app_product_action_window">
             <field name="name">Registries App Product</field>
             <field name="res_model">registry_app.product</field>
+<!--            <field name="domain">['|',('shop_id.user_id', '=', uid),-->
+<!--                                  ('shop_id.create_uid', '=', uid),-->
+<!--                                  ('shop_id.shop_users_ids', 'in', uid)-->
+<!--                                  ]-->
+<!--            </field>-->
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -458,6 +460,10 @@
             <field name="name">Clients</field>
             <field name="res_model">registry_app.client</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
+<!--            <field name="domain">['|',('shop_id', '=', uid.shop_id),-->
+<!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
+<!--                                  ]</field>-->
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No Clients Available
@@ -596,7 +602,11 @@
                 id="registry_app_shop_action_window">
             <field name="name">Shops</field>
             <field name="res_model">registry_app.shop</field>
-            <field name="domain">[('user_id', '=', uid)]</field>
+<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+            <field name="domain">['|',('create_uid', '=', uid),
+                                  ('id', '=', uid.shop_id),
+                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),
+                                  ]</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{'create': True}</field>
             <field name="view_id" ref="registry_app_shop_view_kanban"/>

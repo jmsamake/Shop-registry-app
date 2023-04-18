@@ -14,14 +14,14 @@
     'website': "http://www.cybrosys.com",
     'category': 'Uncategorized',
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'product', 'website'],
+    'depends': ['base', 'web', 'product', 'website','menu_lock'],
     # always loaded
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/login_form.xml',
-        'views/user_inherit.xml',
+        # 'views/user_inherit.xml',
         'report/report_template_custom_header.xml',
         'report/registry_app_report.xml',
         'report/registry_app_report_template.xml',
@@ -36,13 +36,13 @@
             'registry_app/static/src/css/menu_lock.css',
             'registry_app/static/src/js/sale_cust.js',
             'registry_app/static/src/js/systray.js',
-            'registry_app/static/src/js/lock_action.js',
-            'registry_app/static/src/js/security_pin.js',
+            # 'registry_app/static/src/js/lock_action.js',
+            # 'registry_app/static/src/js/security_pin.js',
         ],
         'web.assets_qweb': [
             'registry_app/static/src/xml/templates.xml',
             'registry_app/static/src/xml/systray.xml',
-            'registry_app/static/src/xml/menu_lock.xml',
+            # 'registry_app/static/src/xml/menu_lock.xml',
         ]
     },
     'installable': True,
