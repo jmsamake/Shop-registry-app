@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registry_app_website_cooperatives" name="Cooperatives">
+    <t t-call="website.layout">
+        <div class="container">
+            <h1 class="text-center p-2">Cooperatives</h1>
+            <div class="row">
+                <t t-foreach="cooperatives" t-as="coop">
+                    <div class="col-sm-4 mb-3">
+                        <div class="card h-100 bg-secondary border" t-att-data-coop-id="coop.id">
+                            <div class="card-body">
+                                <h5 class="card-title" t-esc="coop.name"></h5>
+                                <div>
+                                    <a class="btn btn-primary" t-attf-href="/cooperative/{{ coop.id }}/shops">Go to Shop</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+<!--         <style>-->
+<!--        -->
+<!--    </style>-->
+</template>
+</odoo>

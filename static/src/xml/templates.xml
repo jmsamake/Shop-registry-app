@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="SaleCust">
+        <div>
+            <div>
+            </div>
+            <div>
+                <div class="filter_view_tb"></div>
+            </div>
+            <br></br>
+            <div>
+                <div class="table_view"></div>
+            </div>
+        </div>
+    </t>
+    <t t-name="SaleTable">
+        <div class="page p-4" style="margin :0 auto;">
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <h3 class="text-center">Registry Report</h3>
+                </div>
+            </div>
+            <t t-foreach="report_lines" t-as="data">
+                <div class="row mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+                    <div class="col-md-12">
+                        <h4><t t-esc="data['name']"/></h4>
+                        <ul class="list-unstyled">
+                            <li>Salesperson: <strong><t t-esc="data['shop_owner']"/></strong></li>
+                            <li>Shop: <strong><t t-esc="data['shop']"/></strong></li>
+                        </ul>
+                    </div>
+                    <div class="container min-vw-100" style="padding-right:3rem;">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="pt-1">Sales</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-dark text-white">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Client</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['sale_app_ids']"
+                                       t-as="sale">
+                                        <tr>
+                                            <td><t t-esc="sale['0']"></t></td>
+                                            <td><t t-esc="sale['1']"></t></td>
+                                            <td><t t-esc="sale['2']"></t></td>
+                                            <td><t t-esc="sale['3']"></t></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td scope="row"
+                                            class="text-right"><strong>
+                                            Total Sales</strong></td>
+                                        <td><strong>
+                                            <t t-esc="data['total_sales']"></t>
+                                            </strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <h4 class="pt-1">Purchases</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-dark text-white">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Cost</th>
+                                        <!--    <th>Amount</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['purchase_app_ids']"
+                                       t-as="purchase">
+                                        <tr>
+                                            <td><t t-esc="purchase['0']"></t></td>
+                                            <!--                                            <td><t t-esc="data['total_purchase']"></t></td>-->
+                                            <!--                                            <td>[[ purchase.amount ]]</td>-->
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <td scope="row"
+                                            class="text-right"><strong>
+                                            Total Purchase</strong></td>
+                                        <td><strong><t
+                                                t-esc="data['total_purchase']"></t></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </t>
+        </div>
+    </t>
+</templates>

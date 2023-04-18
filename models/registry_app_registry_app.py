@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-import mysql.connector
+from odoo import models, fields, api, _
+from datetime import datetime
+
+from odoo.exceptions import ValidationError
 
 
 class RegistryApp(models.Model):
@@ -9,49 +11,45 @@ class RegistryApp(models.Model):
     _description = 'Registry App'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name', required=True, tracking=True)
+    name = fields.Char(string=_('Name'), required=True, tracking=True,
+                       readonly=True, copy=False,
+                       default=lambda self: 'Registry Log - ' +
+                                            fields.Date.context_today(
+                                                self).strftime('%d-%m-%Y'))
+
+    date = fields.Date(string=_('Date'), default=fields.Date.context_today,
+                       readonly=True, copy=False, required=True)
+
     shop_id = fields.Many2one('registry_app.shop')
     sale_app_ids = fields.One2many('registry_app.sales', 'registry_app_id')
     purchase_app_ids = fields.One2many('registry_app.purchase',
                                        'registry_app_id')
-    total_sales = fields.Float(string='Total Sales',
+    total_sales = fields.Float(string=_('Total Sales'),
                                compute='_compute_registry_sale_total',
                                store=True)
-    total_purchase = fields.Float(string='Total Purchase',
+    total_purchase = fields.Float(string=_('Total Purchase'),
                                   compute='_compute_registry_purchase_total',
                                   store=True)
     description = fields.Text()
     state = fields.Selection(selection=[
-        ('opened', 'Opened'),
-        ('validated', 'Validated'),
-        ('closed', 'Closed'),
-        ('cancelled', 'Cancelled'),
+        ('opened', _('Opened')),
+        ('validated', _('Validated')),
+        ('closed', _('Closed')),
+        ('cancelled', _('Cancelled')),
         # ('archived', 'Archived'),
     ], string="State",
         default='opened')
     registry_user_id = fields.Many2one('res.users', copy=False, tracking=True,
-                                       string='Salesperson',
+                                       string=_('Salesperson'),
                                        default=lambda self: self.env.user)
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged user Company")
-    active = fields.Boolean(string='Active', default=True)
+    active = fields.Boolean(string=_('Active'), default=True)
 
     def close_input(self):
         print('entereed')
-        cnx = mysql.connector.connect(
-            host='127.0.0.1',
-            port=3306,
-            database='mysql',
-            user='root',
-            password='Qwerty@123')
-        print('Cnx', cnx)
-        cursor = cnx.cursor(dictionary=True, buffered=True)
-        cursor.execute("SELECT * FROM movies;")
-        row = cursor.fetchone()
-        print('row', row)
-        print('Current')
-        cnx.close()
+        self.state = 'closed'
 
     def validate(self):
         self.state = 'validated'
@@ -74,9 +72,6 @@ class RegistryApp(models.Model):
 
     def cancel(self):
         self.state = 'cancelled'
-
-    def closed(self):
-        self.state = 'closed'
 
     def reset(self):
         self.state = 'opened'
@@ -122,7 +117,25 @@ class RegistryApp(models.Model):
         print(values, 'values')
         return super(RegistryApp, self).create(values)
 
+    @api.constrains('date')
+    def _check_unique_per_day(self):
+        """Restrict One record per day"""
+        for record in self:
+            domain = [
+                ('date', '=', record.date),
+                ('id', '!=', record.id),
+                ('shop_id', '=', record.shop_id.id),
+            ]
+            count = self.search_count(domain)
+            if count > 0:
+                raise ValidationError('Only one record allowed per day.')
+
     # def my_server_action(self):
     #     action_values = self.env.ref('product.product_template_action').read()[0]
     #
     #     return action_values
+
+    def get_context_today(self):
+        print('get_context_date')
+        print(fields.Date.context_today(self))
+        return fields.Date.context_today(self)

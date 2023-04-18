@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 import datetime
 import requests
 import json
@@ -9,23 +9,23 @@ class SmsBroadcast(models.Model):
     _rec_name = 'name'
     _description = 'SMS Notification'
 
-    name = fields.Char(string="SMS Notification", required=True)
+    name = fields.Char(string=_("SMS Notification"), required=True)
     broadcast_date = fields.Datetime(string="Broadcast Date")
 
-    clients_ids = fields.Many2many('res.users', string='Liste des notifiés',
+    clients_ids = fields.Many2many('registry_app.client', string=_('Clients'),
                                    required=True)
-    message = fields.Text(string="Message", required=True)
-    active = fields.Boolean(string="Active", default=True)
-    msg_sent = fields.Boolean(string="SMS envoyé?", default=False, copy=False,
+    message = fields.Text(string=_("Message"), required=True)
+    active = fields.Boolean(string=_("Active"), default=True)
+    msg_sent = fields.Boolean(string=_("SMS send?"), default=False, copy=False,
                               readonly=True)
 
-    sender_type = fields.Char(string="Type structure")
-    sender_id = fields.Integer(string="Sender ID")
+    sender_type = fields.Char(string=_("Type structure"))
+    sender_id = fields.Integer(string=_("Sender ID"))
     state = fields.Selection([
-        ('draft', 'Draft'),
-        ('send', 'Send'),
-        ('failed', 'Failed')
-    ], string='SMS Status', default='draft', readonly=True, copy=False)
+        ('draft', _('Draft')),
+        ('send', _('Send')),
+        ('failed', _('Failed'))
+    ], string=_('SMS Status'), default='draft', readonly=True, copy=False)
 
     def action_sms_send(self):
         access_token = self.get_access_token()

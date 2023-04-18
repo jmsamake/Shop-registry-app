@@ -1,5 +1,5 @@
 <odoo>
-     <record id="action_report_vehicle_order" model="ir.actions.report">
+     <record id="action_report_registry_log" model="ir.actions.report">
             <field name="name">Registry Log</field>
             <field name="model">registry_app.registry_app</field>
             <field name="report_type">qweb-pdf</field>

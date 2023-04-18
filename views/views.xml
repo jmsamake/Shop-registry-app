@@ -5,8 +5,9 @@
             <field name="name">registry_app.registry_app.search.view</field>
             <field name="model">registry_app.registry_app</field>
             <field name="arch" type="xml">
-                <search string="Point of Sale Session">
+                <search string="Registry App Shop">
                     <field name="name"/>
+                    <field name="date"/>
                     <field name="shop_id"/>
                     <!--                <field name="user_id" />-->
                     <!--                <filter name="my_sessions" string="My Sessions" domain="[('user_id', '=', uid)]"/>-->
@@ -25,12 +26,13 @@
 
 
         <!-- explicit list view definition -->
-        <record model="ir.ui.view" id="registry_app.list">
+        <record model="ir.ui.view" id="registry_app_list">
             <field name="name">Registries list</field>
             <field name="model">registry_app.registry_app</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
+                    <field name="date"/>
                     <field name="active" invisible="True"/>
                     <field name="total_sales"/>
                     <field name="total_purchase"/>
@@ -45,7 +47,7 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button string="test" type="object"
+                        <button string="Close Input" type="object"
                                 name="close_input" data-hotkey="z"
                                 class="oe_highlight"
                         />
@@ -55,9 +57,6 @@
                         <button string="Send SMS" type="object"
                                 name="send_sms" class="oe_highlight"
                                 attrs="{'invisible': [('state', '=', 'opened')]}"
-                        />
-                        <button string="Close" type="object"
-                                name="closed" class="oe_highlight"
                         />
                         <button string="Cancel" type="object"
                                 name="cancel"/>
@@ -82,9 +81,9 @@
                         <!--                            <field name="registry_user_id"-->
                         <!--                                   widget="many2one_avatar_user"></field>-->
                         <!--                        </group>-->
-                        <!--                        <group>-->
-
-                        <!--                        </group>-->
+                        <group>
+                            <field name="date"/>
+                        </group>
                         <!--                        </group>-->
 
                         <notebook>
@@ -155,6 +154,11 @@
             <field name="model">registry_app.client</field>
             <field name="arch" type="xml">
                 <form string="Client">
+                    <header>
+                        <button string="Send sms" type="object"
+                                name="send_sms" class="oe_highlight"
+                        />
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -169,7 +173,35 @@
                                 <!--add new field if needed-->
                             </group>
                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <!--        registry_app.client form view-->
+        <record model="ir.ui.view" id="registry_app_users_form_view">
+            <field name="name">Registry App Users Form View</field>
+            <field name="model">registry_app.users</field>
+            <field name="arch" type="xml">
+                <form string="Client">
+                    <sheet>
+                        <group>
+                            <group>
+                                <!--<field name="name" class="o_bold"/>-->
+                                <field name="user_id" class="o_bold"/>
+                                <field name="login"/>
+                                <field name="password"/>
+                                <!--<field name="phone"/>-->
+                            </group>
+                            <group>
+                                <field name="password_lock" widget="radio"/>
+                                <field name="login_pswd"
+                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
+                                <field name="menus_to_lock"
+                                       widget="many2many_tags"
+                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
+                            </group>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -182,7 +214,8 @@
             <field name="arch" type="xml">
                 <form string="Client">
                     <sheet>
-                        <field name="shop_logo" widget="image" class="oe_avatar"/>
+                        <field name="shop_logo" widget="image"
+                               class="oe_avatar"/>
                         <div class="oe_title">
                             <h1>
                                 <separator style="font-size: 1.3rem"
@@ -190,7 +223,6 @@
                                 <field name="name"/>
                             </h1>
                         </div>
-
                         <br/>
                         <group>
                             <!--                                <field name="name" class="o_bold"/>-->
@@ -283,7 +315,7 @@
                         </group>
                         <group>
                             <field name="clients_ids"
-                                   widget="many2many_avatar_user"/>
+                                   widget="many2many_tags"/>
                             <field name="message"/>
                         </group>
                         <group>
@@ -304,6 +336,191 @@
         </record>
 
 
+        <!-- actions registry_app_cooperatives -->
+        <record model="ir.actions.act_window"
+                id="registry_app_cooperatives_action_window">
+            <field name="name">Cooperatives</field>
+            <field name="res_model">registry_app.cooperatives</field>
+<!--            <field name="domain">['|',('create_uid', '=', uid),('shop_ids', 'in', [uid.shop_id])]</field>-->
+<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+<!--            <field name="domain">['|',('create_uid', '=', uid), ('user_id', '=', uid),('shop_ids', 'in', uid.shop_id)]</field>-->
+            <!--            <field name="context">{'create': False}</field>-->
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No cooperatives Available
+                </p>
+                <p>
+                    Create Your First Cooperative
+                </p>
+            </field>
+        </record>
+
+
+        <!-- actions registry_app.registry_app -->
+        <record model="ir.actions.act_window" id="registry_app_action_window">
+            <field name="name">Registries</field>
+            <field name="res_model">registry_app.registry_app</field>
+<!--            <field name="domain">[('registry_user_id', '=', uid)]</field>-->
+            <!--            <field name="context">{'create': False}</field>-->
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Registries Available
+                </p>
+                <p>
+                    Create Your First Registry
+                </p>
+            </field>
+        </record>
+
+
+        <!-- actions registry_app.registry_app -->
+        <record model="ir.actions.act_window"
+                id="registry_app_users_action_window">
+            <field name="name">Registries App Users</field>
+            <field name="res_model">registry_app.users</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Users Available
+                </p>
+                <p>
+                    Create Your First User
+                </p>
+            </field>
+        </record>
+
+        <!-- actions registry_app.products -->
+        <record model="ir.actions.act_window"
+                id="registry_app_product_action_window">
+            <field name="name">Registries App Product</field>
+            <field name="res_model">registry_app.product</field>
+<!--            <field name="domain">['|',('shop_id.user_id', '=', uid),-->
+<!--                                  ('shop_id.create_uid', '=', uid),-->
+<!--                                  ('shop_id.shop_users_ids', 'in', uid)-->
+<!--                                  ]-->
+<!--            </field>-->
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Products Available
+                </p>
+                <p>
+                    Create Your First Products
+                </p>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window"
+                id="registry_app_past_login_action_window">
+            <field name="name">Registries</field>
+            <field name="res_model">registry_app.registry_app</field>
+            <field name="domain">[('registry_user_id', '=', uid)]</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Registries Available
+                </p>
+                <p>
+                    Create Your First Registry
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window"
+                id="registry_app_filtered_action_window">
+            <field name="name">Registries</field>
+            <field name="res_model">registry_app.registry_app</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('registry_user_id', '=', uid)]</field>
+            <field name="search_view_id" ref="view_registry_shop_search"/>
+            <field name="context">{
+                'search_default_shop_id': [active_id],
+                'default_shop_id': active_id,
+                'create': False
+            }
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Registries Available
+                </p>
+                <p>
+                    Create Your First Registry
+                </p>
+            </field>
+        </record>
+
+        <!--action registry app client-->
+        <record model="ir.actions.act_window"
+                id="registry_app_client_action_window">
+            <field name="name">Clients</field>
+            <field name="res_model">registry_app.client</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
+<!--            <field name="domain">['|',('shop_id', '=', uid.shop_id),-->
+<!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
+<!--                                  ]</field>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Clients Available
+                </p>
+                <p>
+                    Create Your First Client
+                </p>
+            </field>
+        </record>
+
+        <!--        action registry app sale-->
+        <record model="ir.actions.act_window"
+                id="registry_app_sales_action_window">
+            <field name="name">Registry App Sale</field>
+            <field name="res_model">registry_app.sales</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Sale Registries Available
+                </p>
+                <p>
+                    Create Your First Sale Registry
+                </p>
+            </field>
+        </record>
+
+        <!--action registry app purchase-->
+        <record model="ir.actions.act_window"
+                id="registry_app_purchase_action_window">
+            <field name="name">Registry App Purchase</field>
+            <field name="res_model">registry_app.purchase</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Purchase Registries Available
+                </p>
+                <p>
+                    Create Your First Purchase Registry
+                </p>
+            </field>
+        </record>
+
+        <!--        action for broadcast sms-->
+        <record model="ir.actions.act_window"
+                id="sms_broadcast">
+            <field name="name">Broadcast SMS</field>
+            <field name="res_model">regsmsbroadcast</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Broadcast SMS Available
+                </p>
+                <p>
+                    Create Your First Broadcast SMS
+                </p>
+            </field>
+        </record>
 
         <!--registry_app.shop kanban -->
         <record id='registry_app_shop_view_kanban' model='ir.ui.view'>
@@ -336,12 +553,12 @@
                                 <div class="container o_kanban_card_content">
                                     <div class="row">
                                         <!--                                        <button class="btn btn-primary"-->
-                                        <!--                                                name="login_btn"-->
-                                        <!--                                                type="object">Login-->
+                                        <!--                                                name="open_registry_shop"-->
+                                        <!--                                                type="object">Open shop-->
                                         <!--                                        </button>-->
                                         <button class="btn btn-primary"
-                                                name="open_registry_shop"
-                                                type="object">Open shop
+                                                name="open_tree_view"
+                                                type="object">Open Registries
                                         </button>
                                     </div>
                                 </div>
@@ -361,21 +578,15 @@
                                                 <a href="#">Sessions</a>
                                             </div>
                                         </div>
-                                        <!--                                        <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">-->
-                                        <!--                                            <div role="menuitem"-->
-                                        <!--                                                 class="o_kanban_card_manage_title">-->
-                                        <!--                                                <span>Reporting</span>-->
-                                        <!--                                            </div>-->
-                                        <!--                                            <div role="menuitem">-->
-                                        <!--                                                <a href="#">Orders</a>-->
-                                        <!--                                            </div>-->
-                                        <!--                                        </div>-->
                                     </div>
                                     <div t-if="widget.editable"
-                                         class="o_kanban_card_manage_settings row" style="padding-top: 3px;margin-bottom: 0px;">
+                                         class="o_kanban_card_manage_settings row"
+                                         style="padding-top: 3px;margin-bottom: 0px;">
                                         <div role="menuitem" class="col-12">
                                             <button name="open_settings"
-                                                type="object" class="btn btn-link">Settings</button>
+                                                    type="object"
+                                                    class="btn btn-link">
+                                                Settings</button>
                                         </div>
                                     </div>
                                 </div>
@@ -386,92 +597,30 @@
             </field>
         </record>
 
-
-
-        <!-- actions registry_app_cooperatives -->
-        <record model="ir.actions.act_window" id="registry_app_cooperatives_action_window">
-            <field name="name">Cooperatives</field>
-            <field name="res_model">registry_app.cooperatives</field>
-            <field name="domain">[('user_id', '=', uid)]</field>
-<!--            <field name="context">{'create': False}</field>-->
-            <field name="view_mode">kanban,tree,form</field>
-        </record>
-
-        <!-- actions registry app -->
-        <record model="ir.actions.act_window" id="registry_app_action_window">
-            <field name="name">Registries</field>
-            <field name="res_model">registry_app.registry_app</field>
-            <field name="domain">[('registry_user_id', '=', uid)]</field>
-            <field name="context">{'create': False}</field>
-            <field name="view_mode">tree,kanban,form</field>
-        </record>
-
-        <record model="ir.actions.act_window"
-                id="registry_app_past_login_action_window">
-            <field name="name">Registries</field>
-            <field name="res_model">registry_app.registry_app</field>
-            <field name="domain">[('registry_user_id', '=', uid)]</field>
-            <field name="view_mode">tree,kanban,form</field>
-        </record>
-
-        <record model="ir.actions.act_window"
-                id="registry_app_filtered_action_window">
-            <field name="name">Registries</field>
-            <field name="res_model">registry_app.registry_app</field>
-            <field name="view_mode">tree,kanban,form</field>
-            <field name="domain">[('registry_user_id', '=', uid)]</field>
-            <field name="search_view_id" ref="view_registry_shop_search"/>
-            <field name="context">{
-                'search_default_shop_id': [active_id],
-                'default_shop_id': active_id,
-                'create': False
-            }
-            </field>
-        </record>
-
-        <!--action registry app client-->
-        <record model="ir.actions.act_window"
-                id="registry_app_client_action_window">
-            <field name="name">Clients</field>
-            <field name="res_model">registry_app.client</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <!--        action registry app sale-->
-        <record model="ir.actions.act_window"
-                id="registry_app_sales_action_window">
-            <field name="name">Registry App Sale</field>
-            <field name="res_model">registry_app.sales</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <!--action registry app purchase-->
-        <record model="ir.actions.act_window"
-                id="registry_app_purchase_action_window">
-            <field name="name">Registry App Purchase</field>
-            <field name="res_model">registry_app.purchase</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <!--        action for broadcast sms-->
-        <record model="ir.actions.act_window"
-                id="sms_broadcast">
-            <field name="name">Broadcast SMS</field>
-            <field name="res_model">regsmsbroadcast</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
         <!--action registry app shop-->
         <record model="ir.actions.act_window"
                 id="registry_app_shop_action_window">
             <field name="name">Shops</field>
             <field name="res_model">registry_app.shop</field>
-            <field name="domain">[('user_id', '=', uid)]</field>
-            <field name="view_mode">kanban,form</field>
+<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+            <field name="domain">['|',('create_uid', '=', uid),
+                                  ('id', '=', uid.shop_id),
+                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),
+                                  ]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'create': True}</field>
             <field name="view_id" ref="registry_app_shop_view_kanban"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Shops Available
+                </p>
+                <p>
+                    Create Your First Shop
+                </p>
+            </field>
         </record>
 
-<!--        Clients Actions-->
+        <!--        Clients Actions-->
         <record id="sale_action_demo" model="ir.actions.client">
             <field name="name">Sale Custom</field>
             <field name="tag">sale_cust</field>
@@ -497,15 +646,29 @@
                                                 </strong>
                                             </div>
                                         </div>
-                                       <div class="o_dropdown_kanban dropdown">
-                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
-                                        <span class="fa fa-ellipsis-v"/>
-                                    </a>
-                                    <div class="dropdown-menu" role="menu">
-                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
-                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
-                                    </div>
-                                </div>
+                                        <div class="o_dropdown_kanban dropdown">
+                                            <a class="dropdown-toggle o-no-caret btn"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               data-display="static" href="#"
+                                               aria-label="Dropdown menu"
+                                               title="Dropdown menu">
+                                                <span class="fa fa-ellipsis-v"/>
+                                            </a>
+                                            <div class="dropdown-menu"
+                                                 role="menu">
+                                                <t t-if="widget.editable"><a
+                                                        role="menuitem"
+                                                        type="edit"
+                                                        class="dropdown-item">
+                                                    Edit</a></t>
+                                                <t t-if="widget.deletable"><a
+                                                        role="menuitem"
+                                                        type="delete"
+                                                        class="dropdown-item">
+                                                    Delete</a></t>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="container o_kanban_card_content">
@@ -535,9 +698,13 @@
         <!--        sale_action_demo-->
 
         <!-- menu categories -->
-        <menuitem id="menu_sale_demo"  action="sale_action_demo"
-                          name="Sale Custom" parent="registry_app.menu_root"/>
 
+        <menuitem id="menu_sale_demo" action="sale_action_demo"
+                  name="Reporting" parent="registry_app.menu_root"/>
+
+        <menuitem id="registry_app.menu_users"
+                  action="registry_app_users_action_window"
+                  name="Users" parent="registry_app.menu_root"/>
         <menuitem name="Registries" id="registry_app.registries"
                   parent="registry_app.menu_root"
                   action="registry_app_action_window" sequence="1"/>
@@ -545,40 +712,37 @@
                   parent="registry_app.menu_root"
                   action="registry_app_client_action_window" sequence="2"/>
 
-        <menuitem name="Reporting" id="registry_app.reporting"
-                  parent="registry_app.menu_root" sequence="3"/>
+        <!--        <menuitem name="test Report" id="registry_app.reporting"-->
+        <!--                  parent="registry_app.menu_root" sequence="3"/>-->
 
         <menuitem id="registry_app_product" name="Products"
-                  parent="registry_app.menu_root" sequence="4"/>
-        <menuitem action="product.product_template_action" name="Products"
-                  id="registry_app_product_menu" parent="registry_app_product"/>
-        <menuitem id="registry_app_product_variants_menu"
-                  name="Product Variants" action="product.product_normal_action"
-                  parent="registry_app_product"/>
+                  parent="registry_app.menu_root" sequence="4"
+                  action="registry_app_product_action_window"/>
 
+        <!--        <menuitem id="registry_app_product" name="Products"-->
+        <!--                  parent="registry_app.menu_root" sequence="4"/>-->
+        <!--        <menuitem action="product.product_template_action" name="Products"-->
+        <!--                  id="registry_app_product_menu" parent="registry_app_product"/>-->
+        <!--        <menuitem id="registry_app_product_variants_menu"-->
+        <!--                  name="Product Variants" action="product.product_normal_action"-->
+        <!--                  parent="registry_app_product"/>-->
 
-        <menuitem name="Users" id="registry_app.users"
-                  parent="registry_app.menu_root" action="base.action_res_users"
-                  sequence="4" groups="registry_app_global_user"/>
+        <!--        <menuitem name="Users" id="registry_app.users"-->
+        <!--                  parent="registry_app.menu_root" action="base.action_res_users"-->
+        <!--                  sequence="4" groups="registry_app_global_user"/>-->
 
-        <menuitem name="Purchase" id="registry_app.purchase"
-                  parent="registry_app.reporting"
-                  action="registry_app_purchase_action_window"/>
+        <!--        <menuitem name="Purchase" id="registry_app.purchase"-->
+        <!--                  parent="registry_app.reporting"-->
+        <!--                  action="registry_app_purchase_action_window"/>-->
 
-        <menuitem name="sales" id="registry_app.sales"
-                  parent="registry_app.reporting"
-                  action="registry_app_sales_action_window"/>
+        <!--        <menuitem name="sales" id="registry_app.sales"-->
+        <!--                  parent="registry_app.reporting"-->
+        <!--                  action="registry_app_sales_action_window"/>-->
 
         <menuitem name="SMS Log" id="registry_app_sms"
                   parent="registry_app.menu_root"
                   action="sms_broadcast"/>
-        <!-- actions -->
 
-
-        <!--    <menuitem name="List" id="registry_app.menu_1_list" parent="registry_app.registries"-->
-        <!--              action="registry_app.action_window"/>-->
-        <!--    <menuitem name="Server to list" id="registry_app" parent="registry_app.menu_2"-->
-        <!--              action="registry_app.action_server"/>-->
 
     </data>
 </odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+       <record id="website_maintenance_request_menu" model="website.menu">
+           <field name="name">Cooperatives</field>
+           <field name="url">/cooperatives</field>
+           <field name="parent_id" ref="website.main_menu"/>
+           <field name="sequence">50</field>
+       </record>
+
+   </data>
+</odoo>

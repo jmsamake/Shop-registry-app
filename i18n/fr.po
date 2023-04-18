@@ -1,0 +1,1437 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* registry_app
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-10 17:33+0000\n"
+"PO-Revision-Date: 2023-04-10 17:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: registry_app
+#: model:ir.actions.report,print_report_name:registry_app.action_report_registry_log
+msgid "'Registry log - %s' % (object.name)"
+msgstr "'Journal du registre - %s' % (object.name)"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
+msgstr "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Gérer\"/>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "<span>View</span>"
+msgstr "Voir"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+msgid "<strong>Total Purchase</strong>"
+msgstr "<strong>Achat total</strong>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+msgid "<strong>Total Sales</strong>"
+msgstr "<strong>Ventes totales</strong>"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_needaction
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_needaction
+msgid "Action Needed"
+msgstr "Action nécessaire"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__active
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__active
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__active
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__active
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__active
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__active
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__active
+#, python-format
+msgid "Active"
+msgstr "Actif"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__active_lang_count
+msgid "Active Lang Count"
+msgstr "Nombre de langues actives"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Décoration d'exception d'activité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_state
+msgid "Activity State"
+msgstr "État d'activité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône du type d'activité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__additional_info
+msgid "Additional info"
+msgstr "information additionnelle"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__type
+msgid "Address Type"
+msgstr "Type d'adresse"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this"
+" language."
+msgstr ""
+"Tous les e-mails et documents envoyés à ce contact seront traduits dans ceci"
+" langue."
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_attachment_count
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__avatar_1920
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__avatar_1024
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__avatar_128
+msgid "Avatar 128"
+msgstr "Avatar 128"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__avatar_256
+msgid "Avatar 256"
+msgstr "Avatar 256"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__avatar_512
+msgid "Avatar 512"
+msgstr "Avatar 512"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__bank_ids
+msgid "Banks"
+msgstr "Banques"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__barcode
+msgid "Barcode"
+msgstr "code à barre"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__is_blacklisted
+msgid "Blacklist"
+msgstr "Liste noire"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_bounce
+msgid "Bounce"
+msgstr "Rebond"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__broadcast_date
+msgid "Broadcast Date"
+msgstr "Date de diffusion"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.sms_broadcast
+msgid "Broadcast SMS"
+msgstr "Diffuser des SMS"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__channel_ids
+msgid "Channels"
+msgstr "Canaux"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Vérifiez si le contact est une entreprise, sinon c'est une personne"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__employee
+msgid "Check this box if this contact is an Employee."
+msgstr "Check this box if this contact is an Employee."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__city
+msgid "City"
+msgstr "Ville"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__client_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__client_id
+#: model_terms:ir.ui.view,arch_db:registry_app.client_form_view
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_view
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Client"
+msgstr "Cliente"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__client_number
+msgid "Client Number"
+msgstr "Numéro client"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.registry_app_client_action_window
+#: model:ir.ui.menu,name:registry_app.menu_2
+msgid "Clients"
+msgstr "Clientes"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Close Input"
+msgstr "Fermer l'entrée"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__closed
+msgid "Closed"
+msgstr "Fermée"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__color
+msgid "Color Index"
+msgstr "Indice de couleur"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Entité commerciale"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__company_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__company_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__company_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__company_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__company_id
+msgid "Company"
+msgstr "Entreprise"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__company_name
+msgid "Company Name"
+msgstr "Nom de l'entreprise"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__commercial_company_name
+msgid "Company Name Entity"
+msgstr "Nom de l'entreprise Entité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__company_type
+msgid "Company Type"
+msgstr "Type de compagnie"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_gid
+msgid "Company database ID"
+msgstr "ID de la base de données de l'entreprise"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__contact_address
+msgid "Complete Address"
+msgstr "Adresse complète"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__child_ids
+msgid "Contact"
+msgstr "Contact"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__cooperative_id
+msgid "Cooperative"
+msgstr "Coopérative"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__user_id
+#, python-format
+msgid "Cooperative Admin"
+msgstr "Administrateur coopératif"
+
+#. module: registry_app
+#: model:res.groups,name:registry_app.registry_app_cooperative_owner
+msgid "Cooperative Owner"
+msgstr "Propriétaire de la coopérative"
+
+#. module: registry_app
+#: model:res.groups,comment:registry_app.registry_app_cooperative_owner
+msgid "Cooperative Owners"
+msgstr "Propriétaires de coopératives"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.registry_app_cooperatives_action_window
+#: model:ir.model,name:registry_app.model_registry_app_cooperatives
+msgid "Cooperatives"
+msgstr "Coopératives"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__cost
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Cost"
+msgstr "Coût"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr "Compteur du nombre d'emails rebondis pour ce contact"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__country_id
+msgid "Country"
+msgstr "Pays"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__country_code
+msgid "Country Code"
+msgstr "Code postal"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__create_uid
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__create_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__create_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__create_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__create_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__create_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__create_date
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__create_date
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__credit_limit
+msgid "Credit Limit"
+msgstr "Limite de crédit"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__date
+msgid "Date"
+msgstr "Date"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_kanban
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__description
+msgid "Description"
+msgstr "Description"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__display_name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__display_name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__display_name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__display_name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__display_name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__display_name
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__display_name
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__regsmsbroadcast__state__draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_kanban
+msgid "Dropdown menu"
+msgstr "Menu déroulant"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_kanban
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+"Soit client (pas utilisateur), soit utilisateur partagé. Indiqué le "
+"le partenaire est un client sans accès ou avec un accès limité créé pour "
+"partage de données."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email
+msgid "Email"
+msgstr "E-mail"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__employee
+msgid "Employee"
+msgstr "Employé"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Expense"
+msgstr "Frais"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__regsmsbroadcast__state__failed
+msgid "Failed"
+msgstr "Échoué"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_follower_ids
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_follower_ids
+msgid "Followers"
+msgstr "Suiveurs"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_partner_ids
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône de police géniale, par exemple fa-tasks"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr "Format email address \"Name <email@domain>\""
+
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email_formatted
+msgid "Formatted Email"
+msgstr "E-mail formaté"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_latitude
+msgid "Geo Latitude"
+msgstr "Latitude géographique"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_longitude
+msgid "Geo Longitude"
+msgstr "Longitude géographique"
+
+#. module: registry_app
+#: model:res.groups,name:registry_app.registry_app_global_user
+msgid "Global user"
+msgstr "Utilisateur global"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_kanban
+msgid "Go to Shops"
+msgstr "Aller aux magasins"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_registry_shop_search
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__has_message
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__has_message
+msgid "Has Message"
+msgstr "A des messages"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__id
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__id
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__id
+msgid "ID"
+msgstr "IDENTIFIANT"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__im_status
+msgid "IM Status"
+msgstr "Statut de messagerie instantanée"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_needaction
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_unread
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_needaction
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si cette case est cochée, de nouveaux messages nécessitent votre attention."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_has_error
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si cette case est cochée, certains messages présentent une erreur de livraison."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__team_id
+msgid ""
+"If set, this Sales Team will be used for sales and assignments related to "
+"this partner"
+msgstr ""
+"Si défini, cette équipe de vente sera utilisée pour les ventes et les affectations liées à "
+"ce partenaire"
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_shop__user_id
+msgid "If set,the shop is only visible for this user for this user."
+msgstr "Si défini, la boutique n'est visible que pour cet utilisateur pour cet utilisateur."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+"Si l'adresse email est sur la liste noire, le contact ne recevra pas de masse"
+"plus de mailing, à partir de n'importe quelle liste"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_1920
+msgid "Image"
+msgstr "Image"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_1024
+msgid "Image 1024"
+msgstr "Image 1024"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_128
+msgid "Image 128"
+msgstr "Image 128"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_256
+msgid "Image 256"
+msgstr "Image 256"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_512
+msgid "Image 512"
+msgstr "Image 512"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__industry_id
+msgid "Industry"
+msgstr "Industrie"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__type
+msgid ""
+"Invoice & Delivery addresses are used in sales orders. Private addresses are"
+" only visible by authorized users."
+msgstr ""
+"Les adresses de facturation et de livraison sont utilisées dans les commandes client. Les adresses privées sont"
+" uniquement visible par les utilisateurs autorisés."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_is_follower
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_is_follower
+msgid "Is Follower"
+msgstr "Est suiveur"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__is_company
+msgid "Is a Company"
+msgstr "Est une entreprise"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__function
+msgid "Job Position"
+msgstr "Poste"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__lang
+msgid "Language"
+msgstr "Langue"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client____last_update
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives____last_update
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase____last_update
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app____last_update
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales____last_update
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop____last_update
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast____last_update
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__write_uid
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__write_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__write_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__write_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__write_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__write_date
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__write_date
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__write_date
+#: model:ir.model.fields,field_description:registry_app.field_sale_custom__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.model.fields,help:registry_app.field_registry_app_cooperatives__shop_ids
+#, python-format
+msgid "List of shops that comes under this cooperatives"
+msgstr "Liste des commerces relevant de cette coopérative"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__clients_ids
+msgid "List of notified"
+msgstr "Liste des notifiés"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__company_id
+#: model:ir.model.fields,help:registry_app.field_registry_app_purchase__company_id
+#: model:ir.model.fields,help:registry_app.field_registry_app_sales__company_id
+#: model:ir.model.fields,help:registry_app.field_registry_app_shop__company_id
+msgid "Logged in user Company"
+msgstr "Utilisateur connecté Société"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__company_id
+msgid "Logged user Company"
+msgstr "Utilisateur connecté Société"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.tmp_sales_data
+msgid "Login"
+msgstr "Connexion"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__shop_logo
+#: model_terms:ir.ui.view,arch_db:registry_app.external_layout_bold_new
+#: model_terms:ir.ui.view,arch_db:registry_app.external_layout_standard_new
+msgid "Logo"
+msgstr "Logo"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_main_attachment_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pièce jointe principale"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__message
+msgid "Message"
+msgstr "Main AttachmentMessagehment"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_has_error
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur de livraison du message"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_ids
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_ids
+msgid "Messages"
+msgstr "messages"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__mobile
+msgid "Mobile"
+msgstr "Mobile"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Date limite de mon activité"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_treport_header_footer
+msgid "My Company"
+msgstr "Mon entreprise"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__name
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__name
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_view
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Name"
+msgstr "Nom"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.model.fields,help:registry_app.field_registry_app_cooperatives__name
+#, python-format
+msgid "Name of the Cooperative"
+msgstr "Nom de la coopérative"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de la prochaine activité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activité suivant"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email_normalized
+msgid "Normalized Email"
+msgstr "E-mail normalisé"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__comment
+msgid "Notes"
+msgstr "Remarques"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_needaction_counter
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_has_error_counter
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_needaction_counter
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_has_error_counter
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec erreur de livraison"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__message_unread_counter
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de messages non lus"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "Open shop"
+msgstr "Boutique ouverte"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__opened
+msgid "Opened"
+msgstr "Ouvert"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "Orders"
+msgstr "Ordres"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.external_layout_standard_new
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__parent_name
+msgid "Parent name"
+msgstr "Nom du parent"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr "Partenaire avec le même numéro d'identification fiscale"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.tmp_sales_data
+msgid "Password"
+msgstr "Mot de passe"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__phone
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_registry_shop_search
+msgid "Point of Sale"
+msgstr "Point de vente"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_registry_shop_search
+msgid "Point of Sale Session"
+msgstr "Séance en point de vente"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Price"
+msgstr "Prix"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_sales__price
+msgid "Price at which the product is sold to customers."
+msgstr "Prix auquel le produit est vendu aux clients."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__property_product_pricelist
+msgid "Pricelist"
+msgstr "Liste de prix"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__product_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.registry_app_product_variants_menu
+msgid "Product Variants"
+msgstr "Variantes de produit"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.registry_app_product
+#: model:ir.ui.menu,name:registry_app.registry_app_product_menu
+msgid "Products"
+msgstr "Des produits"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.purchase
+msgid "Purchase"
+msgstr "Achat"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__purchase_app_ids
+msgid "Purchase App"
+msgstr "Acheter l'application"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_registry_app_purchase
+msgid "Purchase Registries"
+msgstr "Registres d'achat"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Purchases"
+msgstr "Achats"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__quantity
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__ref
+msgid "Reference"
+msgstr "Référence"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.registry_app_action_window
+#: model:ir.actions.act_window,name:registry_app.registry_app_filtered_action_window
+#: model:ir.actions.act_window,name:registry_app.registry_app_past_login_action_window
+#: model:ir.ui.menu,name:registry_app.registries
+msgid "Registries"
+msgstr "Registres"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.menu_root
+msgid "Registry"
+msgstr "Enregistrer"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_registry_app_registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_purchase__registry_app_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__registry_app_id
+#: model:ir.module.category,name:registry_app.module_category_registry_app
+msgid "Registry App"
+msgstr "Application de registre"
+
+#. module: registry_app
+#: model:ir.actions.server,name:registry_app.auto_time_check_scheduler_ir_actions_server
+#: model:ir.cron,cron_name:registry_app.auto_time_check_scheduler
+#: model:ir.cron,name:registry_app.auto_time_check_scheduler
+msgid "Registry App : Message Broadcast"
+msgstr "Application de registre : diffusion de messages"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.registry_app_purchase_action_window
+msgid "Registry App Purchase"
+msgstr "Achat de l'application de registre"
+
+#. module: registry_app
+#: model:ir.actions.act_window,name:registry_app.registry_app_sales_action_window
+msgid "Registry App Sale"
+msgstr "Vente d'applications de registre"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_registry_app_shop
+msgid "Registry App Shop"
+msgstr "Boutique d'applications de registre"
+
+#. module: registry_app
+#: model:ir.actions.report,name:registry_app.action_report_registry_log
+msgid "Registry Log"
+msgstr "Journal du registre"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Registry Report"
+msgstr "Rapport de registre"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__parent_id
+msgid "Related Company"
+msgstr "Société liée"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.reporting
+msgid "Reporting"
+msgstr "Rapports"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_sms_broadcast_form
+msgid "SMS Broadcast Form"
+msgstr "Formulaire de diffusion SMS"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.registry_app_sms
+msgid "SMS Log"
+msgstr "Journal SMS"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_regsmsbroadcast
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__name
+msgid "SMS Notification"
+msgstr "Notification par SMS"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__state
+msgid "SMS Status"
+msgstr "Statut SMS"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__msg_sent
+msgid "SMS send?"
+msgstr "SMS envoyé?"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Sale"
+msgstr "Vente"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__sale_app_ids
+msgid "Sale App"
+msgstr "Application de vente"
+
+#. module: registry_app
+#: model:ir.actions.client,name:registry_app.sale_action_demo
+#: model:ir.ui.menu,name:registry_app.menu_sale_demo
+msgid "Sale Custom"
+msgstr "Vente personnalisée"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_sales__price
+msgid "Sales Price"
+msgstr "Prix de vente"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_registry_app_sales
+msgid "Sales Registries"
+msgstr "Registres des ventes"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__team_id
+msgid "Sales Team"
+msgstr "Équipe de vente"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__user_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__registry_user_id
+msgid "Salesperson"
+msgstr "Vendeur"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Salesperson:"
+msgstr "Vendeur:"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__self
+msgid "Self"
+msgstr "Soi"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__regsmsbroadcast__state__send
+msgid "Send"
+msgstr "Envoyer"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Send SMS"
+msgstr "Envoyer un SMS"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_sms_broadcast_form
+msgid "Send SMS Now"
+msgstr "Envoyer un SMS maintenant"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__sender_id
+msgid "Sender ID"
+msgstr "Identifiant de l'expéditeur"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "Sessions"
+msgstr "Séances"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.model.fields,help:registry_app.field_registry_app_cooperatives__user_id
+#, python-format
+msgid "Set the admin user for this cooperative"
+msgstr "Définir l'utilisateur admin pour cette coopérative"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+msgid "Settings"
+msgstr "Paramètres"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_share
+msgid "Share Partner"
+msgstr "Partenaire de partage"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__shop_id
+msgid "Shop"
+msgstr "Boutique"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__user_id
+#: model:res.groups,name:registry_app.registry_app_shop_owner
+msgid "Shop Owner"
+msgstr "Propriétaire de la boutique"
+
+#. module: registry_app
+#: model:res.groups,comment:registry_app.registry_app_shop_owner
+msgid "Shop Owners"
+msgstr "Propriétaires de magasins"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
+#, python-format
+msgid "Shop:"
+msgstr "Boutique:"
+
+#. module: registry_app
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: code:addons/registry_app/models/registry_app_cooperatives.py:0
+#: model:ir.actions.act_window,name:registry_app.registry_app_shop_action_window
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__shop_ids
+#, python-format
+msgid "Shops"
+msgstr "Magasins"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__signup_expiration
+msgid "Signup Expiration"
+msgstr "Expiration de l'inscription"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__signup_token
+msgid "Signup Token"
+msgstr "Jeton d'inscription"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__signup_type
+msgid "Signup Token Type"
+msgstr "Type de jeton d'inscription"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__signup_valid
+msgid "Signup Token is Valid"
+msgstr "Le jeton d'inscription est valide"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__signup_url
+msgid "Signup URL"
+msgstr "URL d'inscription"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__state_id
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__state
+msgid "State"
+msgstr "État"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.view_registry_shop_search
+msgid "Status"
+msgstr "Statut"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard: la date d'échéance est déjà dépassée\n"
+"Aujourd'hui: la date d'activité est aujourd'hui\n"
+"Prévu: Activités futures."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__street
+msgid "Street"
+msgstr "Rue"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__street2
+msgid "Street2"
+msgstr "Rue2"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_registry_app_client
+msgid "TPE Member"
+msgstr "Membre TPE"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__category_id
+msgid "Tags"
+msgstr "Mots clés"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.external_layout_bold_new
+msgid "Tel:"
+msgstr "Tél:"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+"Le code pays ISO en deux caractères. \n"
+"Vous pouvez utiliser ce champ pour une recherche rapide."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__vat
+msgid ""
+"The Tax Identification Number. Complete it if the contact is subjected to "
+"government taxes. Used in some legal statements."
+msgstr ""
+"Le numéro d'identification fiscale. Complétez-le si le contact est soumis à "
+"taxes gouvernementales. Utilisé dans certaines déclarations légales."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__user_id
+msgid "The internal user in charge of this contact."
+msgstr "L'utilisateur interne en charge de ce contact."
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can"
+" contain more than strictly an email address."
+msgstr ""
+"Ce champ est utilisé pour effectuer une recherche sur l'adresse e-mail comme le peut le champ e-mail principal"
+"contiennent plus que strictement une adresse e-mail."
+
+#. module: registry_app
+#: model:ir.module.category,description:registry_app.module_category_registry_app
+msgid "This is to enable Registry App user groups "
+msgstr "Il s'agit d'activer les groupes d'utilisateurs de l'application de registre "
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__property_product_pricelist
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
+msgstr ""
+"Cette liste de prix sera utilisée, à la place de celle par défaut, pour les ventes aux "
+"partenaire actuel"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_shop__cooperative_id
+msgid "This shop belongs to this particular cooperative"
+msgstr "Cette boutique appartient à cette coopérative particulière"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__tz
+msgid "Timezone"
+msgstr "Fuseau horaire"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__tz_offset
+msgid "Timezone offset"
+msgstr "Décalage horaire"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__title
+msgid "Title"
+msgstr "Titre"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__total_purchase
+#, python-format
+msgid "Total Purchase"
+msgstr "Achat total"
+
+#. module: registry_app
+#. openerp-web
+#: code:addons/registry_app/static/src/qweb/templates.xml:0
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__total_sales
+#, python-format
+msgid "Total Sales"
+msgstr "Ventes totales"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__sender_type
+msgid "Type structure"
+msgstr "Type d'activité d'exception enregistrée."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_unread
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_unread
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_unread_counter
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Compteur de messages non lus"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__barcode
+msgid "Use a barcode to identify this contact."
+msgstr "Utilisez un code-barres pour identifier ce contact."
+
+#. module: registry_app
+#: model:res.groups,name:registry_app.registry_app_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.tmp_sales_data
+msgid "Username"
+msgstr "Username"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__user_ids
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__shop_users_ids
+#: model:ir.ui.menu,name:registry_app.users
+#: model:res.groups,comment:registry_app.registry_app_user
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__vat
+msgid "VAT/Tax ID"
+msgstr ""
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: registry_app
+#: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__validated
+msgid "Validated"
+msgstr "Validé"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__website
+msgid "Website Link"
+msgstr "Lien de site Web"
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__website_message_ids
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__website_message_ids
+msgid "Website Messages"
+msgstr "Messagerie du site Web"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__website_message_ids
+#: model:ir.model.fields,help:registry_app.field_registry_app_registry_app__website_message_ids
+msgid "Website communication history"
+msgstr "Historique des communications du site Web"
+
+#. module: registry_app
+#: model:ir.model.fields,help:registry_app.field_registry_app_client__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your web client."
+msgstr ""
+"Lors de l'impression de documents et de l'exportation/importation de données, les valeurs horaires sont calculées en fonction de ce fuseau horaire.\n"
+"Si le fuseau horaire n'est pas défini, UTC (Coordinated Universal Time) est utilisé.\n"
+"Partout ailleurs, les valeurs temporelles sont calculées en fonction du décalage horaire de votre client Web."
+
+#. module: registry_app
+#: model:ir.model.fields,field_description:registry_app.field_registry_app_client__zip
+msgid "Zip"
+msgstr ""
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_treport_header_footer
+msgid "custom footer"
+msgstr "pied de page personnalisé"
+
+#. module: registry_app
+#: model:ir.model,name:registry_app.model_sale_custom
+msgid "sale.custom"
+msgstr "vente.personnalisé"
+
+#. module: registry_app
+#: model:ir.ui.menu,name:registry_app.sales
+msgid "sales"
+msgstr "ventes"
