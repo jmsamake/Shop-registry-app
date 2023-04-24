@@ -4,6 +4,10 @@
     <t t-call="website.layout">
         <div class="container">
             <h1 class="text-center p-2">Shops</h1>
+            <div class="mb-3">
+                    <a href="/cooperatives/form"
+                       class="btn btn-primary">Create</a>
+                </div>
             <div class="row">
                 <t t-foreach="shops" t-as="shop">
                     <div class="col-sm-4 mb-3">

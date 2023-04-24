@@ -8,6 +8,26 @@ class ResUsers(models.Model):
 
     shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop',
                               default=False)
+    is_from_registry_app = fields.Boolean(
+        string='Is User created from Registry App', default=False)
+
+    # @api.model
+    # def create(self, vals):
+    #     vals['is_from_registry_app'] = bool(vals.get('is_from_registry_app'))
+    #     return super(ResUsers, self).create(vals)
+
+    def get_pref(self):
+        if self.env.user:
+            # return self.env['ir.actions.act_window']._for_xml_id('base.view_users_form_simple_modif')
+            domain = [('id', '=', self.env.user.id)]
+            action = \
+                self.env.ref(
+                    'base.view_users_form_simple_modif').sudo().read()[0]
+            action['domain'] = domain
+            for rec in action:
+                print('rec  %', rec)
+            return action
+        # return super(ResUsers, self).get_pref()
 
 
 class RegistryAppShop(models.Model):
@@ -117,8 +137,6 @@ class RegistryAppShop(models.Model):
                     'shop_id': self.id
                 })
         return super(RegistryAppShop, self).write(vals)
-
-
 
 # def login_btn(self):
 #     view_id = self.env.ref('registry_app.login_wizard_view').id

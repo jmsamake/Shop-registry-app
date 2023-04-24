@@ -9,9 +9,9 @@ class RegistryAppSales(models.Model):
 
     # name = fields.Char(string='Name', required=True)
 
-    product_id = fields.Many2one('product.template', string=_('Product'), )
+    product_id = fields.Many2one('registry_app.product', string=_('Product'), )
     # price = fields.Float()
-    price = fields.Float(related='product_id.list_price', readonly=False)
+    price = fields.Float(related='product_id.price', readonly=False)
     quantity = fields.Integer(string=_('Quantity'), default=1)
     registry_app_id = fields.Many2one('registry_app.registry_app')
     client_id = fields.Many2one('registry_app.client', string=_('Client'))
@@ -23,4 +23,4 @@ class RegistryAppSales(models.Model):
     @api.onchange('quantity', 'price')
     def _compute_calculated_price(self):
         for record in self:
-            record.price = record.quantity * record.product_id.list_price
+            record.price = record.quantity * record.product_id.price

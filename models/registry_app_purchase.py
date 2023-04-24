@@ -8,8 +8,8 @@ class RegistryAppPurchase(models.Model):
     _description = 'Purchase Registries'
 
     # name = fields.Char(string='Name', required=True)
-    product_id = fields.Many2one('product.template', string=_('Product'), )
-    cost = fields.Float()
+    product_id = fields.Many2one('registry_app.product', string=_('Product'), )
+    cost = fields.Float(related='product_id.cost', readonly=False)
     registry_app_id = fields.Many2one('registry_app.registry_app')
     client_id = fields.Many2one('registry_app.client', string=_('Client'))
     company_id = fields.Many2one('res.company', string='Company',
@@ -18,3 +18,8 @@ class RegistryAppPurchase(models.Model):
     active = fields.Boolean(string=_('Active'), default=True)
 
 
+class LanguageChange(models.AbstractModel):
+    _name= 'language.change'
+
+    # language =
+    # lang = fields.Selection

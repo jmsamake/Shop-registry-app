@@ -6,9 +6,9 @@ class RegistryAppUsers(models.Model):
     _name = 'registry_app.users'
     _description = 'Registry User'
 
-    # name = fields.Char(string='Name', required=True)
+    # name = fields.Char(required=True, string=_("Name"))
     user_id = fields.Many2one('res.users', delegate=True, ondelete='cascade',
-                              required=True, string=_("Name"),
+                              string=_("User ID"),
                               domain="[('id','=',0)]")
     login = fields.Char(related='user_id.login', store=True, readonly=False,
                         string='Email', required=True)

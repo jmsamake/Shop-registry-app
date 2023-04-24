@@ -10,8 +10,8 @@
         </record>
 
         <!-- group 1. Global User -->
-        <record id="registry_app_global_user" model="res.groups">
-            <field name="name">Global user</field>
+        <record id="registry_app_super_admin" model="res.groups">
+            <field name="name">Super Admin</field>
             <field name="category_id" ref="module_category_registry_app"/>
         </record>
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registry_app_website_sms_broadcast" name="Clients">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1 class="text-center p-2">SMS Broadcast</h1>
+                <div class="mb-3">
+                    <a href="/sms_broadcast/form"
+                       class="btn btn-primary">Create</a>
+                </div>
+                <div class="row">
+                    <t t-foreach="sms_broadcasts" t-as="sb">
+                        <div class="col-sm-4 mb-3">
+                            <div class="card h-100 bg-secondary border"
+                                 t-att-data-coop-id="sb.id">
+                                <div class="card-body">
+                                    <h5 class="card-title"
+                                        t-esc="sb.name"></h5>
+                                    <div>
+                                        <p>Broadcast date : <span
+                                                t-esc="sb.broadcast_date"/></p>
+                                        <br/>
+                                        <p>Clients : <t
+                                                t-foreach="sb.client_ids"
+                                                t-as="client">
+                                            <span t-esc="client.name"/>
+                                        </t></p>
+                                        <!--                                        <a class="btn btn-primary"-->
+                                        <!--                                           t-attf-href="/cooperative/{{ prod.id }}/shops">-->
+                                        <!--                                            Go to Shop</a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+        <!--         <style>-->
+        <!--        -->
+        <!--    </style>-->
+    </template>
+
+    <template id="website_sms_broadcast_form_template" name="Products Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Create Products</h1>
+                    <form action="/submit_sms_broadcast" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+
+                        <div class="form-group">
+                            <label for="name">SMS Notification:</label>
+                            <input type="text" class="form-control" id="name"
+                                   name="name" required="True"/>
+                            <br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="broadcast_date">Date:</label>
+                            <input type="datetime-local" class="form-control"
+                                   id="broadcast_date"
+                                   name="broadcast_date"/>
+                            <br/>
+                        </div>
+                        <!--                    <div class="form-group">-->
+                        <!--                        <label for="shop_ids">Shops:</label>-->
+                        <!--                        <input type="text" class="form-control" id="shop_ids"-->
+                        <!--                               name="shop_ids"/>-->
+                        <!--                        <br/>-->
+                        <!--                    </div>-->
+                        <div class="form-group">
+                            <label for="client_id">Clients:</label>
+                            <select class="form-control" id="client_id"
+                                    name="client_id" multiple="multiple">
+                                <option value="">Select a Client...</option>
+                                <t t-foreach="clients" t-as="client">
+                                    <option t-att-value="client.id"><t
+                                            t-esc="client.partner_id.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <input type="text" class="form-control" id="message"
+                                   name="message"/>
+                            <br/>
+                        </div>
+                        <a href="#" class="btn btn-primary">Send SMS </a>
+
+
+                        <button type="submit" class="btn btn-primary">
+                            Submit</button>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

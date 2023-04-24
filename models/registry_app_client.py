@@ -6,10 +6,10 @@ class RegistryAppClient(models.Model):
     _description = 'TPE Member'
 
     client_number = fields.Char(string=_('Client Number'))
-    # name = fields.Char(string='Name', required=True)
+    # name = fields.Char(related='partner_id.name', string='Name', readonly=False,
+    #                    required=True)
     partner_id = fields.Many2one('res.partner', delegate=True, string=_('Name'),
-                                 ondelete='cascade', required=True,
-                                 domain=[('id', '=', 0)])
+                                 ondelete='cascade', domain=[('id', '=', 0)])
     phone = fields.Char(related='partner_id.phone', store=True, readonly=False,
                         string=_('Phone'))
     email = fields.Char(related='partner_id.email', store=True, readonly=False,

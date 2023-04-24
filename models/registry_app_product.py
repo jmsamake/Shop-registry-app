@@ -32,12 +32,6 @@ class RegistryAppProduct(models.Model):
 
     @api.model
     def create(self, values):
-        """Override default Odoo create function and extend."""
-        # shop_id = self.env['registry_app.shop'].search(
-        #     [('create_uid', '=', self.env.user.id),
-        #      ], limit=1).id
-        # print('shop_id', shop_id)
-        # values['shop_id'] = shop_id
         values.update({
             'shop_id':  self.env.user.shop_id.id
         })

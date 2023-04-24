@@ -28,6 +28,23 @@ class RegistryApp(http.Controller):
         return request.render("registry_app.registry_app_website_cooperatives",
                               values)
 
+    @http.route('/cooperatives/form', type='http', auth="public", website=True)
+    def cooperative_form(self, **kw):
+        users = request.env['res.users'].search([])
+        return request.render('registry_app.cooperative_form_template', {
+            'users': users
+        })
+
+    @http.route('/submit_cooperative', type='http', auth="public", website=True)
+    def submit_cooperative(self, **kw):
+        print(request.env, "Please enter")
+        cooperatives = request.env['registry_app.cooperatives']
+        cooperatives.create({
+            'name': kw.get('name'),
+            'user_id': kw.get('user_id')
+        })
+        return request.redirect('/cooperatives')
+
     @http.route('/cooperative/<int:cooperative_id>/shops',
                 type='http', auth='public', website=True)
     def show_shop(self, cooperative_id, **kwargs):
@@ -48,11 +65,12 @@ class RegistryApp(http.Controller):
 
 class RegistryAppShopController(http.Controller):
 
-    @http.route('/registry_app_shop/form/<int:shop_id>', auth='public', website=True)
-    def shop_form(self, shop_id ,**kw):
+    @http.route('/registry_app_shop/form/<int:shop_id>', auth='public',
+                website=True)
+    def shop_form(self, shop_id, **kw):
         users = request.env['res.users'].search([])
         cooperatives = request.env['registry_app.cooperatives'].search([])
-        shop = request.env['registry_app.shop'].search([('id','=', shop_id)])
+        shop = request.env['registry_app.shop'].search([('id', '=', shop_id)])
 
         date = request.env['registry_app.registry_app'].get_context_today()
         print(date)
@@ -63,7 +81,7 @@ class RegistryAppShopController(http.Controller):
                                'cooperatives': cooperatives,
                                'date': date,
                                'name': name,
-                               'shop':shop
+                               'shop': shop
                                # 'shop_id':shop_id
                                })
 
@@ -80,3 +98,110 @@ class RegistryAppShopController(http.Controller):
         }
         registry_app_shop.create(vals)
         return request.render('registry_app.shop_thankyou')
+
+
+class RegistryAppProductController(http.Controller):
+    @http.route('/reg_products', type='http', auth='user', website=True)
+    def get_cooperatives(self):
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        products = request.env['registry_app.product'].sudo().search(
+            [('shop_id', '=', shop_id.id)])
+        values = {"products": products}
+        return request.render("registry_app.registry_app_website_products",
+                              values)
+
+    @http.route('/reg_products/form', type='http', auth="public", website=True)
+    def cooperative_form(self, **kw):
+        users = request.env['res.users'].search([])
+        return request.render(
+            'registry_app.website_reg_products_form_template', )
+
+    @http.route('/submit_products', type='http', auth="public", website=True)
+    def submit_cooperative(self, **kw):
+        print(kw, "KW")
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        product_template = request.env['product.template']
+        new_product_template = product_template.create({
+            'name': kw.get('name'),
+            'list_price': kw.get('price'),
+            'standard_price': kw.get('cost'),
+        })
+        print(new_product_template, 'npt')
+        products = request.env['registry_app.product']
+        products.create({
+            'product_id': new_product_template.id,
+            'price': kw.get('price'),
+            'cost': kw.get('cost'),
+        })
+        return request.redirect('/reg_products')
+
+
+class RegistryAppClientsController(http.Controller):
+    @http.route('/reg_clients', type='http', auth='user', website=True)
+    def get_cooperatives(self):
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        clients = request.env['registry_app.client'].sudo().search(
+            [('shop_id', '=', shop_id.id)])
+        values = {"clients": clients}
+        return request.render("registry_app.registry_app_website_client",
+                              values)
+
+    @http.route('/clients/form', type='http', auth="public", website=True)
+    def cooperative_form(self, **kw):
+        users = request.env['res.users'].search([])
+        return request.render('registry_app.website_reg_client_form_template',)
+
+    @http.route('/submit_clients', type='http', auth="public", website=True)
+    def submit_cooperative(self, **kw):
+        print(kw, "KW")
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        partner_id = request.env['res.partner']
+        new_partner_id = partner_id.create({
+            'name': kw.get('name'),
+            'phone': kw.get('phone'),
+            'email': kw.get('email'),
+            'street': kw.get('street'),
+        })
+        print(new_partner_id, 'npt')
+        clients = request.env['registry_app.client']
+        clients.create({
+            'partner_id': new_partner_id.id,
+            'client_number': kw.get('client_number'),
+            'phone': kw.get('phone'),
+            'email': kw.get('email'),
+            'street': kw.get('street'),
+        })
+        return request.redirect('/reg_clients')
+
+
+class RegistryAppSmsController(http.Controller):
+    @http.route('/reg_sms', type='http', auth='user', website=True)
+    def get_cooperatives(self):
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        sms_broadcasts = request.env['regsmsbroadcast'].sudo().search(
+            [('shop_id', '=', shop_id.id)])
+        values = {"sms_broadcasts": sms_broadcasts}
+        return request.render("registry_app.registry_app_website_sms_broadcast",
+                              values)
+
+    @http.route('/sms_broadcast/form', type='http', auth="public", website=True)
+    def cooperative_form(self, **kw):
+        clients = request.env['registry_app.client'].search([])
+        values = {'clients': clients}
+        return request.render(
+            'registry_app.website_sms_broadcast_form_template', values)
+
+    @http.route('/submit_sms_broadcast', type='http', auth="public",
+                website=True)
+    def submit_cooperative(self, **kw):
+        print(kw, "KW")
+        shop_id = request.env['res.users'].browse(request.uid).shop_id
+        broadcast_sms = request.env['regsmsbroadcast']
+
+        # broadcast_sms.create({
+        #     'name': kw.get('name'),
+        #     'broadcast_date': kw.get('broadcast_date'),
+        #     'clients_ids': kw.get('clients'),
+        #     'message': kw.get('message'),
+        # })
+        return request.redirect('/reg_sms')

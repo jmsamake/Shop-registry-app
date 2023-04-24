@@ -1,4 +1,4 @@
-from odoo import models, fields, api,_
+from odoo import models, fields, api, _
 import datetime
 import requests
 import json
@@ -26,6 +26,15 @@ class SmsBroadcast(models.Model):
         ('send', _('Send')),
         ('failed', _('Failed'))
     ], string=_('SMS Status'), default='draft', readonly=True, copy=False)
+    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop')
+
+    @api.model
+    def create(self, values):
+        values.update({
+            'shop_id': self.env.user.shop_id.id
+        })
+        print(values, 'values')
+        return super(SmsBroadcast, self).create(values)
 
     def action_sms_send(self):
         access_token = self.get_access_token()
