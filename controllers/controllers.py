@@ -5,26 +5,33 @@ import werkzeug.utils
 
 
 class RegistryApp(http.Controller):
-    @http.route('/registry_app/registry_app', auth='public')
-    def index(self, **kw):
-        # return "Hello, world"
-        return request.render("registry_app.tmp_sales_data")
+    #     @http.route('/registry_app/registry_app', auth='public')
+    #     def index(self, **kw):
+    #         # return "Hello, world"
+    #         return request.render("registry_app.tmp_sales_data")
 
     @http.route('/my/cus/login', type='http', auth='user', website=True)
     def list(self, **kw):
-        print(kw.get('username'))
-        if kw.get('username') == '1' and kw.get('password') == '1':
-            view_id = request.env.ref(
-                'registry_app.registry_app_shop_action_window')
-            return request.redirect(
-                '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
-                    view_id.id))
+        print('KW : ', kw)
+        # print(kw.get('username'))
+        # if kw.get('username') == '1' and kw.get('password') == '1':
+        #     view_id = request.env.ref(
+        #         'registry_app.registry_app_shop_action_window')
+        #     return request.redirect(
+        #         '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
+        #             view_id.id))
 
     @http.route('/cooperatives', type='http', auth='user', website=True)
     def get_cooperatives(self):
         cooperatives = request.env['registry_app.cooperatives'].sudo().search(
             [('user_id', '=', request.uid)])
-        values = {"cooperatives": cooperatives}
+        user = request.env['res.users'].browse(request.uid)
+        shop_logo = user.shop_id.shop_logo
+        values = {
+            "cooperatives": cooperatives,
+            "user": user,
+            "shop_logo": shop_logo
+        }
         return request.render("registry_app.registry_app_website_cooperatives",
                               values)
 
@@ -149,7 +156,7 @@ class RegistryAppClientsController(http.Controller):
     @http.route('/clients/form', type='http', auth="public", website=True)
     def cooperative_form(self, **kw):
         users = request.env['res.users'].search([])
-        return request.render('registry_app.website_reg_client_form_template',)
+        return request.render('registry_app.website_reg_client_form_template', )
 
     @http.route('/submit_clients', type='http', auth="public", website=True)
     def submit_cooperative(self, **kw):
@@ -205,3 +212,10 @@ class RegistryAppSmsController(http.Controller):
         #     'message': kw.get('message'),
         # })
         return request.redirect('/reg_sms')
+
+    @http.route('/registry_app', type='http', auth='user', website=True)
+    def open_registry_app(self):
+        # cooperatives = request.env['registry_app.cooperatives'].sudo().search(
+        #     [('user_id', '=', request.uid)])
+        return request.render(
+            "registry_app.registry_app_login_form")

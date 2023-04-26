@@ -6,16 +6,12 @@ class RegistryAppClient(models.Model):
     _description = 'TPE Member'
 
     client_number = fields.Char(string=_('Client Number'))
-    # name = fields.Char(related='partner_id.name', string='Name', readonly=False,
-    #                    required=True)
-    partner_id = fields.Many2one('res.partner', delegate=True, string=_('Name'),
+    name = fields.Char(string=_('Name'), required=True)
+    partner_id = fields.Many2one('res.partner', delegate=True, string=_('Partner'),
                                  ondelete='cascade', domain=[('id', '=', 0)])
-    phone = fields.Char(related='partner_id.phone', store=True, readonly=False,
-                        string=_('Phone'))
-    email = fields.Char(related='partner_id.email', store=True, readonly=False,
-                        string=_('Email'))
-    street = fields.Char(related='partner_id.street', store=True,
-                         string=_('Street'), readonly=False)
+    phone = fields.Char(string=_('Phone'))
+    email = fields.Char(string=_('Email'))
+    street = fields.Char(string=_('Street'),)
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
@@ -37,17 +33,48 @@ class RegistryAppClient(models.Model):
             'view_id': view_id,
         }
 
+    def action_sms_test(self):
+        print(self)
+
+    def open_broadcastsms(self):
+        ctx = dict(self.env.context)
+        ctx.pop('active_id', None)
+        ctx.pop('default_journal_id', None)
+        ctx['active_ids'] = self.ids
+        print(ctx,'selffffff',self.ids)
+        sms_wizard = self.env['regsmsbroadcast'].create({
+            'name': 'Sms Broadcast',
+            'clients_ids': [(6, 0, self.ids)],
+            'message': 'Enter your SMS message here',
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'regsmsbroadcast',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'new',
+            'res_id': sms_wizard.id,
+        }
+
+
     @api.model
     def create(self, values):
         """Override default Odoo create function and extend."""
-        # shop_id = self.env['registry_app.shop'].search(
-        #     ['|',('create_uid', '=', self.env.user.id),
-        #      ('id', '=', self.env.user.shop_id),
-        #      ], limit=1).id
+        print( 'name',self.name)
+        print( 'name va',values['name'])
+        new_partner = self.env['res.partner'].create({
+            'name': values['name'],
+            'phone': values['phone'],
+            'email': values['email'],
+            'street': values['street'],
+        })
+        print(new_partner,'new_partner')
         print('shop_id', self.env.user.shop_id)
         # values['shop_id'] = shop_id
         values.update({
-            'shop_id': self.env.user.shop_id.id
+            'shop_id': self.env.user.shop_id.id,
+            'partner_id': new_partner.id
         })
         print(values, 'values')
         return super(RegistryAppClient, self).create(values)
+

@@ -31,6 +31,7 @@
         'views/registry_app_website_client_template.xml',
         'views/registry_app_website_sms_broadcast.xml',
         'views/registry_app_website_shops.xml',
+        'views/registry_app_website_registry_app_template.xml',
         'data/auto_time_check.xml'
     ],
     'assets': {

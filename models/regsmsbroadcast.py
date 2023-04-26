@@ -54,7 +54,8 @@ class SmsBroadcast(models.Model):
         for client in self.clients_ids:
             vals = {}
             # recipient = client.mobile
-            recipient = '+22375108040'
+            # recipient = '+22375108040'
+            recipient = client.phone
             if '+' in recipient:
                 recipient = recipient.replace('+', '')
             data = {
@@ -110,3 +111,7 @@ class SmsBroadcast(models.Model):
             record.action_sms_send()
             # set msg_sent field to True
             record.msg_sent = True
+        all_broadcast_records = self.search([])
+        for record in all_broadcast_records:
+            if record.state == 'send':
+                record.msg_send = True

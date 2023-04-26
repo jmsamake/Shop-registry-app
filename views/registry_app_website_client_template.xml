@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_client" name="Clients">
-        <t t-call="website.layout">
+        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
             <div class="container">
                 <h1 class="text-center p-2">Clients</h1>
                 <div class="mb-3">
@@ -27,14 +27,14 @@
                     </t>
                 </div>
             </div>
-        </t>
+        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
         <!--         <style>-->
         <!--        -->
         <!--    </style>-->
     </template>
 
     <template id="website_reg_client_form_template" name="Products Form">
-        <t t-call="website.layout">
+        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
             <div class="container">
                 <div>
                     <h1 class="text-center p-2">Create Products</h1>
@@ -81,6 +81,6 @@
                     </form>
                 </div>
             </div>
-        </t>
+        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
 </odoo>

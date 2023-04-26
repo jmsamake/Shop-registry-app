@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="tmp_sales_data" name="Sale Details">
-<!--        <t t-call="website.layout">-->
+<!--    <template id="tmp_sales_data" name="Sale Details">-->
+<!--		<link rel="stylesheet" href="/registry_app/static/src/css/style.css"></link>-->
+<!--      <div class="login-box">-->
+<!--		<h1>Login</h1>-->
+<!--		<form action="/my/cus/login">-->
+<!--			<label for="username">Username</label>-->
+<!--			<input type="text" id="username" name="username" />-->
+<!--			<label for="password">Password</label>-->
+<!--			<input type="password" id="password" name="password" />-->
+<!--			<input type="submit" value="Login"/>-->
+<!--		</form>-->
+<!--	</div>-->
+
+<!--    </template>-->
+
+	<template id="registry_app_login_form" name="Registry App Login Page">
+<t t-call="registry_app.registry_app_website_reg_app_header_template"/>
 		<link rel="stylesheet" href="/registry_app/static/src/css/style.css"></link>
       <div class="login-box">
 		<h1>Login</h1>
@@ -14,6 +29,6 @@
 		</form>
 	</div>
 
-<!--        </t>-->
+<t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
 </odoo>

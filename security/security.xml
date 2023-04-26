@@ -32,8 +32,8 @@
 
         <!-- group 4. User -->
         <record id="registry_app_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="comment">Users</field>
+            <field name="name">Registry App User</field>
+            <field name="comment">Registry App Users</field>
             <field name="category_id" ref="module_category_registry_app"/>
         </record>
 

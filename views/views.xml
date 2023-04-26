@@ -30,12 +30,17 @@
             <field name="name">Registries list</field>
             <field name="model">registry_app.registry_app</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-success="state == 'validated'"
+                      decoration-info="state == 'opened'"
+                      decoration-danger="state == 'cancelled'"
+                      decoration-warning="state == 'closed'">
                     <field name="name"/>
                     <field name="date"/>
+                    <field name="create_uid" widget="many2one_avatar"/>
                     <field name="active" invisible="True"/>
                     <field name="total_sales"/>
                     <field name="total_purchase"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -59,11 +64,14 @@
                         <button string="Send SMS" type="object"
                                 name="send_sms" class="oe_highlight"
                                 attrs="{'invisible': [('state', '=', 'opened')]}"
+                                groups="registry_app.registry_app_shop_owner"
                         />
-                        <button string="Cancel" type="object"
-                                name="cancel"/>
-                        <button string="Reset" type="object"
-                                name="reset"/>
+                        <button string="Cancel" type="object" name="cancel"
+                                groups="registry_app.registry_app_shop_owner"
+                        />
+                        <button string="Reset" type="object" name="reset"
+                                groups="registry_app.registry_app_shop_owner"
+                        />
                         <field name="state" widget="statusbar" nolabel="1"/>
                     </header>
                     <sheet>
@@ -135,14 +143,33 @@
         <!--            </field>-->
         <!--        </record>-->
 
+<!--        action = self.env['regsmsbroadcast'].create({-->
+<!--            'client_ids': [(6, 0, records.ids)],-->
+<!--            'message': 'Enter your SMS message here',-->
+<!--            'name': 'test',-->
+<!--        })-->
+
+        <!--            registry app server action menu sms -->
+         <record model="ir.actions.server" id="action_reg_send_sms">
+       <field name="name">Send SMS</field>
+       <field name="model_id" ref="registry_app.model_registry_app_client"/>
+       <field name="binding_model_id" ref="registry_app.model_registry_app_client"/>
+       <field name="state">code</field>
+       <field name="code">
+           if records:
+                action = records.open_broadcastsms()
+       </field>
+   </record>
+
         <!--        registry_app.client tree view-->
         <record model="ir.ui.view" id="registry_app.client_tree_view">
             <field name="name">client.tree</field>
             <field name="model">registry_app.client</field>
             <field name="arch" type="xml">
                 <tree>
+                    <header><button name="open_broadcastsms" string="Send SMS" type="object" class="btn-primary"/></header>
                     <field name="client_number"/>
-                    <field name="partner_id"/>
+                    <field name="name"/>
                     <field name="phone"/>
                     <field name="email"/>
                     <field name="street"/>
@@ -165,7 +192,7 @@
                         <group>
                             <group>
                                 <!--<field name="name" class="o_bold"/>-->
-                                <field name="partner_id" class="o_bold"/>
+                                <field name="name" class="o_bold"/>
                                 <field name="client_number"/>
                                 <field name="phone"/>
                                 <field name="email"/>
@@ -180,7 +207,7 @@
             </field>
         </record>
 
-        <!--        registry_app.client form view-->
+        <!--        registry_app.users form view-->
         <record model="ir.ui.view" id="registry_app_users_form_view">
             <field name="name">Registry App Users Form View</field>
             <field name="model">registry_app.users</field>
@@ -190,9 +217,11 @@
                         <group>
                             <group>
                                 <!--<field name="name" class="o_bold"/>-->
-                                <field name="user_id" class="o_bold"/>
+                                <field name="name" class="o_bold"/>
                                 <field name="login"/>
                                 <field name="password"/>
+                                <field name="registry_user_group"
+                                       widget="radio"/>
                                 <!--<field name="phone"/>-->
                             </group>
                             <group>
@@ -209,8 +238,9 @@
             </field>
         </record>
 
-         <!--        registry_app.client form view-->
-        <record model="ir.ui.view" id="registry_app.registry_app_cooperative_view_from">
+        <!--        registry_app.cooperative form view-->
+        <record model="ir.ui.view"
+                id="registry_app.registry_app_cooperative_view_from">
             <field name="name">registry_app.cooperative_form</field>
             <field name="model">registry_app.cooperatives</field>
             <field name="arch" type="xml">
@@ -228,7 +258,10 @@
                             <group>
                                 <field name="shop_ids"
                                        widget="many2many_tags" readonly="True"/>
-                                <field name="user_id" widget="many2one_avatar_user"/>
+                                <field name="user_id"
+                                       widget="many2one_avatar_user"
+                                       domain="[('is_from_registry_app', '=', True)]"
+                                />
                             </group>
                             <group>
                             </group>
@@ -258,9 +291,13 @@
                         <group>
                             <!--                                <field name="name" class="o_bold"/>-->
                             <group>
-                                <field name="user_id" widget="many2one_avatar"/>
+                                <field name="user_id" widget="many2one_avatar"
+                                       domain="[('is_from_registry_app', '=', True)]"
+                                />
                                 <field name="shop_users_ids"
-                                       widget="many2many_tags_avatar"/>
+                                       widget="many2many_tags_avatar"
+                                       domain="[('is_from_registry_app', '=', True)]"
+                                />
                                 <field name="company_id"
                                        options="{'no_create': True}"
                                        groups="base.group_multi_company"
@@ -339,6 +376,9 @@
             <field name="model">regsmsbroadcast</field>
             <field name="arch" type="xml">
                 <form string="SMS Broadcast Form" create="true" edit="true">
+                    <header>
+                        <field name="state" widget="statusbar" nolabel="1"/>
+                    </header>
                     <sheet>
                         <group>
                             <field name="name"/>
@@ -368,15 +408,14 @@
             </field>
         </record>
 
-
         <!-- actions registry_app_cooperatives -->
         <record model="ir.actions.act_window"
                 id="registry_app_cooperatives_action_window">
             <field name="name">Cooperatives</field>
             <field name="res_model">registry_app.cooperatives</field>
-<!--            <field name="domain">['|',('create_uid', '=', uid),('shop_ids', 'in', [uid.shop_id])]</field>-->
-<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
-<!--            <field name="domain">['|',('create_uid', '=', uid), ('user_id', '=', uid),('shop_ids', 'in', uid.shop_id)]</field>-->
+            <!--            <field name="domain">['|',('create_uid', '=', uid),('shop_ids', 'in', [uid.shop_id])]</field>-->
+            <!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+            <!--            <field name="domain">['|',('create_uid', '=', uid), ('user_id', '=', uid),('shop_ids', 'in', uid.shop_id)]</field>-->
             <!--            <field name="context">{'create': False}</field>-->
 
             <field name="view_mode">kanban,tree,form</field>
@@ -395,7 +434,7 @@
         <record model="ir.actions.act_window" id="registry_app_action_window">
             <field name="name">Registries</field>
             <field name="res_model">registry_app.registry_app</field>
-<!--            <field name="domain">[('registry_user_id', '=', uid)]</field>-->
+            <!--            <field name="domain">[('registry_user_id', '=', uid)]</field>-->
             <!--            <field name="context">{'create': False}</field>-->
             <field name="view_mode">tree,kanban,form</field>
             <field name="help" type="html">
@@ -430,12 +469,13 @@
                 id="registry_app_product_action_window">
             <field name="name">Registries App Product</field>
             <field name="res_model">registry_app.product</field>
-<!--            <field name="domain">['|',('shop_id.user_id', '=', uid),-->
-<!--                                  ('shop_id.create_uid', '=', uid),-->
-<!--                                  ('shop_id.shop_users_ids', 'in', uid)-->
-<!--                                  ]-->
-<!--            </field>-->
-            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
+            <!--            <field name="domain">['|',('shop_id.user_id', '=', uid),-->
+            <!--                                  ('shop_id.create_uid', '=', uid),-->
+            <!--                                  ('shop_id.shop_users_ids', 'in', uid)-->
+            <!--                                  ]-->
+            <!--            </field>-->
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), (
+            'shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -493,10 +533,11 @@
             <field name="name">Clients</field>
             <field name="res_model">registry_app.client</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">['|', ('shop_id.user_id', '=', uid), ('shop_id.shop_users_ids', 'in', [uid])] </field>
-<!--            <field name="domain">['|',('shop_id', '=', uid.shop_id),-->
-<!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
-<!--                                  ]</field>-->
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), (
+            'shop_id.shop_users_ids', 'in', [uid])] </field>
+            <!--            <field name="domain">['|',('shop_id', '=', uid.shop_id),-->
+            <!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
+            <!--                                  ]</field>-->
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No Clients Available
@@ -635,11 +676,11 @@
                 id="registry_app_shop_action_window">
             <field name="name">Shops</field>
             <field name="res_model">registry_app.shop</field>
-<!--            <field name="domain">[('user_id', '=', uid)]</field>-->
-<!--            <field name="domain">['|',('create_uid', '=', uid),-->
-<!--                                  ('id', '=', uid.shop_id),-->
-<!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
-<!--                                  ]</field>-->
+            <!--            <field name="domain">[('user_id', '=', uid)]</field>-->
+            <!--            <field name="domain">['|',('create_uid', '=', uid),-->
+            <!--                                  ('id', '=', uid.shop_id),-->
+            <!--                                  (uid.has_group('registry_app.registry_app_global_user'), '=', True),-->
+            <!--                                  ]</field>-->
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{'create': True}</field>
             <field name="view_id" ref="registry_app_shop_view_kanban"/>
