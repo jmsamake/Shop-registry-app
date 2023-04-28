@@ -1,7 +1,6 @@
 /** @odoo-module **/
 // import { Component } from "@odoo/owl";
 const { Component } = owl;
-console.log("test")
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 // import { patch } from "@web/core/utils/patch";
 import { patch } from 'web.utils';

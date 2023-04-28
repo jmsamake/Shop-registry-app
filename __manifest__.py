@@ -14,12 +14,13 @@
     'website': "http://www.cybrosys.com",
     'category': 'Uncategorized',
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'product', 'website','menu_lock'],
+    'depends': ['base', 'web', 'product', 'website', 'menu_lock'],
     # always loaded
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
+        'views/registry_app_website_registry_app_template.xml',
         'views/login_form.xml',
         # 'views/user_inherit.xml',
         'report/report_template_custom_header.xml',
@@ -31,7 +32,7 @@
         'views/registry_app_website_client_template.xml',
         'views/registry_app_website_sms_broadcast.xml',
         'views/registry_app_website_shops.xml',
-        'views/registry_app_website_registry_app_template.xml',
+
         'data/auto_time_check.xml'
     ],
     'assets': {

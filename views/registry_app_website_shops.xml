@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_shops" name="Shops">
-        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
+    <t t-call="registry_app.custom_header"/>
         <div class="container">
             <h1 class="text-center p-2">Shops</h1>
             <div class="mb-3">
-                <a href="/cooperatives/form"
-                   class="btn btn-primary">Create</a>
-            </div>
+                    <a t-attf-href="/registry_app_shop/{{ cooperative_id }}/form"
+                       class="btn btn-primary">Create</a>
+                </div>
             <div class="row">
                 <t t-foreach="shops" t-as="shop">
                     <div class="col-sm-4 mb-3">
-                        <div class="card h-100 border"
-                             t-att-data-coop-id="shop.id">
-                            <div class="card-header p-0 bg-transparent">
+                        <div class="card h-100 border" t-att-data-coop-id="shop.id">
+                             <div class="card-header p-0 bg-transparent" >
                                 <div class="text-right">
-                                    <a t-attf-href="/shop_settings/{{ shop.id }}/registries"
-                                       class="btn btn-link"><i
-                                            class="fa fa-cog"></i></a>
+                                    <a t-attf-href="/shop_settings/{{ shop.id }}/registries" class="btn btn-link"><i class="fa fa-cog"></i></a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" t-esc="shop.name"></h5>
                                 <div>
-                                    <a class="btn btn-primary"
-                                       t-attf-href="/shops/{{ shop.id }}/registries">
-                                        Open Registry</a>
-                                    <a class="btn btn-primary"
-                                       t-attf-href="/registry_app_shop/form/{{ shop.id }}">
-                                        Open s</a>
+                                    <a class="btn btn-primary" t-attf-href="/shops/{{ shop.id }}/registries">Open Registry</a>
+                                    <a class="btn btn-primary" t-attf-href="/registry_app_shop/form/{{ shop.id }}">Open s</a>
                                 </div>
                             </div>
                         </div>
@@ -36,99 +29,138 @@
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
-        <!--         <style>-->
-        <!--        -->
-        <!--    </style>-->
+ <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+<!--         <style>-->
+<!--        -->
+<!--    </style>-->
+</template>
+
+
+<template id="registry_app_shop_form_template" name="Registry App Shop regstry Form">
+    <t t-call="registry_app.custom_header"/>
+   <form method="post" t-attf-action="/shops/{{ shop.id }}/registries" class="container">
+    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+    <div class="form-group">
+      <label class="col-form-label">Name</label>
+        <div>
+        <input type="text" name="date" class="form-control" t-att-value="date" required="required"/>
+      </div>
+    </div>
+
+       <div class="form-group">
+      <label class="col-form-label">Date</label>
+
+        <div>
+        <input type="text" name="date" class="form-control" t-att-value="date" required="required"/>
+      </div>
+    </div>
+
+       <div class="form-group">
+      <label class="col-form-label">Shop Id</label>
+      <div>
+        <select name="shop" class="form-control" required="required">
+            <option t-att-value="shop.id"><t t-esc="shop.name"/></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Shop Owner</label>
+      <div>
+        <select name="user_id" class="form-control" required="required">
+          <t t-foreach="users" t-as="user">
+            <option t-att-value="user.id"><t t-esc="user.name"/></option>
+          </t>
+        </select>
+      </div>
+    </div>
+<!--    <div class="form-group">-->
+<!--      <label class="col-form-label">Users</label>-->
+<!--      <div>-->
+<!--        <select multiple="multiple" name="shop_users_ids" class="form-control" required="required">-->
+<!--          <t t-foreach="users" t-as="user">-->
+<!--            <option t-att-value="user.id"><t t-esc="user.name"/></option>-->
+<!--          </t>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
+         <div class="form-group">
+      <label class="col-form-label">State</label>
+      <div>
+        <select name="state" class="form-control">
+            <option value="opened">Opened</option>
+            <option value="validated">Validated</option>
+            <option value="closed">Closed</option>
+            <option value="draft">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Cooperative</label>
+      <div>
+        <select name="cooperative_id" class="form-control" required="required">
+          <option t-att-value="shop.cooperative_id"><t t-esc="shop.cooperative_id.name"/></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+    <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+</template>
+
+
+    <template id="registry_app_shop_create_form_template" name="Shop Form">
+       <t t-call="registry_app.custom_header"/>
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Create Shop</h1>
+                    <form action="/registry_app/shop/create" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="cooperative_id"
+                               t-att-value="cooperative_id"/>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name"
+                                   name="name" required="True"/>
+                            <br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_id">shop Owner:</label>
+                            <select class="form-control" id="user_id"
+                                    name="user_id">
+                                <option value="">Select a user...</option>
+                                <t t-foreach="users" t-as="user">
+                                    <option t-att-value="user.id"><t
+                                            t-esc="user.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_id">shop User:</label>
+                            <select class="form-control" id="user_ids"
+                                    name="user_ids">
+                                <option value="">Select shop users...</option>
+                                <t t-foreach="users" t-as="user">
+                                    <option t-att-value="user.id"><t
+                                            t-esc="user.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Submit</button>
+                    </form>
+                </div>
+            </div>
+<t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
 
-
-    <template id="registry_app_shop_form_template"
-              name="Registry App Shop Form">
-        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
-        <form method="post" action="/registry_app/shop/create"
-              class="container">
-            <input type="hidden" name="csrf_token"
-                   t-att-value="request.csrf_token()"/>
-            <div class="form-group">
-                <label class="col-form-label">Name</label>
-                <div>
-                    <input type="text" name="date" class="form-control"
-                           t-att-value="date" required="required"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-form-label">Date</label>
-
-                <div>
-                    <input type="text" name="date" class="form-control"
-                           t-att-value="date" required="required"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-form-label">Shop Id</label>
-                <div>
-                    <select name="shop" class="form-control"
-                            required="required">
-                        <option t-att-value="shop.id"><t
-                                t-esc="shop.name"/></option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-form-label">Shop Owner</label>
-                <div>
-                    <select name="user_id" class="form-control"
-                            required="required">
-                        <t t-foreach="users" t-as="user">
-                            <option t-att-value="user.id"><t
-                                    t-esc="user.name"/></option>
-                        </t>
-                    </select>
-                </div>
-            </div>
-            <!--    <div class="form-group">-->
-            <!--      <label class="col-form-label">Users</label>-->
-            <!--      <div>-->
-            <!--        <select multiple="multiple" name="shop_users_ids" class="form-control" required="required">-->
-            <!--          <t t-foreach="users" t-as="user">-->
-            <!--            <option t-att-value="user.id"><t t-esc="user.name"/></option>-->
-            <!--          </t>-->
-            <!--        </select>-->
-            <!--      </div>-->
-            <!--    </div>-->
-            <div class="form-group">
-                <label class="col-form-label">State</label>
-                <div>
-                    <select name="state" class="form-control">
-                        <option value="opened">Opened</option>
-                        <option value="validated">Validated</option>
-                        <option value="closed">Closed</option>
-                        <option value="draft">Cancelled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-form-label">Cooperative</label>
-                <div>
-                    <select name="cooperative_id" class="form-control"
-                            required="required">
-                        <option t-att-value="shop.cooperative_id"><t
-                                t-esc="shop.cooperative_id.name"/></option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <button type="submit" class="btn btn-primary">
-                        Submit</button>
-                </div>
-            </div>
-        </form>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
-    </template>
 
 </odoo>

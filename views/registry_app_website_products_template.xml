@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_products" name="Products">
-        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
+        <t t-call="registry_app.custom_header"/>
             <div class="container">
                 <h1 class="text-center p-2">Products</h1>
                 <div class="mb-3">
@@ -11,7 +11,7 @@
                 <div class="row">
                     <t t-foreach="products" t-as="prod">
                         <div class="col-sm-4 mb-3">
-                            <div class="card h-100 bg-secondary border"
+                            <div class="card h-100 bg-light border"
                                  t-att-data-coop-id="prod.id">
                                 <div class="card-body">
                                     <h5 class="card-title"
@@ -27,14 +27,13 @@
                     </t>
                 </div>
             </div>
-         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
-        <!--         <style>-->
+<t t-call="registry_app.registry_app_website_reg_app_footer_template"/>        <!--         <style>-->
         <!--        -->
         <!--    </style>-->
     </template>
 
     <template id="website_reg_products_form_template" name="Products Form">
-        <t t-call="registry_app.registry_app_website_reg_app_header_template"/>
+        <t t-call="registry_app.custom_header"/>
             <div class="container">
                 <div>
                     <h1 class="text-center p-2">Create Products</h1>
@@ -86,6 +85,6 @@
                     </form>
                 </div>
             </div>
-         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+<t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
 </odoo>
