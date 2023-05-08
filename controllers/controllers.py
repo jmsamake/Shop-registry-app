@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import base64
+import datetime
+
 from odoo import http, fields
 from odoo.http import request
 import werkzeug.utils
@@ -50,7 +53,8 @@ class RegistryApp(http.Controller):
     @http.route('/cooperatives', type='http', auth='user', website=True)
     def get_cooperatives(self):
         cooperatives = request.env['registry_app.cooperatives'].sudo().search(
-            [('user_id', '=', request.uid)])
+            ['|', ('user_id', '=', request.uid),
+             ('create_uid', '=', request.uid)])
         user = request.env['res.users'].browse(request.uid)
         shop_logo = user.shop_id.shop_logo
         values = {
@@ -86,32 +90,40 @@ class RegistryApp(http.Controller):
         shops."""
         shops = request.env['registry_app.shop'].sudo().search(
             [('cooperative_id', '=', cooperative_id)])
+        view_id = request.env.ref(
+            'registry_app.registry_app_shop_form_view')
         values = {
             'shops': shops,
             'cooperative_id': cooperative_id,
+            'view_id': view_id
         }
         return request.render("registry_app.registry_app_website_shops", values)
 
     @http.route('/shops/<int:shop_id>/registries', type='http', auth='public',
                 website=True)
     def open_registry_website(self, shop_id, **kwargs):
-        print("Opening", shop_id)
         users = request.env['res.users'].search(
             [('is_from_registry_app', '=', True)])
         cooperatives = request.env['registry_app.cooperatives'].search([])
         shop = request.env['registry_app.shop'].search([('id', '=', shop_id)])
 
-        date = request.env['registry_app.registry_app'].get_context_today()
-        print(date)
-        name = 'Registry Log - ' + str(date)
-        print(name)
+        date = request.env['registry_app.registry_app'].get_context_today(). \
+            strftime('%d-%m-%Y')
+        name = f'Registry Log - {str(date)}'
+        user = request.env['res.users'].browse(request.uid)
+        product = request.env['registry_app.product'].search(
+            [('shop_id', '=', user.shop_id.id)])
+        client = request.env['registry_app.client'].search(
+            [('shop_id', '=', user.shop_id.id)])
         return request.render('registry_app.registry_app_shop_form_template',
                               {'users': users,
                                'cooperatives': cooperatives,
                                'date': date,
                                'name': name,
-                               'shop': shop
+                               'shop': shop,
                                # 'shop_id':shop_id
+                               'product': product,
+                               'client': client
                                })
 
 
@@ -120,7 +132,8 @@ class RegistryAppShopController(http.Controller):
     @http.route('/registry_app_shop/<int:cooperative_id>/form', auth='public',
                 website=True)
     def shop_form(self, cooperative_id, **kw):
-        users = request.env['res.users'].search([('is_from_registry_app','=',True)])
+        users = request.env['res.users'].search(
+            [('is_from_registry_app', '=', True)])
         return request.render(
             'registry_app.registry_app_shop_create_form_template', {
                 'users': users,
@@ -132,16 +145,43 @@ class RegistryAppShopController(http.Controller):
     def create_shop(self, **post):
         registry_app_shop = request.env['registry_app.shop']
         print('Creating', post)
+        print('sdsd', type(post.get('shop_logo')))
+        file = post.get('shop_logo')
         coop_id = int(post.get('cooperative_id'))
+        selct = post.get('users[]')
         vals = {
             'name': post.get('name'),
             'user_id': int(post.get('user_id')),
+            'shop_logo': base64.b64encode(file.read()),
             # 'shop_users_ids': [(6, 0, post.getlist('shop_users_ids'))],
             'cooperative_id': coop_id,
-            'active': True,
+            # 'active': True,
         }
         registry_app_shop.create(vals)
         return request.redirect(f'/registry_app_shop/{coop_id}/form')
+
+    @http.route('/registries/create', auth='public', website=True,
+                csrf=False)
+    def create_registry(self, **post):
+        print('Creating registry', post)
+        # registry_app_shop = request.env['registry_app.shop']
+        # print('Creating', post)
+        # print('sdsd', type(post.get('shop_logo')))
+        # file = post.get('shop_logo')
+        # coop_id = int(post.get('cooperative_id'))
+        # selct = post.get('users[]')
+        # print('Selct', selct)
+        # pass
+        # vals = {
+        #     'name': post.get('name'),
+        #     'user_id': int(post.get('user_id')),
+        #     'shop_logo': base64.b64encode(file.read()),
+        #     # 'shop_users_ids': [(6, 0, post.getlist('shop_users_ids'))],
+        #     'cooperative_id': coop_id,
+        #     # 'active': True,
+        # }
+        # registry_app_shop.create(vals)
+        # return request.redirect(f'/registry_app_shop/{coop_id}/form')
 
 
 class RegistryAppProductController(http.Controller):
@@ -156,7 +196,8 @@ class RegistryAppProductController(http.Controller):
 
     @http.route('/reg_products/form', type='http', auth="public", website=True)
     def cooperative_form(self, **kw):
-        users = request.env['res.users'].search([('is_from_registry_app','=',True)])
+        users = request.env['res.users'].search(
+            [('is_from_registry_app', '=', True)])
         return request.render(
             'registry_app.website_reg_products_form_template', )
 
@@ -192,7 +233,8 @@ class RegistryAppClientsController(http.Controller):
 
     @http.route('/clients/form', type='http', auth="public", website=True)
     def client_form(self, **kw):
-        users = request.env['res.users'].search([('is_from_registry_app','=',True)])
+        users = request.env['res.users'].search(
+            [('is_from_registry_app', '=', True)])
         return request.render('registry_app.website_reg_client_form_template', )
 
     @http.route('/submit_clients', type='http', auth="public", website=True)
@@ -232,6 +274,7 @@ class RegistryAppSmsController(http.Controller):
     def regsms_form(self, **kw):
         clients = request.env['registry_app.client'].search([])
         values = {'clients': clients}
+
         return request.render(
             'registry_app.website_sms_broadcast_form_template', values)
 
@@ -241,13 +284,17 @@ class RegistryAppSmsController(http.Controller):
         print(kw, "KW")
         shop_id = request.env['res.users'].browse(request.uid).shop_id
         broadcast_sms = request.env['regsmsbroadcast']
-
-        # broadcast_sms.create({
-        #     'name': kw.get('name'),
-        #     'broadcast_date': kw.get('broadcast_date'),
-        #     'clients_ids': kw.get('clients'),
-        #     'message': kw.get('message'),
-        # })
+        timestamp_str = f'{kw.get("broadcast_date")}'
+        dt_obj = datetime.datetime.strptime(timestamp_str, "%Y-%m-%dT%H:%M")
+        print('dt_obj', dt_obj)
+        now = datetime.datetime.now()
+        print(now, 'now')
+        broadcast_sms.create({
+            'name': kw.get('name'),
+            'broadcast_date': dt_obj,
+            'clients_ids': kw.get('clients'),
+            'message': kw.get('message'),
+        })
         return request.redirect('/reg_sms')
 
     @http.route('/registry_app', type='http', auth='user', website=True)
@@ -256,3 +303,54 @@ class RegistryAppSmsController(http.Controller):
         #     [('user_id', '=', request.uid)])
         return request.render(
             "registry_app.registry_app_login_form")
+
+    @http.route('/test_action', type='http', auth='user', website=True)
+    def test_act(self):
+        view_id = request.env.ref(
+            'registry_app.registry_app_shop_form_view')
+        print(view_id)
+        return request.redirect(
+            f'/web?&#min=1&limit=80&view_type=form&active_id=1&model=registry_app.shop'
+        )
+
+    @http.route('/reg_app/reporting', type='http', auth='user', website=True)
+    def test_act(self):
+        print('sdsd')
+        action_name = 'Sale Custom'
+        action = request.env['ir.actions.client'].sudo().search(
+            [('name', '=', action_name)], limit=1)
+        print(action)
+        if action:
+            action_id = action.id
+            menu_id = request.env['ir.ui.menu'].sudo().search(
+                [('name', '=', 'Reg Reporting')],
+                limit=1).id
+            if menu_id:
+                return request.redirect('/web#action=%s&menu_id=%s' % (action_id, menu_id))
+
+        else:
+            pass
+        # handle the case where the action was not found
+
+    @http.route('/reg_app/registries', type='http', auth='user', website=True)
+    def test_act(self):
+        view_id = request.env.ref(
+            'registry_app.registry_app_past_login_action_window')
+        if view_id:
+            return request.redirect(
+                '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
+                    view_id.id))
+        else:
+            pass
+        # handle the case where the action was not found
+
+    @http.route('/reg_app/users', type='http', auth='user', website=True)
+    def test_act(self):
+        view_id = request.env.ref(
+            'registry_app.registry_app_users_web_action_window')
+        if view_id:
+            return request.redirect(
+                '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
+                    view_id.id))
+        else:
+            pass

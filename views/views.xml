@@ -61,11 +61,11 @@
                                 name="validate" class="oe_highlight"
                                 groups="registry_app.registry_app_shop_owner"
                         />
-                        <button string="Send SMS" type="object"
-                                name="send_sms" class="oe_highlight"
-                                attrs="{'invisible': [('state', '=', 'opened')]}"
-                                groups="registry_app.registry_app_shop_owner"
-                        />
+<!--                        <button string="Send SMS" type="object"-->
+<!--                                name="send_sms" class="oe_highlight"-->
+<!--                                attrs="{'invisible': [('state', '=', 'opened')]}"-->
+<!--                                groups="registry_app.registry_app_shop_owner"-->
+<!--                        />-->
                         <button string="Cancel" type="object" name="cancel"
                                 groups="registry_app.registry_app_shop_owner"
                         />
@@ -464,6 +464,21 @@
             </field>
         </record>
 
+        <record model="ir.actions.act_window"
+                id="registry_app_users_web_action_window">
+            <field name="name">Registries App Users</field>
+            <field name="res_model">registry_app.users</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Users Available
+                </p>
+                <p>
+                    Create Your First User
+                </p>
+            </field>
+        </record>
+
         <!-- actions registry_app.product -->
         <record model="ir.actions.act_window"
                 id="registry_app_product_action_window">
@@ -492,7 +507,8 @@
                 id="registry_app_past_login_action_window">
             <field name="name">Registries</field>
             <field name="res_model">registry_app.registry_app</field>
-            <field name="domain">[('registry_user_id', '=', uid)]</field>
+            <field name="domain">['|', ('shop_id.user_id', '=', uid), (
+            'shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -776,7 +792,7 @@
         <!-- menu categories -->
 
         <menuitem id="menu_sale_demo" action="sale_action_demo"
-                  name="Reporting" parent="registry_app.menu_root"/>
+                  name="Reg Reporting" parent="registry_app.menu_root"/>
 
         <menuitem id="registry_app.menu_users"
                   action="registry_app_users_action_window"

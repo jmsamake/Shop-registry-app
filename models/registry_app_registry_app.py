@@ -55,10 +55,9 @@ class RegistryApp(models.Model):
         self.state = 'validated'
 
     def send_sms(self):
-        # my_sms = self.env['sms.composer'].create({'numbers': '+916282717330',
-        #                                           'body': 'New lead has been created in Odoo'})
-        # print('my_sms', my_sms)
-        # my_sms.action_send_sms()
+        # my_sms = self.env['sms.composer'].create({'numbers':
+        # '+916282717330', 'body': 'New lead has been created in Odoo'})
+        # print('my_sms', my_sms) my_sms.action_send_sms()
         view_id = self.env.ref('registry_app.view_sms_broadcast_form').id
 
         return {

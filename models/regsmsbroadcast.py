@@ -114,4 +114,4 @@ class SmsBroadcast(models.Model):
         all_broadcast_records = self.search([])
         for record in all_broadcast_records:
             if record.state == 'send':
-                record.msg_send = True
+                record.msg_sent = True
