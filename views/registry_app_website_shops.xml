@@ -15,31 +15,18 @@
                              t-att-data-coop-id="shop.id">
                             <div class="card-header p-0 bg-transparent">
                                 <div class="text-right">
-                                    <!--                                    <a t-attf-href="/shop_settings/{{ shop.id }}/registries"-->
-                                    <!--                                       class="btn btn-link"><i-->
-                                    <!--                                            class="fa fa-cog"></i></a>-->
-<!--                                    <a t-attf-href="/web?#id={{ shop.id }}&amp;view_type=form&amp;model=registry_app.shop&amp;action=registry_app_shop_form_view">-->
-<!--                                        {{ shop.id }}-->
-<!--                                    </a>-->
-<!--                                    <a t-attf-href="/web#id=1&amp;cids=1&amp;menu_id=140&amp;active_id=1&amp;model=registry_app.shop&amp;view_type=form">-->
-<!--                                        2</a>-->
-<!--                                    <a href="/test_action">3</a>-->
-<!--                                    <a t-attf-href="/web?#id=1&amp;view_type=form&amp;model=registry_app_shop&amp;action=registry_app_shop_form_view">-->
-<!--                                        Shop</a>-->
+
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" t-esc="shop.name"></h5>
                                 <div>
                                     <a class="btn btn-secondary"
-                                       t-attf-href="/shops/{{ shop.id }}/registries">
+                                       href="/reg_app/registries">
                                         Open Registry</a>
 <!--                                    <a class="btn btn-secondary"-->
-<!--                                       t-attf-href="/registry_app_shop/form/{{ shop.id }}">-->
+<!--                                       t-attf-href="/web#action=202">-->
 <!--                                        Open s</a>-->
-                                    <a class="btn btn-secondary"
-                                       t-attf-href="/web#action=202">
-                                        Open s</a>
 
                                 </div>
                             </div>
@@ -49,9 +36,7 @@
             </div>
         </div>
         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
-        <!--         <style>-->
-        <!--        -->
-        <!--    </style>-->
+
     </template>
 
     <template id="registry_app_shop_form_template"
@@ -123,13 +108,6 @@
                                         role="tab" aria-controls="profile"
                                         aria-selected="false">Expense</button>
                             </li>
-<!--                            <li class="nav-item" role="presentation">-->
-<!--                                <button class="nav-link" id="contact-tab"-->
-<!--                                        data-bs-toggle="tab"-->
-<!--                                        data-bs-target="#contact" type="button"-->
-<!--                                        role="tab" aria-controls="contact"-->
-<!--                                        aria-selected="false">Contact</button>-->
-<!--                            </li>-->
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home"
@@ -247,9 +225,6 @@
                                     a
                                     Line</button>
                             </div>
-                            <!--                            <div class="tab-pane fade" id="contact"-->
-                            <!--                                 role="tabpanel" aria-labelledby="contact-tab">-->
-                            <!--                                ...</div>-->
                         </div>
                     </div>
 
@@ -289,11 +264,8 @@
         </div>
         <script type="text/javascript"
                 src="/registry_app/static/src/js/new.js"/>
-
-
         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
-
 
     <template id="registry_app_shop_create_form_template" name="Shop Form">
         <t t-call="registry_app.custom_header"/>

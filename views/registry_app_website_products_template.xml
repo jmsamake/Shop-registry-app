@@ -16,20 +16,13 @@
                             <div class="card-body">
                                 <h5 class="card-title"
                                     t-esc="prod.product_id.name"></h5>
-                                <!--                                    <div>-->
-                                <!--                                        <a class="btn btn-secondary"-->
-                                <!--                                           t-attf-href="/cooperative/{{ prod.id }}/shops">-->
-                                <!--                                            Go to Shop</a>-->
-                                <!--                                    </div>-->
                             </div>
                         </div>
                     </div>
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>        <!--         <style>-->
-        <!--        -->
-        <!--    </style>-->
+        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
     </template>
 
     <template id="website_reg_products_form_template" name="Products Form">
@@ -62,24 +55,6 @@
                         <br/>
                     </div>
 
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="shop_ids">Shops:</label>-->
-                    <!--                        <input type="text" class="form-control" id="shop_ids"-->
-                    <!--                               name="shop_ids"/>-->
-                    <!--                        <br/>-->
-                    <!--                    </div>-->
-
-                    <!--                        <div class="form-group">-->
-                    <!--                            <label for="user_id">User:</label>-->
-                    <!--                            <select class="form-control" id="user_id"-->
-                    <!--                                    name="user_id">-->
-                    <!--                                <option value="">Select a user...</option>-->
-                    <!--                                <t t-foreach="users" t-as="user">-->
-                    <!--                                    <option t-att-value="user.id"><t-->
-                    <!--                                            t-esc="user.name"/></option>-->
-                    <!--                                </t>-->
-                    <!--                            </select>-->
-                    <!--                        </div>-->
                     <button type="submit" class="btn btn-success">Submit
                     </button>
                     <button onclick="history.back()" class="btn btn-danger">

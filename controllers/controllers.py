@@ -2,9 +2,86 @@
 import base64
 import datetime
 
-from odoo import http, fields
+from odoo import http, fields, _
 from odoo.http import request
 import werkzeug.utils
+from werkzeug.utils import redirect
+import odoo
+import odoo.addons.web.controllers.main as main
+
+# Shared parameters for all login/signup flows
+SIGN_UP_REQUEST_PARAMS = {'db', 'login', 'debug', 'token', 'message', 'error',
+                          'scope', 'mode',
+                          'redirect', 'redirect_hostname', 'email', 'name',
+                          'partner_id',
+                          'password', 'confirm_password', 'city', 'country_id',
+                          'lang'}
+
+
+class Home(main.Home):
+    @http.route('/web/login', type='http', auth="none")
+    def web_login(self, redirect=None, **kw):
+        print('request', request.params)
+
+        main.ensure_db()
+        request.params['login_success'] = False
+        if request.httprequest.method == 'GET' and redirect and request.session.uid:
+            return request.redirect(redirect)
+
+        if not request.uid:
+            request.uid = odoo.SUPERUSER_ID
+
+        values = {k: v for k, v in request.params.items() if
+                  k in SIGN_UP_REQUEST_PARAMS}
+        try:
+            values['databases'] = http.db_list()
+        except odoo.exceptions.AccessDenied:
+            values['databases'] = None
+        print('vales', values)
+
+        if request.httprequest.method == 'POST':
+            old_uid = request.uid
+
+            print('redirect', redirect)
+            try:
+                uid = request.session.authenticate(request.session.db,
+                                                   request.params['login'],
+                                                   request.params['password'])
+                request.params['login_success'] = True
+                user = request.env.user
+                user = request.env.user
+                if user.has_group(
+                        'registry_app.registry_app_shop_owner') | user.has_group(
+                        'registry_app.registry_app_user') | user.has_group(
+                        'registry_app.registry_app_cooperative_owner'):
+
+                    # values['redirect'] = '/registry_app'
+                    return request.redirect(
+                        self._login_redirect(uid, redirect='/registry_app'))
+                else:
+                    return request.redirect(
+                        self._login_redirect(uid, redirect=redirect))
+            except odoo.exceptions.AccessDenied as e:
+                request.uid = old_uid
+                values['error'] = (
+                    _("Wrong login/password")
+                    if e.args == odoo.exceptions.AccessDenied().args
+                    else e.args[0]
+                )
+        elif 'error' in request.params and request.params.get(
+                'error') == 'access':
+            values['error'] = _(
+                'Only employees can access this database. Please contact the administrator.')
+
+        if 'login' not in values and request.session.get('auth_login'):
+            values['login'] = request.session.get('auth_login')
+
+        if not odoo.tools.config['list_db']:
+            values['disable_database_manager'] = True
+
+        response = request.render('web.login', values)
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+        return response
 
 
 class RegistryApp(http.Controller):
@@ -52,10 +129,12 @@ class RegistryApp(http.Controller):
 
     @http.route('/cooperatives', type='http', auth='user', website=True)
     def get_cooperatives(self):
-        cooperatives = request.env['registry_app.cooperatives'].sudo().search(
-            ['|', ('user_id', '=', request.uid),
-             ('create_uid', '=', request.uid)])
         user = request.env['res.users'].browse(request.uid)
+        cooperatives = request.env['registry_app.cooperatives'].sudo().search(
+            ['|', '|', ('user_id', '=', request.uid),
+             ('create_uid', '=', request.uid),
+             ('shop_ids', 'in', [user.shop_id.id])])
+        print('cooperatives', cooperatives)
         shop_logo = user.shop_id.shop_logo
         values = {
             "cooperatives": cooperatives,
@@ -314,7 +393,7 @@ class RegistryAppSmsController(http.Controller):
         )
 
     @http.route('/reg_app/reporting', type='http', auth='user', website=True)
-    def test_act(self):
+    def reg_reporting(self):
         print('sdsd')
         action_name = 'Sale Custom'
         action = request.env['ir.actions.client'].sudo().search(
@@ -326,31 +405,24 @@ class RegistryAppSmsController(http.Controller):
                 [('name', '=', 'Reg Reporting')],
                 limit=1).id
             if menu_id:
-                return request.redirect('/web#action=%s&menu_id=%s' % (action_id, menu_id))
-
-        else:
-            pass
-        # handle the case where the action was not found
+                return request.redirect(
+                    '/web#action=%s&menu_id=%s' % (action_id, menu_id))
 
     @http.route('/reg_app/registries', type='http', auth='user', website=True)
-    def test_act(self):
+    def reg_registries(self):
         view_id = request.env.ref(
             'registry_app.registry_app_past_login_action_window')
+        print(view_id, 'df')
         if view_id:
             return request.redirect(
                 '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
                     view_id.id))
-        else:
-            pass
-        # handle the case where the action was not found
 
-    @http.route('/reg_app/users', type='http', auth='user', website=True)
-    def test_act(self):
+    @http.route('/reg_app/users', type='http', auth='user', )
+    def reg_users(self):
         view_id = request.env.ref(
             'registry_app.registry_app_users_web_action_window')
         if view_id:
             return request.redirect(
                 '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
                     view_id.id))
-        else:
-            pass
