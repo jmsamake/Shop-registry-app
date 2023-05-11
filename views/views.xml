@@ -351,7 +351,7 @@
                 id="registry_app_cooperatives_action_window">
             <field name="name">Cooperatives</field>
             <field name="res_model">registry_app.cooperatives</field>
-            <field name="domain">['|',('create_uid', '=', uid),('shop_ids', 'in', [uid.shop_id])]</field>
+<!--            <field name="domain"># ['|','|',('create_uid', '=', uid),('user_id', '=', uid),('id', '=', uid.cooperative_id)]</field>-->
             <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -384,6 +384,9 @@
                 id="registry_app_users_action_window">
             <field name="name">Registries App Users</field>
             <field name="res_model">registry_app.users</field>
+<!--            <field name="domain">['|','|',('create_uid', '=', uid),('user_id', '=', uid),-->
+<!--                                  ('cooperative_id', '=', uid.cooperative_id)]-->
+<!--            </field>-->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

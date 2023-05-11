@@ -9,16 +9,23 @@ class RegistryAppCooperatives(models.Model):
 
     name = fields.Char(string=_('Name'), required=True,
                        help=_('Name of the Cooperative'))
-    shop_ids = fields.Many2many('registry_app.shop', copy=False, string=_('Shops'),
-                                help=_('List of shops that comes under this cooperatives'))
+    shop_ids = fields.Many2many('registry_app.shop', copy=False,
+                                string=_('Shops'),
+                                help=_(
+                                    'List of shops that comes under this cooperatives'))
     user_id = fields.Many2one('res.users', string=_('Cooperative Admin'),
                               help=_('Set the admin user for this cooperative'))
     active = fields.Boolean(string=_('Active'), default=True)
 
     def goto_registry_shop(self):
+        self.id
+        print(self.id,'=====self======')
+        print(self.env.user.cooperative_id,'======coop_id=====' )
         """Open all shops interface."""
-        view_id = self.env.ref('registry_app.registry_app_shop_action_window').id
-        action = self.env.ref('registry_app.registry_app_shop_action_window').sudo().read()[0]
+        view_id = self.env.ref(
+            'registry_app.registry_app_shop_action_window').id
+        action = self.env.ref(
+            'registry_app.registry_app_shop_action_window').sudo().read()[0]
         action['target'] = 'current'
         action['view_mode'] = 'tree,kanban,form'
         action['context'] = {'cooperative_id': self.id}
@@ -39,6 +46,33 @@ class RegistryAppCooperatives(models.Model):
         #     'view_id': view_id,
         #     'context': {'cooperative_id': self.id},
         # }
+
+    @api.model
+    def create(self, values):
+        """Override create function and Adding the cooperative_id to users
+        model."""
+        res = super().create(values)
+        if res.user_id:
+            reg_user = self.env['registry_app.users'].search(
+                [('user_id', '=', self.user_id.id)])
+            res.user_id.write({
+                'cooperative_id': res.id
+            })
+            reg_user.cooperative_id = self.id
+        return res
+
+    def write(self, vals):
+        """Override write function and Adding the cooperative_id to users
+        model"""
+        if self.user_id:
+            reg_user = self.env['registry_app.users'].search(
+                [('user_id', '=', self.user_id.id)])
+            print('Writing', reg_user)
+            reg_user.cooperative_id = self.id
+            self.user_id.write({
+                'cooperative_id': self.id
+            })
+        return super(RegistryAppCooperatives, self).write(vals)
 
 
 class SaleCustom(models.Model):

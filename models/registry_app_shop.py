@@ -8,6 +8,9 @@ class ResUsers(models.Model):
 
     shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop',
                               default=False)
+    cooperative_id = fields.Many2one('registry_app.cooperatives',
+                                     string='Registry App Cooperative',
+                                     default=False)
     is_from_registry_app = fields.Boolean(
         string='Is User created from Registry App', default=False)
 

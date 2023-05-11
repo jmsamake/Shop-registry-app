@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="registry_app_users_rule_super_admin" model="ir.rule">
+        <field name="name">Registry app Super admin can view al records</field>
+        <field ref="registry_app.model_registry_app_users" name="model_id"/>
+        <field name="domain_force">[('id', '!=', False)]</field>
+        <field name="groups" eval="[(4, ref('registry_app.registry_app_super_admin'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+<!--        <field name="active" eval="False"/> &lt;!&ndash; opw-2027005: this rules breaks sale "see own document" &ndash;&gt;-->
+    </record>
+
+
+        <record id="registry_app_users_rule_cooperative_owner" model="ir.rule">
+        <field name="name">Registry app cooperative owner can view his records</field>
+        <field ref="registry_app.model_registry_app_users" name="model_id"/>
+        <field name="domain_force">['|','|',('create_uid', '=', user.id),('user_id', '=', user.id),('cooperative_id', '=', user.cooperative_id.id)]</field>
+        <field name="groups" eval="[(4, ref('registry_app.registry_app_cooperative_owner'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+<!--        <field name="active" eval="False"/> &lt;!&ndash; opw-2027005: this rules breaks sale "see own document" &ndash;&gt;-->
+    </record>
+    </data>
+</odoo>

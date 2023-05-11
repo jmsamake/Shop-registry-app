@@ -54,7 +54,6 @@ class Home(main.Home):
                         'registry_app.registry_app_shop_owner') | user.has_group(
                         'registry_app.registry_app_user') | user.has_group(
                         'registry_app.registry_app_cooperative_owner'):
-
                     # values['redirect'] = '/registry_app'
                     return request.redirect(
                         self._login_redirect(uid, redirect='/registry_app'))
@@ -126,6 +125,13 @@ class RegistryApp(http.Controller):
         #     return request.redirect('/cooperatives')
         if registry_password == form_password:
             return request.redirect('/cooperatives')
+        else:
+            user = request.env['res.users'].browse(request.uid)
+            values = {
+                "user": user,
+                "error_msg": "Invalid login or password."
+            }
+            return request.render('registry_app.registry_app_login_form', values)
 
     @http.route('/cooperatives', type='http', auth='user', website=True)
     def get_cooperatives(self):

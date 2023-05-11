@@ -18,6 +18,7 @@
     # always loaded
     'data': [
         'security/security.xml',
+        'security/registry_app_users_security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/registry_app_website_registry_app_template.xml',
