@@ -2,13 +2,13 @@
 <odoo>
     <template id="custom_header" name="Custom Header">
         <!--        <xpath expr="//header" position="replace">-->
-        <!--                    <meta charset="utf-8"/>-->
-        <!--                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>-->
-        <!--                    <meta name="viewport"-->
-        <!--                          content="width=device-width, initial-scale=1, user-scalable=no"/>-->
-        <!--                    <meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+                            <meta charset="utf-8"/>
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                            <meta name="viewport"
+                                  content="width=device-width, initial-scale=1, user-scalable=no"/>
+                            <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <!--                    <meta name="generator" content="Odoo"/>-->
-        <!--                    <meta name="default_title" content=" Cooperatives | My Website "/>-->
+                            <meta name="default_title" content=" Cooperatives | My Website "/>
         <!--                    <meta name="description"/>-->
         <!--                    <meta name="keywords"/>-->
 
@@ -152,6 +152,15 @@
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
         <style>
+
+<!--            @media (min-width: 768px) {-->
+<!--                body {-->
+<!--                    max-width: 720px;-->
+<!--                    background: #00d0ff;-->
+<!--                    overflow-x: hidden !important;-->
+<!--                }-->
+<!--            }-->
+
             #google_translate_element select {
                 background-color: #f6edfd;
                 color: #383ffa;
@@ -221,7 +230,8 @@
                         </t>
                         <t t-else="">
                             <img src="registry_app/static/src/img/website_logo.svg"
-                                 alt="logo" style="height: 35px;max-height: 35px;"></img>
+                                 alt="logo"
+                                 style="height: 35px;max-height: 35px;"></img>
                             <!--                            <p>logo</p>-->
                         </t>
                     </a>
@@ -265,7 +275,8 @@
                             </li>
                             <li class="nav-item dropdown reg_user_drop_down text-white"
                                 style="position: absolute;right: 30px;">
-                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                <a class="nav-link dropdown-toggle text-white"
+                                   href="#"
                                    id="navbarDropdown" role="button"
                                    data-bs-toggle="dropdown"
                                    aria-expanded="false">
@@ -273,9 +284,12 @@
                                     <!--                                         t-att-src="website.image_url(user, 'avatar_128', '30x30')"-->
                                     <!--                                         alt="Avatar"-->
                                     <!--                                         style="width:30px;height: 30px"/>-->
-<!--                                    <img class="o_forum_avatar rounded-circle mr-1" t-att-src="'/web/image/res.users/' + str(request.env.user.id) + '/image_128'" style="width:35px;height: 35px"/>-->
-                                    <img t-if="request.env.user.partner_id.image_128" t-att-src="website.image_url(request.env.user.partner_id, 'image_128', '30x30')"
-                                         alt="User Avatar" class="rounded-circle" style="width: 30px; height: 30px;"/>
+                                    <!--                                    <img class="o_forum_avatar rounded-circle mr-1" t-att-src="'/web/image/res.users/' + str(request.env.user.id) + '/image_128'" style="width:35px;height: 35px"/>-->
+                                    <img t-if="request.env.user.partner_id.image_128"
+                                         t-att-src="website.image_url(request.env.user.partner_id, 'image_128', '30x30')"
+                                         alt="User Avatar"
+                                         class="rounded-circle"
+                                         style="width: 30px; height: 30px;"/>
                                     <span t-esc="request.env.user.name"></span>
                                 </a>
                                 <ul class="dropdown-menu"
@@ -283,12 +297,13 @@
                                     <li><a class="dropdown-item" href="#">
                                         Profile</a></li>
                                     <li>
-<!--                                        <a class="dropdown-item"-->
-<!--                                           href="/web/session/logout?redirect=/">-->
-<!--                                        Logout</a>-->
+                                        <!--                                        <a class="dropdown-item"-->
+                                        <!--                                           href="/web/session/logout?redirect=/">-->
+                                        <!--                                        Logout</a>-->
                                         <a class="dropdown-item"
                                            href="/registry_app">
-                                        Logout</a>
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

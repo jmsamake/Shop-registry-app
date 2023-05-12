@@ -27,7 +27,7 @@
         <!--                crossorigin="anonymous"></script>-->
         <t t-call="website.layout">
 
-            <section class="vh-100">
+            <section class="m-5">
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-md-9 col-lg-6 col-xl-5">
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="text-center">
                                     <t t-if="error_msg">
-                                        <div class="alert alert-danger" >
+                                        <div class="alert alert-danger">
                                             <p t-esc="error_msg"/>
                                         </div>
                                     </t>
@@ -88,12 +88,13 @@
 
                                 <div class="text-center text-lg-start mt-4 pt-2">
 
-                                    <input type="submit"
+                                    <input type="submit" id="regLoginBtn"
                                            class="btn btn-primary btn-lg"
                                            style="padding-left: 2.5rem; padding-right: 2.5rem;"
                                            value="Login"/>
-                                    <!--                                    <a href="/reg_app/login" class="btn btn-primary btn-lg"-->
-                                    <!--                                       style="padding-left: 2.5rem; padding-right: 2.5rem;" id="reg_login" onclick="newFunction()">Login</a>-->
+
+                                    <!-- <a href="/reg_app/login" class="btn btn-primary btn-lg"-->
+                                    <!--    style="padding-left: 2.5rem; padding-right: 2.5rem;" id="reg_login" onclick="newFunction()">Login</a>-->
 
 
                                 </div>
@@ -102,30 +103,21 @@
                         </div>
                     </div>
                 </div>
-                <!--            <div-->
-                <!--                    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">-->
-                <!--                &lt;!&ndash; Copyright &ndash;&gt;-->
-                <!--                <div class="text-white mb-3 mb-md-0 w-100">-->
-                <!--                    <div class="d-flex justify-content-around" >-->
-                <!--                        <div>-->
-                <!--                            <t t-if="user and user.shop_id">-->
-                <!--                                <p>&#169; 2023 <span-->
-                <!--                                        t-esc="user.shop_id.name"></span> All-->
-                <!--                                    rights reserved.</p>-->
-                <!--                            </t>-->
-                <!--                            <t t-else="">-->
-                <!--                                <p>&#169; 2023 My Shop All rights reserved.</p>-->
-                <!--                            </t>-->
-                <!--                        </div>-->
-                <!--                        <div class="text-white">-->
-                <!--                            <t t-call="portal.language_selector"/>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-                <!--            </div>-->
             </section>
         </t>
+        <script>
+            loginBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            loginBtn.value = "Logging in";
+            loginBtn.disabled = true;
+            console.log("sds",loginBtn.value)
+            console.log('btn disabled');
+            setTimeout(function() {
+            loginBtn.form.submit();
+            }, 500);
+            });
+        </script>
 
         <!--<t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
