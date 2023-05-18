@@ -3,10 +3,10 @@
     <template id="registry_app_website_shops" name="Shops">
         <t t-call="registry_app.custom_header"/>
         <div class="container">
-            <h1 class="text-center p-2">Shops</h1>
+            <h1 class="text-center p-2">Magasins</h1>
             <div class="mb-3">
                 <a t-attf-href="/registry_app_shop/{{ cooperative_id }}/form"
-                   class="btn btn-secondary">Create</a>
+                   class="btn btn-secondary" t-if = "user.has_group('registry_app.registry_app_cooperative_owner')">Créer</a>
             </div>
             <div class="row">
                 <t t-foreach="shops" t-as="shop">
@@ -23,7 +23,7 @@
                                 <div>
                                     <a class="btn btn-secondary"
                                        href="/reg_app/registries">
-                                        Open Registry</a>
+                                        Registre ouvert</a>
 <!--                                    <a class="btn btn-secondary"-->
 <!--                                       t-attf-href="/web#action=202">-->
 <!--                                        Open s</a>-->
@@ -44,14 +44,14 @@
         <t t-call="registry_app.custom_header"/>
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Create Shop</h1>
+                <h1 class="text-center p-2">Créer une boutique</h1>
                 <form method="post"
                       t-attf-action="/registries/create"
                       class="container">
                     <input type="hidden" name="csrf_token"
                            t-att-value="request.csrf_token()"/>
                     <div class="form-group">
-                        <label class="col-form-label">Name</label>
+                        <label class="col-form-label">Nom</label>
                         <div>
                             <input type="text" name="date" class="form-control"
                                    t-att-value="name" required="required"/>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Shop Id</label>
+                        <label class="col-form-label">Identifiant de la boutique</label>
                         <div>
                             <select name="shop" class="form-control"
                                     required="required">
@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Shop Owner</label>
+                        <label class="col-form-label">Propriétaire de la boutique</label>
                         <div>
                             <select name="user_id" class="form-control"
                                     required="required">
@@ -99,14 +99,14 @@
                                         data-bs-toggle="tab"
                                         data-bs-target="#home" type="button"
                                         role="tab" aria-controls="home"
-                                        aria-selected="true">Sales</button>
+                                        aria-selected="true">Ventes</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab"
                                         data-bs-toggle="tab"
                                         data-bs-target="#profile" type="button"
                                         role="tab" aria-controls="profile"
-                                        aria-selected="false">Expense</button>
+                                        aria-selected="false">Frais</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -271,18 +271,20 @@
         <t t-call="registry_app.custom_header"/>
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Create Shop</h1>
+                <h1 class="text-center p-2">Créer une boutique</h1>
                 <form action="/registry_app/shop/create" method="POST"
                       enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token"
                            t-att-value="request.csrf_token()"/>
                     <input type="hidden" name="cooperative_id"
                            t-att-value="cooperative_id"/>
+                    <br/>
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name">Nom:</label>
                         <input type="text" class="form-control" id="name"
                                name="name" required="True"/>
                     </div>
+                    <br/>
                     <div class="form-group">
                         <label for="shop_logo" class="form-label">Shop
                             Logo</label>
@@ -291,9 +293,10 @@
                                data-show-caption="true" data-show-preview="true"
                                accept="image/*"/>
                     </div>
+                    <br/>
 
                     <div class="form-group">
-                        <label for="users"> users:</label>
+                        <label for="users">Utilisateurs:</label>
                         <select class="js-example-basic-multiple form-control"
                                 id="users" name="users[]" multiple="multiple">
                             <option value="">Select shop users...</option>
@@ -303,9 +306,10 @@
                             </t>
                         </select>
                     </div>
+                    <br/>
 
                     <div class="form-group">
-                        <label for="user_id">shop Owner:</label>
+                        <label for="user_id">Propriétaire de la boutique:</label>
                         <select class="form-control" id="user_id"
                                 name="user_id">
                             <option value="">Select a user...</option>
@@ -315,23 +319,26 @@
                             </t>
                         </select>
                     </div>
+                    <br/>
 
-                    <div class="form-group">
-                        <label for="user_id">shop User:</label>
-                        <select class="form-control" id="user_ids"
-                                name="user_ids">
-                            <option value="">Select shop users...</option>
-                            <t t-foreach="users" t-as="user">
-                                <option t-att-value="user.id"><t
-                                        t-esc="user.name"/></option>
-                            </t>
-                        </select>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="user_id">Utilisateur de la boutique:</label>-->
+<!--                        <select class="form-control" id="user_ids"-->
+<!--                                name="user_ids">-->
+<!--                            <option value="">Select shop users...</option>-->
+<!--                            <t t-foreach="users" t-as="user">-->
+<!--                                <option t-att-value="user.id"><t-->
+<!--                                        t-esc="user.name"/></option>-->
+<!--                            </t>-->
+<!--                        </select>-->
+<!--                    </div>-->
+                    <br/>
 
                     <button type="submit" class="btn btn-success" id="sssubmit">
-                        Submit</button>
-                    <button onclick="history.back()" class="btn btn-danger">
-                        Discard</button>
+                        Soumettre</button>
+                    <a class="btn btn-danger"
+                                       t-attf-href="/cooperative/{{ cooperative_id }}/shops">
+                                        Jeter</a>
                 </form>
             </div>
         </div>

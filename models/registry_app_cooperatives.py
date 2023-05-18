@@ -6,6 +6,7 @@ from odoo import models, fields, api, _
 class RegistryAppCooperatives(models.Model):
     _name = 'registry_app.cooperatives'
     _description = 'Cooperatives'
+    _inherit = ['mail.thread']
 
     name = fields.Char(string=_('Name'), required=True,
                        help=_('Name of the Cooperative'))

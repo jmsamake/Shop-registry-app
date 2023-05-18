@@ -6,6 +6,7 @@ from odoo import models, fields, api, _
 class RegistryAppSales(models.Model):
     _name = 'registry_app.sales'
     _description = 'Sales Registries'
+    _inherit = ['mail.thread']
 
     # name = fields.Char(string='Name', required=True)
 

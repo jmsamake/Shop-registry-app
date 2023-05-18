@@ -4,14 +4,16 @@ from odoo import models, fields, api, _
 class RegistryAppClient(models.Model):
     _name = 'registry_app.client'
     _description = 'TPE Member'
+    _inherit = ['mail.thread']
 
     client_number = fields.Char(string=_('Client Number'))
     name = fields.Char(string=_('Name'), required=True)
-    partner_id = fields.Many2one('res.partner', delegate=True, string=_('Partner'),
+    partner_id = fields.Many2one('res.partner', delegate=True,
+                                 string=_('Partner'),
                                  ondelete='cascade', domain=[('id', '=', 0)])
     phone = fields.Char(string=_('Phone'))
     email = fields.Char(string=_('Email'))
-    street = fields.Char(string=_('Street'),)
+    street = fields.Char(string=_('Street'), )
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
@@ -41,7 +43,7 @@ class RegistryAppClient(models.Model):
         ctx.pop('active_id', None)
         ctx.pop('default_journal_id', None)
         ctx['active_ids'] = self.ids
-        print(ctx,'selffffff',self.ids)
+        print(ctx, 'selffffff', self.ids)
         sms_wizard = self.env['regsmsbroadcast'].create({
             'name': 'Sms Broadcast',
             'clients_ids': [(6, 0, self.ids)],
@@ -56,19 +58,18 @@ class RegistryAppClient(models.Model):
             'res_id': sms_wizard.id,
         }
 
-
     @api.model
     def create(self, values):
         """Override default Odoo create function and extend."""
-        print( 'name',self.name)
-        print( 'name va',values['name'])
-        new_partner = self.env['res.partner'].create({
+        res_partner = self.env['res.partner']
+
+        new_partner = res_partner.create({
             'name': values['name'],
             'phone': values['phone'],
             'email': values['email'],
             'street': values['street'],
         })
-        print(new_partner,'new_partner')
+        print(new_partner, 'new_partner')
         print('shop_id', self.env.user.shop_id)
         # values['shop_id'] = shop_id
         values.update({
@@ -77,4 +78,3 @@ class RegistryAppClient(models.Model):
         })
         print(values, 'values')
         return super(RegistryAppClient, self).create(values)
-

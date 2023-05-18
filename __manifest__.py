@@ -14,7 +14,7 @@
     'website': "http://www.cybrosys.com",
     'category': 'Uncategorized',
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'product', 'website', 'menu_lock'],
+    'depends': ['base', 'web', 'product', 'website', 'portal'],
     # always loaded
     'data': [
         'security/security.xml',
@@ -33,6 +33,7 @@
         'views/registry_app_website_client_template.xml',
         'views/registry_app_website_sms_broadcast.xml',
         'views/registry_app_website_shops.xml',
+        'views/registry_app_portal_view.xml',
 
         'data/auto_time_check.xml'
     ],

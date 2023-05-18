@@ -8,6 +8,7 @@ class SmsBroadcast(models.Model):
     _name = 'regsmsbroadcast'
     _rec_name = 'name'
     _description = 'SMS Notification'
+    _inherit = ['mail.thread']
 
     name = fields.Char(string=_("SMS Notification"), required=True)
     broadcast_date = fields.Datetime(string="Broadcast Date")

@@ -36,6 +36,7 @@ class ResUsers(models.Model):
 class RegistryAppShop(models.Model):
     _name = 'registry_app.shop'
     _description = 'Registry App Shop'
+    _inherit = ['mail.thread']
 
     name = fields.Char(string=_('Name'), required=True)
     user_id = fields.Many2one('res.users', string='Shop Owner',

@@ -8,6 +8,8 @@ import werkzeug.utils
 from werkzeug.utils import redirect
 import odoo
 import odoo.addons.web.controllers.main as main
+from odoo.addons.portal.controllers.portal import CustomerPortal, \
+    pager as portal_pager
 
 # Shared parameters for all login/signup flows
 SIGN_UP_REQUEST_PARAMS = {'db', 'login', 'debug', 'token', 'message', 'error',
@@ -49,14 +51,35 @@ class Home(main.Home):
                                                    request.params['password'])
                 request.params['login_success'] = True
                 user = request.env.user
-                user = request.env.user
+                print('user', user)
+                print('user_id', user.id)
+                # cooperatives = request.env['registry_app.cooperatives'].search(
+                #     [])
+                coop = request.env[
+                    'registry_app.cooperatives'].sudo().browse(
+                    user.cooperative_id.id)
+                print('coop', coop.id)
                 if user.has_group(
                         'registry_app.registry_app_shop_owner') | user.has_group(
-                        'registry_app.registry_app_user') | user.has_group(
-                        'registry_app.registry_app_cooperative_owner'):
-                    # values['redirect'] = '/registry_app'
+                    'registry_app.registry_app_user'):
                     return request.redirect(
-                        self._login_redirect(uid, redirect='/registry_app'))
+                        self._login_redirect(uid,
+                                             redirect=f'/cooperative/{coop.id}/shops'))
+                if user.has_group(
+                        'registry_app.registry_app_cooperative_owner'):
+                    return request.redirect(
+                        self._login_redirect(uid,
+                                             redirect='/cooperatives'))
+                # if user.has_group(
+                #         'registry_app.registry_app_shop_owner') | user.has_group(
+                #     'registry_app.registry_app_user') | user.has_group(
+                #     'registry_app.registry_app_cooperative_owner'):
+                # values['redirect'] = '/registry_app'
+                # return request.redirect(
+                #     self._login_redirect(uid, redirect='/registry_app'))
+                # redirect to cooperatives on odoo login
+                # return request.redirect(
+                #     self._login_redirect(uid, redirect='/cooperatives'))
                 else:
                     return request.redirect(
                         self._login_redirect(uid, redirect=redirect))
@@ -112,26 +135,40 @@ class RegistryApp(http.Controller):
 
     @http.route('/reg_app/login', type='http', auth='user', website=True)
     def list(self, **kw):
-        form_password = kw.get('reg_password')
-        print(request.uid)
-        registry_password = request.env['res.users'].browse(
-            request.uid).login_pswd
-
-        print('form_password', form_password)
-        print('registry_password', registry_password)
-        # return request.redirect('/cooperatives')
-        # if registry_password is None:
-        #     print('bibe')
+        # form_password = kw.get('reg_password')
+        # print(request.uid)
+        # registry_password = request.env['res.users'].browse(
+        #     request.uid).login_pswd
+        # print('form_password', form_password)
+        # print('registry_password', registry_password)
+        # if registry_password == form_password:
         #     return request.redirect('/cooperatives')
-        if registry_password == form_password:
+        # else:
+        #     user = request.env['res.users'].browse(request.uid)
+        #     values = {
+        #         "user": user,
+        #         "error_msg": "Invalid login or password."
+        #     }
+        #     return request.render('registry_app.registry_app_login_form',
+        #                           values)
+        user = request.env.user
+        print('user', user)
+        print('user_id', user.id)
+        # cooperatives = request.env['registry_app.cooperatives'].search(
+        #     [])
+        coop = request.env[
+            'registry_app.cooperatives'].sudo().browse(
+            user.cooperative_id.id)
+        print('coop', coop.id)
+        if user.has_group(
+                'registry_app.registry_app_shop_owner') | user.has_group(
+            'registry_app.registry_app_user'):
+            return request.redirect(f'/cooperative/{coop.id}/shops')
+        if user.has_group(
+                'registry_app.registry_app_cooperative_owner') | user.has_group(
+            'registry_app.registry_app_super_admin'):
             return request.redirect('/cooperatives')
-        else:
-            user = request.env['res.users'].browse(request.uid)
-            values = {
-                "user": user,
-                "error_msg": "Invalid login or password."
-            }
-            return request.render('registry_app.registry_app_login_form', values)
+        # return request.redirect('/cooperatives')
 
     @http.route('/cooperatives', type='http', auth='user', website=True)
     def get_cooperatives(self):
@@ -152,8 +189,10 @@ class RegistryApp(http.Controller):
 
     @http.route('/cooperatives/form', type='http', auth="public", website=True)
     def cooperative_form(self, **kw):
+        log_user = request.env['res.users'].browse(request.uid)
         users = request.env['res.users'].search(
-            [('is_from_registry_app', '=', True)])
+            [('is_from_registry_app', '=', True),
+             ('cooperative_id', '=', log_user.cooperative_id.id)])
         return request.render('registry_app.cooperative_form_template', {
             'users': users
         })
@@ -173,6 +212,8 @@ class RegistryApp(http.Controller):
     def show_shop(self, cooperative_id, **kwargs):
         """Fetching the Cooperative_id from the button click and filtering
         shops."""
+        print(cooperative_id, "Please")
+        user = request.env['res.users'].browse(request.uid)
         shops = request.env['registry_app.shop'].sudo().search(
             [('cooperative_id', '=', cooperative_id)])
         view_id = request.env.ref(
@@ -180,22 +221,25 @@ class RegistryApp(http.Controller):
         values = {
             'shops': shops,
             'cooperative_id': cooperative_id,
-            'view_id': view_id
+            'view_id': view_id,
+            'user': user
         }
         return request.render("registry_app.registry_app_website_shops", values)
 
     @http.route('/shops/<int:shop_id>/registries', type='http', auth='public',
                 website=True)
     def open_registry_website(self, shop_id, **kwargs):
+        user = request.env['res.users'].browse(request.uid)
         users = request.env['res.users'].search(
-            [('is_from_registry_app', '=', True)])
+            [('is_from_registry_app', '=', True),
+             ('cooperative_id', '=', user.cooperative_id.id)])
         cooperatives = request.env['registry_app.cooperatives'].search([])
         shop = request.env['registry_app.shop'].search([('id', '=', shop_id)])
 
         date = request.env['registry_app.registry_app'].get_context_today(). \
             strftime('%d-%m-%Y')
         name = f'Registry Log - {str(date)}'
-        user = request.env['res.users'].browse(request.uid)
+
         product = request.env['registry_app.product'].search(
             [('shop_id', '=', user.shop_id.id)])
         client = request.env['registry_app.client'].search(
@@ -217,8 +261,10 @@ class RegistryAppShopController(http.Controller):
     @http.route('/registry_app_shop/<int:cooperative_id>/form', auth='public',
                 website=True)
     def shop_form(self, cooperative_id, **kw):
+        user = request.env['res.users'].browse(request.uid)
         users = request.env['res.users'].search(
-            [('is_from_registry_app', '=', True)])
+            [('is_from_registry_app', '=', True),
+             ('cooperative_id', '=', user.cooperative_id.id)])
         return request.render(
             'registry_app.registry_app_shop_create_form_template', {
                 'users': users,
@@ -234,6 +280,7 @@ class RegistryAppShopController(http.Controller):
         file = post.get('shop_logo')
         coop_id = int(post.get('cooperative_id'))
         selct = post.get('users[]')
+        # print(adadsadsadsa)
         vals = {
             'name': post.get('name'),
             'user_id': int(post.get('user_id')),
@@ -281,8 +328,10 @@ class RegistryAppProductController(http.Controller):
 
     @http.route('/reg_products/form', type='http', auth="public", website=True)
     def cooperative_form(self, **kw):
+        user = request.env['res.users'].browse(request.uid)
         users = request.env['res.users'].search(
-            [('is_from_registry_app', '=', True)])
+            [('is_from_registry_app', '=', True),
+             ('cooperative_id', '=', user.cooperative_id.id)])
         return request.render(
             'registry_app.website_reg_products_form_template', )
 
@@ -302,6 +351,7 @@ class RegistryAppProductController(http.Controller):
             'product_id': new_product_template.id,
             'price': kw.get('price'),
             'cost': kw.get('cost'),
+            'shop_id': shop_id.id
         })
         return request.redirect('/reg_products')
 
@@ -318,30 +368,44 @@ class RegistryAppClientsController(http.Controller):
 
     @http.route('/clients/form', type='http', auth="public", website=True)
     def client_form(self, **kw):
+        user = request.env['res.users'].browse(request.uid)
         users = request.env['res.users'].search(
-            [('is_from_registry_app', '=', True)])
+            [('is_from_registry_app', '=', True),
+             ('cooperative_id', '=', user.cooperative_id.id)])
         return request.render('registry_app.website_reg_client_form_template', )
 
     @http.route('/submit_clients', type='http', auth="public", website=True)
     def submit_client(self, **kw):
         print(kw, "KW")
         shop_id = request.env['res.users'].browse(request.uid).shop_id
-        partner_id = request.env['res.partner']
-        new_partner_id = partner_id.create({
+        values = {
             'name': kw.get('name'),
+            'client_number': '121',
             'phone': kw.get('phone'),
             'email': kw.get('email'),
             'street': kw.get('street'),
-        })
-        print(new_partner_id, 'npt')
-        clients = request.env['registry_app.client']
-        clients.create({
-            'partner_id': new_partner_id.id,
-            'client_number': kw.get('client_number'),
-            'phone': kw.get('phone'),
-            'email': kw.get('email'),
-            'street': kw.get('street'),
-        })
+            'shop_id': shop_id
+        }
+        request.env['registry_app.client'].create(values)
+
+        # partner_id = request.env['res.partner']
+        # new_partner_id = partner_id.sudo().create({
+        #     'name': kw.get('name'),
+        #     'phone': kw.get('phone'),
+        #     'email': kw.get('email'),
+        #     'street': kw.get('street'),
+        # })
+        # print(new_partner_id, 'npt')
+        # clients = request.env['registry_app.client']
+        # clients.create({
+        #     'partner_id': new_partner_id.id,
+        #     'name': kw.get('name'),
+        #     'client_number': kw.get('client_number'),
+        #     'phone': kw.get('phone'),
+        #     'email': kw.get('email'),
+        #     'street': kw.get('street'),
+        #     'shop_id': shop_id.id
+        # })
         return request.redirect('/reg_clients')
 
 
@@ -432,3 +496,32 @@ class RegistryAppSmsController(http.Controller):
             return request.redirect(
                 '/web?&#min=1&limit=80&view_type=list&model=registry_app.shop&action=%s' % (
                     view_id.id))
+
+
+class RegistryAppPortal(CustomerPortal):
+
+    def _prepare_home_portal_values(self, counters):
+        rtn = super(RegistryAppPortal, self)._prepare_home_portal_values(
+            counters)
+        print('rtn: %s' % rtn)
+        rtn['registry_log_count'] = request.env[
+            'registry_app.registry_app'].search_count([])
+        return rtn
+        # values = super()._prepare_home_portal_values(counters)
+
+    @http.route(['/my/registry_log'], type='http', auth='user', website=True)
+    def registry_app_list_view(self, **kw):
+        registry_log = request.env['registry_app.registry_app'].search([])
+        vals = {
+            'registry_log': registry_log,
+            'page_name': 'registry_log_list_view'
+        }
+        return request.render('registry_app.registry_app_list_view_portal',
+                              vals)
+
+    @http.route([
+        '/my/registry_log/<model("registry_app.registry_app"):registry_app_id>'],
+        type='http', auth='user', website=True)
+    def registry_app_form_view(self,registry_app_id, **kw):
+        print('hello')
+        return 'Hello'

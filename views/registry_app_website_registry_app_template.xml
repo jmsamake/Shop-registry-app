@@ -216,7 +216,6 @@
                 color: transparent !important;
             }
 
-
         </style>
         <header>
             <nav class="navbar navbar-expand-lg mw-100 reg_app_navbar"
@@ -248,11 +247,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                    href="/cooperatives">
-                                    Cooperatives</a>
+                                    Coopératives</a>
+<!--                                t-if="user.has_group('registry_app.registry_app_super_admin') or user.has_group('registry_app.registry_app_cooperative_owner')"-->
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white"
-                                   href="/reg_products">Products</a>
+                                   t-attf-href="/cooperative/{{ request.env.user.shop_id.cooperative_id.id }}/shops">Magasins</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white"
+                                   href="/reg_products">Produits</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white"
@@ -265,13 +270,13 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                    href="/reg_app/reporting">
-                                    Reporting</a>
+                                    Rapports</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                    href="/reg_app/users">
-                                    Users</a>
+                                    Utilisateurs</a>
                             </li>
                             <li class="nav-item dropdown reg_user_drop_down text-white"
                                 style="position: absolute;right: 30px;">
@@ -295,14 +300,14 @@
                                 <ul class="dropdown-menu"
                                     aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#">
-                                        Profile</a></li>
+                                        Profil</a></li>
                                     <li>
                                         <!--                                        <a class="dropdown-item"-->
                                         <!--                                           href="/web/session/logout?redirect=/">-->
                                         <!--                                        Logout</a>-->
                                         <a class="dropdown-item"
                                            href="/registry_app">
-                                            Logout
+                                            Se déconnecter
                                         </a>
                                     </li>
                                 </ul>
@@ -312,14 +317,11 @@
                 </div>
             </nav>
         </header>
-
         <!--                                    <img src="/path/to/user/image.png"-->
         <!--                                         alt="User Image"-->
         <!--                                         class="rounded-circle me-1"-->
         <!--                                         style="height: 20px;"/>-->
         <!--                                                                        <img class="o_forum_avatar rounded-circle mr-1" t-att-src="website.image_url(user, 'avatar_128', '30x30')" alt="Avatar" style="width:30px;height: 30px"/>-->
-
-
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap');
 
@@ -329,16 +331,13 @@
                     right: 0 !important;
                 }
             }
-
             .reg_app_navbar {
                 font-family: 'Poppins', sans-serif;
             }
-
             .nav-link {
                 font-size: 1rem;
             }
         </style>
-
     </template>
 
     <template id="registry_app_website_reg_app_footer_template"
@@ -350,20 +349,20 @@
                 <div id="google_translate_element"></div>
                 <script>
 
-                    function setCookie(key, value, expiry) {
-                    var expires = new Date();
-                    expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 *
-                    1000));
-                    document.cookie = key + '=' + value + ';expires=' +
-                    expires.toUTCString();
-                    }
+<!--                    function setCookie(key, value, expiry) {-->
+<!--                    var expires = new Date();-->
+<!--                    expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 *-->
+<!--                    1000));-->
+<!--                    document.cookie = key + '=' + value + ';expires=' +-->
+<!--                    expires.toUTCString();-->
+<!--                    }-->
 
                     function googleTranslateElementInit() {
-                    setCookie('googtrans', '/en/fr',1);
+<!--                    setCookie('googtrans', '/en/fr',1);-->
                     new google.translate.TranslateElement({
-                    pageLanguage: 'en',
+                    pageLanguage: 'fr',
                     autoDisplay: 'true',
-                    includedLanguages:'en,fr,de,ru,es',
+                    includedLanguages:'fr,en,de,ru,es',
                     layout:
                     google.translate.TranslateElement.InlineLayout.HORIZONTAL
                     }, 'google_translate_element');
@@ -374,14 +373,12 @@
                     <div>
                         <t t-if="user and user.shop_id">
                             <p>&#169; 2023 <span
-                                    t-esc="user.shop_id.name"></span> All
-                                rights reserved.</p>
+                                    t-esc="user.shop_id.name"></span> Tous les droits sont réservés.</p>
                         </t>
                         <t t-else="">
-                            <p>&#169; 2023 My Shop All rights reserved.</p>
+                            <p>&#169; 2023 My Shop Tous les droits sont réservés.</p>
                         </t>
                     </div>
-
                 </div>
             </div>
         </footer>

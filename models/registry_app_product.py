@@ -7,6 +7,7 @@ class RegistryAppProduct(models.Model):
     _name = 'registry_app.product'
     _description = 'Registry Product'
     _rec_name = 'product_id'
+    _inherit = ['mail.thread']
 
     product_id = fields.Many2one('product.template', "Product", required=True,
                                  domain=[('id', '=', 0)])
@@ -32,6 +33,7 @@ class RegistryAppProduct(models.Model):
 
     @api.model
     def create(self, values):
+        print('values',values)
         values.update({
             'shop_id':  self.env.user.shop_id.id
         })

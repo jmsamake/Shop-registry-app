@@ -6,6 +6,7 @@ from odoo import models, fields, api,_
 class RegistryAppPurchase(models.Model):
     _name = 'registry_app.purchase'
     _description = 'Purchase Registries'
+    _inherit = ['mail.thread']
 
     # name = fields.Char(string='Name', required=True)
     product_id = fields.Many2one('registry_app.product', string=_('Product'), )

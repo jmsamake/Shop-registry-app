@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Registry Logs</t>
+                <t t-set="url" t-value="'/my/registry_log'"/>
+                <t t-set="placeholder_count" t-value="'registry_log_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="registry_app_list_view_portal">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Created by</th>
+                        <th class="text-center">Total Sales</th>
+                        <th class="text-center">Total Purchase</th>
+                        <th class="text-center">State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="registry_log" t-as="reg_log">
+                        <tr>
+                            <td class="text-center"><t t-out="reg_log.name"/></td>
+                            <td class="text-center"><t t-out="reg_log.date"/></td>
+                            <td class="text-center"><t t-out="reg_log.create_uid.name"/></td>
+                            <td class="text-center"><t t-out="reg_log.total_sales"/></td>
+                            <td class="text-center"><t t-out="reg_log.total_purchase"/></td>
+                            <td class="text-center"><t t-out="reg_log.state"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'registry_log_list_view'" class="breadcrumb-item">Registry Logs</li>
+        </xpath>
+    </template>
+
+</odoo>
+

@@ -180,6 +180,40 @@
                             </group>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!--        registry_app.products form view-->
+        <record model="ir.ui.view" id="registry_app_product_form_view">
+            <field name="name">registry_app_product.form</field>
+            <field name="model">registry_app.product</field>
+            <field name="arch" type="xml">
+                <form string="Client">
+                    <sheet>
+                        <group>
+                            <group>
+                                <!--<field name="name" class="o_bold"/>-->
+                                <field name="product_id" class="o_bold"/>
+                                <field name="price"/>
+                                <field name="cost"/>
+                            </group>
+                            <group>
+                                <!--add new field if needed-->
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -201,16 +235,21 @@
                                        widget="radio"/>
                                 <!--<field name="phone"/>-->
                             </group>
-                            <group>
-                                <field name="password_lock" widget="radio"/>
-                                <field name="login_pswd"
-                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
-                                <field name="menus_to_lock"
-                                       widget="many2many_tags"
-                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>
-                            </group>
+<!--                            <group>-->
+<!--                                <field name="password_lock" widget="radio"/>-->
+<!--                                <field name="login_pswd"-->
+<!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
+<!--                                <field name="menus_to_lock"-->
+<!--                                       widget="many2many_tags"-->
+<!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
+<!--                            </group>-->
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -245,6 +284,11 @@
                             </group>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -289,6 +333,11 @@
                             </group>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -342,6 +391,11 @@
                         <button string="Send SMS Now" name="action_sms_send"
                                 type="object" class="btn-primary"/>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>

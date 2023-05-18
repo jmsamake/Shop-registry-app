@@ -12,9 +12,7 @@
     <!--			<input type="submit" value="Login"/>-->
     <!--		</form>-->
     <!--	</div>-->
-
     <!--    </template>-->
-
     <template id="registry_app_login_form" name="Registry App Login Page">
         <!--<t t-call="registry_app.custom_header"/>-->
         <!--		<link rel="stylesheet" href="/registry_app/static/src/css/style.css"></link>-->
@@ -26,7 +24,6 @@
         <!--                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"-->
         <!--                crossorigin="anonymous"></script>-->
         <t t-call="website.layout">
-
             <section class="m-5">
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,15 +39,11 @@
                                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                     <p class="lead fw-normal mb-0 me-3">Log
                                         in </p>
-
                                 </div>
-
                                 <div class="divider d-flex align-items-center my-4">
                                     <p class="text-center fw-bold mx-3 mb-0">
                                     </p>
-
                                     <!--                                   <img t-if="user.shop_id.shop_logo"  t-att-src="image_data_uri(user.shop_id.shop_logo)" style="max-height:50px;max-width:50px"></img>-->
-
                                 </div>
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
@@ -62,43 +55,33 @@
                                            t-att-value="request.env.user.name"
                                            readonly="True">
                                     </input>
-
-
                                 </div>
-
                                 <!-- Password input -->
-                                <div class="form-outline mb-3">
-                                    <label class="form-label"
-                                           for="reg_password">
-                                        Password</label>
-                                    <input type="password"
-                                           id="reg_password"
-                                           name="reg_password"
-                                           class="form-control form-control-lg"
-                                           placeholder="Enter password"/>
-
-                                </div>
-                                <div class="text-center">
-                                    <t t-if="error_msg">
-                                        <div class="alert alert-danger">
-                                            <p t-esc="error_msg"/>
-                                        </div>
-                                    </t>
-                                </div>
-
+<!--                                <div class="form-outline mb-3">-->
+<!--                                    <label class="form-label"-->
+<!--                                           for="reg_password">-->
+<!--                                        Password</label>-->
+<!--                                    <input type="password"-->
+<!--                                           id="reg_password"-->
+<!--                                           name="reg_password"-->
+<!--                                           class="form-control form-control-lg"-->
+<!--                                           placeholder="Enter password"/>-->
+<!--                                </div>-->
+<!--                                <div class="text-center">-->
+<!--                                    <t t-if="error_msg">-->
+<!--                                        <div class="alert alert-danger">-->
+<!--                                            <p t-esc="error_msg"/>-->
+<!--                                        </div>-->
+<!--                                    </t>-->
+<!--                                </div>-->
                                 <div class="text-center text-lg-start mt-4 pt-2">
-
                                     <input type="submit" id="regLoginBtn"
                                            class="btn btn-primary btn-lg"
                                            style="padding-left: 2.5rem; padding-right: 2.5rem;"
                                            value="Login"/>
-
                                     <!-- <a href="/reg_app/login" class="btn btn-primary btn-lg"-->
                                     <!--    style="padding-left: 2.5rem; padding-right: 2.5rem;" id="reg_login" onclick="newFunction()">Login</a>-->
-
-
                                 </div>
-
                             </form>
                         </div>
                     </div>
