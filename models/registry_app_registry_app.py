@@ -16,18 +16,16 @@ class RegistryApp(models.Model):
                        default=lambda self: 'Registry Log - ' +
                                             fields.Date.context_today(
                                                 self).strftime('%d-%m-%Y'))
-
     date = fields.Date(string=_('Date'), default=fields.Date.context_today,
                        readonly=True, copy=False, required=True)
-
-    shop_id = fields.Many2one('registry_app.shop')
-    sale_app_ids = fields.One2many('registry_app.sales', 'registry_app_id')
+    shop_id = fields.Many2one('registry_app.shop',copy=False)
+    sale_app_ids = fields.One2many('registry_app.sales', 'registry_app_id',copy=False)
     purchase_app_ids = fields.One2many('registry_app.purchase',
-                                       'registry_app_id')
-    total_sales = fields.Float(string=_('Total Sales'),
+                                       'registry_app_id',copy=False)
+    total_sales = fields.Float(string=_('Total Sales'),copy=False,
                                compute='_compute_registry_sale_total',
                                store=True)
-    total_purchase = fields.Float(string=_('Total Purchase'),
+    total_purchase = fields.Float(string=_('Total Purchase'),copy=False,
                                   compute='_compute_registry_purchase_total',
                                   store=True)
     description = fields.Text()
@@ -38,11 +36,11 @@ class RegistryApp(models.Model):
         ('cancelled', _('Cancelled')),
         # ('archived', 'Archived'),
     ], string="State",
-        default='opened')
+        default='opened',copy=False)
     registry_user_id = fields.Many2one('res.users', copy=False, tracking=True,
                                        string=_('Salesperson'),
                                        default=lambda self: self.env.user)
-    company_id = fields.Many2one('res.company', string='Company',
+    company_id = fields.Many2one('res.company', string='Company',copy=False,
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged user Company")
     active = fields.Boolean(string=_('Active'), default=True)
@@ -75,28 +73,6 @@ class RegistryApp(models.Model):
     def reset(self):
         self.state = 'opened'
 
-    # def write(self, vals):
-    #     res = super(RegistryApp, self).write(vals)
-    #     if vals.get('active'):
-    #         for record in self:
-    #             if record.active and record.state != 'archived':
-    #                 record.state = 'archived'
-    #     return res
-
-    # @api.constrains('active')
-    # def _check_state(self):
-    #     print('active', self.active)
-    #     if not self.active:
-    #         self.state = 'archived'
-
-    # @api.model
-    # def send_sms(self, message, partner_ids=None):
-    #     sms_template = self.env.ref('base_sms_demo.sms_template',
-    #                                 raise_if_not_found=False)
-    #     sms_template.with_context(default_model='res.partner').send_sms(
-    #         partner_ids, message=message)
-
-    # computing total cost for showing in tree view
     @api.depends('purchase_app_ids')
     def _compute_registry_purchase_total(self):
         self.total_purchase = sum(self.purchase_app_ids.mapped('cost'))
@@ -110,8 +86,9 @@ class RegistryApp(models.Model):
     def create(self, values):
         """Override default Odoo create function and extend."""
         print('context', self._context.get('shop_id'))
+        print('usr shop',self.env.user.shop_id)
         values.update({
-            'shop_id': self._context.get('shop_id')
+            'shop_id': self.env.user.shop_id.id
         })
         print(values, 'values')
         return super(RegistryApp, self).create(values)
@@ -129,12 +106,23 @@ class RegistryApp(models.Model):
             if count > 0:
                 raise ValidationError('Only one record allowed per day.')
 
-    # def my_server_action(self):
-    #     action_values = self.env.ref('product.product_template_action').read()[0]
-    #
-    #     return action_values
-
     def get_context_today(self):
         print('get_context_date')
         print(fields.Date.context_today(self))
         return fields.Date.context_today(self)
+
+    @api.model
+    def _set_status_to_closed(self):
+        registry_apps = self.env['registry_app.registry_app'].search([
+            ('state', 'not in', ['closed', 'cancelled'])
+        ])
+        end_of_day = fields.Datetime.now().replace(hour=23, minute=59,
+                                                   second=59)
+        print('set_status_to_closed' , end_of_day)
+
+        for log in registry_apps:
+            # if log.date <= end_of_day:
+            log.state = 'closed'
+
+    def _cron_set_status_to_closed(self):
+        self._set_status_to_closed()

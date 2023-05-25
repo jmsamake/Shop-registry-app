@@ -38,8 +38,8 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Quantity</th>
-                                        <th>Client</th>
                                         <th>Price</th>
+                                        <th>Client</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -2,13 +2,13 @@
 <odoo>
     <template id="custom_header" name="Custom Header">
         <!--        <xpath expr="//header" position="replace">-->
-                            <meta charset="utf-8"/>
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-                            <meta name="viewport"
-                                  content="width=device-width, initial-scale=1, user-scalable=no"/>
-                            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <!--                    <meta name="generator" content="Odoo"/>-->
-                            <meta name="default_title" content=" Cooperatives | My Website "/>
+        <meta name="default_title" content=" Cooperatives | My Website "/>
         <!--                    <meta name="description"/>-->
         <!--                    <meta name="keywords"/>-->
 
@@ -153,67 +153,67 @@
 
         <style>
 
-<!--            @media (min-width: 768px) {-->
-<!--                body {-->
-<!--                    max-width: 720px;-->
-<!--                    background: #00d0ff;-->
-<!--                    overflow-x: hidden !important;-->
-<!--                }-->
-<!--            }-->
+            <!--            @media (min-width: 768px) {-->
+            <!--                body {-->
+            <!--                    max-width: 720px;-->
+            <!--                    background: #00d0ff;-->
+            <!--                    overflow-x: hidden !important;-->
+            <!--                }-->
+            <!--            }-->
 
             #google_translate_element select {
-                background-color: #f6edfd;
-                color: #383ffa;
-                border: none;
-                border-radius: 3px;
-                padding: 6px 8px
+            background-color: #f6edfd;
+            color: #383ffa;
+            border: none;
+            border-radius: 3px;
+            padding: 6px 8px
             }
 
             .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
-                display: none !important;
+            display: none !important;
             }
 
             body {
-                top: 0px !important;
+            top: 0px !important;
             }
 
             .goog-tooltip {
-                display: none !important;
+            display: none !important;
             }
 
             .goog-tooltip:hover {
-                display: none !important;
+            display: none !important;
             }
 
             .goog-text-highlight {
-                background-color: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
             }
 
             #google_translate_element {
-                display: flex;
-                justify-content: center;
+            display: flex;
+            justify-content: center;
             }
 
             #goog-gt- {
-                display: none !important;
+            display: none !important;
             }
 
             .skiptranslate iframe {
-                display: none !important;
+            display: none !important;
             }
 
             .goog-te-gadget a {
-                display: none !important;
+            display: none !important;
             }
 
             .goog-logo-link {
-                display: none !important;
+            display: none !important;
             }
 
             .goog-te-gadget {
-                color: transparent !important;
+            color: transparent !important;
             }
 
         </style>
@@ -244,21 +244,26 @@
                     <div class="collapse navbar-collapse justify-content-start"
                          style="position: relative;" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            <li class="nav-item"
+                                    t-if="user.has_group('registry_app.registry_app_super_admin') or user.has_group('registry_app.registry_app_cooperative_owner')">
                                 <a class="nav-link text-white"
-                                   href="/cooperatives">
-                                    Coopératives</a>
-<!--                                t-if="user.has_group('registry_app.registry_app_super_admin') or user.has_group('registry_app.registry_app_cooperative_owner')"-->
-
+                                   href="/cooperatives">Coopératives</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-white"
-                                   t-attf-href="/cooperative/{{ request.env.user.shop_id.cooperative_id.id }}/shops">Magasins</a>
+                                   t-attf-href="/cooperative/{{ request.env.user.cooperative_id.id }}/shops">
+                                    Magasins
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                    href="/reg_products">Produits</a>
                             </li>
+                            <!--                            <li class="nav-item">-->
+                            <!--                                <a class="nav-link text-white"-->
+                            <!--                                   href="/my/registry_log">Registres</a>-->
+                            <!--                            </li>-->
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                    href="/reg_clients">Clients</a>
@@ -273,7 +278,8 @@
                                     Rapports</a>
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item"
+                                t-if="not request.env.user.has_group('registry_app.registry_app_user')">
                                 <a class="nav-link text-white"
                                    href="/reg_app/users">
                                     Utilisateurs</a>
@@ -290,11 +296,11 @@
                                     <!--                                         alt="Avatar"-->
                                     <!--                                         style="width:30px;height: 30px"/>-->
                                     <!--                                    <img class="o_forum_avatar rounded-circle mr-1" t-att-src="'/web/image/res.users/' + str(request.env.user.id) + '/image_128'" style="width:35px;height: 35px"/>-->
-                                    <img t-if="request.env.user.partner_id.image_128"
-                                         t-att-src="website.image_url(request.env.user.partner_id, 'image_128', '30x30')"
-                                         alt="User Avatar"
-                                         class="rounded-circle"
-                                         style="width: 30px; height: 30px;"/>
+                                    <!--                                    <img t-if="request.env.user.partner_id.image_128"-->
+                                    <!--                                         t-att-src="website.image_url(request.env.user.partner_id, 'image_128', '30x30')"-->
+                                    <!--                                         alt="User Avatar"-->
+                                    <!--                                         class="rounded-circle"-->
+                                    <!--                                         style="width: 30px; height: 30px;"/>-->
                                     <span t-esc="request.env.user.name"></span>
                                 </a>
                                 <ul class="dropdown-menu"
@@ -305,8 +311,9 @@
                                         <!--                                        <a class="dropdown-item"-->
                                         <!--                                           href="/web/session/logout?redirect=/">-->
                                         <!--                                        Logout</a>-->
+                                        <!--                                        <a class="dropdown-item" href="/registry_app">-->
                                         <a class="dropdown-item"
-                                           href="/registry_app">
+                                           href="/web/session/logout?redirect=/">
                                             Se déconnecter
                                         </a>
                                     </li>
@@ -331,9 +338,11 @@
                     right: 0 !important;
                 }
             }
+
             .reg_app_navbar {
                 font-family: 'Poppins', sans-serif;
             }
+
             .nav-link {
                 font-size: 1rem;
             }
@@ -349,16 +358,16 @@
                 <div id="google_translate_element"></div>
                 <script>
 
-<!--                    function setCookie(key, value, expiry) {-->
-<!--                    var expires = new Date();-->
-<!--                    expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 *-->
-<!--                    1000));-->
-<!--                    document.cookie = key + '=' + value + ';expires=' +-->
-<!--                    expires.toUTCString();-->
-<!--                    }-->
+                    <!--                    function setCookie(key, value, expiry) {-->
+                    <!--                    var expires = new Date();-->
+                    <!--                    expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 *-->
+                    <!--                    1000));-->
+                    <!--                    document.cookie = key + '=' + value + ';expires=' +-->
+                    <!--                    expires.toUTCString();-->
+                    <!--                    }-->
 
                     function googleTranslateElementInit() {
-<!--                    setCookie('googtrans', '/en/fr',1);-->
+                    <!--                    setCookie('googtrans', '/en/fr',1);-->
                     new google.translate.TranslateElement({
                     pageLanguage: 'fr',
                     autoDisplay: 'true',
@@ -373,14 +382,33 @@
                     <div>
                         <t t-if="user and user.shop_id">
                             <p>&#169; 2023 <span
-                                    t-esc="user.shop_id.name"></span> Tous les droits sont réservés.</p>
+                                    t-esc="user.shop_id.name"></span> Tous les
+                                droits sont réservés.</p>
                         </t>
                         <t t-else="">
-                            <p>&#169; 2023 My Shop Tous les droits sont réservés.</p>
+                            <p>&#169; 2023 My Shop Tous les droits sont
+                                réservés.</p>
                         </t>
                     </div>
                 </div>
             </div>
         </footer>
     </template>
+
+<!--<template id="custom_header_template" inherit_id="website.layout" name="Custom Header">-->
+<!--  <xpath expr="//header" position="replace">-->
+<!--    <t t-if="request.env.user.is_from_registry_app">-->
+<!--      <t t-call="registry_app.custom_header" />-->
+<!--    </t>-->
+<!--    <t t-else="">-->
+<!--      <header>-->
+<!--        <t t-call="super" />-->
+<!--      </header>-->
+<!--    </t>-->
+<!--  </xpath>-->
+<!--</template>-->
+
+
+
 </odoo>
+

@@ -29,7 +29,8 @@
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>        <!--         <style>-->
+        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        <!--         <style>-->
         <!--        -->
         <!--    </style>-->
     </template>

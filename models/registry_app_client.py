@@ -7,25 +7,20 @@ class RegistryAppClient(models.Model):
     _inherit = ['mail.thread']
 
     client_number = fields.Char(string=_('Client Number'))
-    name = fields.Char(string=_('Name'), required=True)
+    name = fields.Char(string=_('Name'), required=True, copy=False)
     partner_id = fields.Many2one('res.partner', delegate=True,
-                                 string=_('Partner'),
+                                 string=_('Partner'),copy=False,
                                  ondelete='cascade', domain=[('id', '=', 0)])
-    phone = fields.Char(string=_('Phone'))
-    email = fields.Char(string=_('Email'))
-    street = fields.Char(string=_('Street'), )
+    phone = fields.Char(string=_('Phone'),copy=False)
+    email = fields.Char(string=_('Email'),copy=False)
+    street = fields.Char(string=_('Street'), copy=False)
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id,
-                                 readonly=True, help="Logged in user Company")
-    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop')
+                                 readonly=True, help="Logged in user Company",copy=False)
+    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop',copy=False)
     active = fields.Boolean(string=_('Active'), default=True)
 
     def send_sms(self):
-        # view_id = self.env.ref('registry_app.view_sms_broadcast_form').id
-        # action = self.env.ref('registry_app.sms_broadcast').read()[0]
-        # action['target'] = 'new'
-        # action['view_mode'] = 'form'
-        # return action
         view_id = self.env.ref('registry_app.view_sms_broadcast_form').id,
         return {
             'res_model': 'regsmsbroadcast',
@@ -34,9 +29,6 @@ class RegistryAppClient(models.Model):
             'target': 'new',
             'view_id': view_id,
         }
-
-    def action_sms_test(self):
-        print(self)
 
     def open_broadcastsms(self):
         ctx = dict(self.env.context)

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<record id="res_config_settings_view_form_ProjectName" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.ProjectName</field>
+    <field name="model">res.config.settings</field>
+    <field name="priority" eval="25"/>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('settings')]" position="inside">
+            <div class="app_settings_block" data-string="ProjectName" string="ProjectTitle" data-key="ProjectName" groups="registry_app.registry_app_super_admin">
+                <h2>SMS Configuration</h2>
+                <div class="row mt16 o_settings_container" id="sms_config">
+                        <div class="col-12 col-lg-6 o_setting_box" title="Provide the authorization header for Orange SMS API">
+                            <div class="o_setting_left_pane">
+<!--                                <field name="authorization_header"/>-->
+                            </div>
+                             <div class="o_setting_right_pane">
+                                <label for="authorization_header"/>
+                                <div class="text-muted" id="authorization_header_default">
+                                    Authorization header
+                                    <br/>
+                                    <field name="authorization_header"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="api_sender">
+                            <div class="o_setting_left_pane">
+<!--                                <field name=""/>-->
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="api_sender"/>
+                                <div class="text-muted" id="api_sender_default">
+                                    Sender
+                                    <br/>
+                                    <field name="api_sender"/>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="col-12 col-lg-6 o_setting_box"-->
+<!--                            id="restrict_template_rendering_setting">-->
+<!--                            <div class="o_setting_left_pane">-->
+<!--                                <field name="toggle_cron_job"/>-->
+<!--                            </div>-->
+<!--                            <div class="o_setting_right_pane">-->
+<!--                                <label for="toggle_cron_job"/>-->
+<!--                                <div class="text-muted" id="toggle_cron_job">-->
+<!--                                    Activate/Deactivate Cron Job-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+            </div>
+        </xpath>
+    </field>
+</record>
+
+
+
+        <record id="action_ProjectName_configuration"
+                model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module': 'ProjectName'}</field>
+        </record>
+
+<!--        <menuitem id="ProjectName_settings" name="Settings"-->
+<!--                  parent="your_root_menu"-->
+<!--                  action="action_ProjectName_configuration"-->
+<!--                  groups="base.group_system"/>-->
+
+        <menuitem name="Configuration" id="registry_app_conf"
+                  parent="registry_app.menu_root"
+                  action="action_ProjectName_configuration"/>
+        <menuitem id="registry_app_conf_settings" name="Settings"
+                  parent="registry_app_conf"
+                  action="action_ProjectName_configuration"/>
+
+    </data>
+</odoo>

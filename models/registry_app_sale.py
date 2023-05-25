@@ -9,14 +9,12 @@ class RegistryAppSales(models.Model):
     _inherit = ['mail.thread']
 
     # name = fields.Char(string='Name', required=True)
-
-    product_id = fields.Many2one('registry_app.product', string=_('Product'), )
-    # price = fields.Float()
-    price = fields.Float(related='product_id.price', readonly=False)
-    quantity = fields.Integer(string=_('Quantity'), default=1)
-    registry_app_id = fields.Many2one('registry_app.registry_app')
-    client_id = fields.Many2one('registry_app.client', string=_('Client'))
-    company_id = fields.Many2one('res.company', string='Company',
+    product_id = fields.Many2one('registry_app.product', string=_('Product'),copy=False)
+    price = fields.Float(related='product_id.price', readonly=False,copy=False)
+    quantity = fields.Integer(string=_('Quantity'), default=1,copy=False)
+    registry_app_id = fields.Many2one('registry_app.registry_app',copy=False)
+    client_id = fields.Many2one('registry_app.client', string=_('Client'),copy=False)
+    company_id = fields.Many2one('res.company', string='Company',copy=False,
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
     active = fields.Boolean(string=_('Active'), default=True)

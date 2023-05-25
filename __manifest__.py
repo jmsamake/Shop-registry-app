@@ -19,6 +19,7 @@
     'data': [
         'security/security.xml',
         'security/registry_app_users_security.xml',
+        'security/registry_app_shops_security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/registry_app_website_registry_app_template.xml',
@@ -34,22 +35,28 @@
         'views/registry_app_website_sms_broadcast.xml',
         'views/registry_app_website_shops.xml',
         'views/registry_app_portal_view.xml',
-
-        'data/auto_time_check.xml'
+        'views/res_config_settings.xml',
+        'data/auto_time_check.xml',
+        'data/registry_log_closed.xml'
     ],
     'assets': {
         'web.assets_backend': [
-            'registry_app/static/src/css/style.css',
-            'registry_app/static/src/css/menu_lock.css',
+            'registry_app/static/src/css/style.scss',
+            # 'registry_app/static/src/css/menu_lock.css',
             'registry_app/static/src/js/sale_cust.js',
+            'registry_app/static/src/js/main_navbar_hide.js',
             # 'registry_app/static/src/js/systray.js',
             'registry_app/static/src/js/test.js',
             # 'registry_app/static/src/js/lock_action.js',
             # 'registry_app/static/src/js/security_pin.js',
         ],
+        'web.assets_frontend': [
+            'registry_app/static/src/js/main_navbar_hide.js',
+        ],
         'web.assets_qweb': [
             'registry_app/static/src/xml/templates.xml',
             'registry_app/static/src/xml/systray.xml',
+            'registry_app/static/src/xml/tree_button.xml',
             # 'registry_app/static/src/xml/menu_lock.xml',
         ]
     },

@@ -10,24 +10,24 @@ class SmsBroadcast(models.Model):
     _description = 'SMS Notification'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string=_("SMS Notification"), required=True)
-    broadcast_date = fields.Datetime(string="Broadcast Date")
+    name = fields.Char(string=_("SMS Notification"), required=True,copy=False)
+    broadcast_date = fields.Datetime(string="Broadcast Date",copy=False)
 
     clients_ids = fields.Many2many('registry_app.client', string=_('Clients'),
-                                   required=True)
-    message = fields.Text(string=_("Message"), required=True)
+                                   required=True,copy=False)
+    message = fields.Text(string=_("Message"), required=True,copy=False)
     active = fields.Boolean(string=_("Active"), default=True)
     msg_sent = fields.Boolean(string=_("SMS send?"), default=False, copy=False,
-                              readonly=True)
+                              readonly=True,)
 
-    sender_type = fields.Char(string=_("Type structure"))
-    sender_id = fields.Integer(string=_("Sender ID"))
+    sender_type = fields.Char(string=_("Type structure"),copy=False)
+    sender_id = fields.Integer(string=_("Sender ID"),copy=False)
     state = fields.Selection([
         ('draft', _('Draft')),
         ('send', _('Send')),
         ('failed', _('Failed'))
     ], string=_('SMS Status'), default='draft', readonly=True, copy=False)
-    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop')
+    shop_id = fields.Many2one('registry_app.shop', string='Registry App Shop',copy=False)
 
     @api.model
     def create(self, values):
@@ -45,8 +45,10 @@ class SmsBroadcast(models.Model):
             'Authorization': authorization,
             'Content-Type': 'application/json',
         }
-
-        sender = '2230000'
+        params = self.env['ir.config_parameter'].sudo()
+        sender = params.get_param('registry_app.api_sender')
+        print('sender', sender)
+        # sender = '2230000'
         if '+' in sender:
             sender = sender.replace('+', '')
         url = 'https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B{dev_phone_number}/requests'.format(
@@ -69,9 +71,10 @@ class SmsBroadcast(models.Model):
                     }
                 }
             }
+            print('data',data)
             response = requests.post(url, headers=headers,
                                      data=json.dumps(data))
-
+            print('response',response)
             vals.update({
                 'body': message,
                 'number': recipient.replace(" ", ""),
@@ -79,14 +82,22 @@ class SmsBroadcast(models.Model):
                 'error_code': response,
                 'response': response.text,
             })
+            print('vals',vals)
             if response.status_code == 201:
                 self.state = 'send'
             else:
                 self.state = 'failed'
 
     def get_access_token(self):
+        params = self.env['ir.config_parameter'].sudo()
+        authorization_header_code = params.get_param(
+            'registry_app.authorization_header')
+        print('authorization_header_code', authorization_header_code)
+        # api_sender = params.get_param('registry_app.api_sender')
         authentication_url = 'https://api.orange.com/oauth/v3/token'
-        authorization_header = 'Basic U05STFo3YUJ4NkcyQTFDeFlsZjVMMjBMbFE4Qzg4MXE6MkhyRGFtcnF6TTdsQjZSTQ=='
+        # authorization_header = 'Basic U05STFo3YUJ4NkcyQTFDeFlsZjVMMjBMbFE4Qzg4MXE6MkhyRGFtcnF6TTdsQjZSTQ=='
+        authorization_header = f'Basic {authorization_header_code}'
+        print('authorization_',authorization_header)
         headers = {
             'Authorization': authorization_header,
             'Content-Type': 'application/x-www-form-urlencoded',

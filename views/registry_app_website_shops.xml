@@ -6,27 +6,29 @@
             <h1 class="text-center p-2">Magasins</h1>
             <div class="mb-3">
                 <a t-attf-href="/registry_app_shop/{{ cooperative_id }}/form"
-                   class="btn btn-secondary" t-if = "user.has_group('registry_app.registry_app_cooperative_owner')">Créer</a>
+                   class="btn btn-secondary"
+                   t-if="user.has_group('registry_app.registry_app_cooperative_owner')">
+                    Créer</a>
             </div>
             <div class="row">
                 <t t-foreach="shops" t-as="shop">
                     <div class="col-sm-4 mb-3">
                         <div class="card h-100 border"
                              t-att-data-coop-id="shop.id">
-                            <div class="card-header p-0 bg-transparent">
-                                <div class="text-right">
-
-                                </div>
-                            </div>
+                            <!--                            <div class="card-header text-right p-2 bg-transparent">-->
+                            <!--                                <a t-attf-href="/shop/{{ shop.id }}/edit">-->
+                            <!--                                    <i class="fas fa-cog"></i>-->
+                            <!--                                </a>-->
+                            <!--                            </div>-->
                             <div class="card-body">
                                 <h5 class="card-title" t-esc="shop.name"></h5>
                                 <div>
                                     <a class="btn btn-secondary"
                                        href="/reg_app/registries">
                                         Registre ouvert</a>
-<!--                                    <a class="btn btn-secondary"-->
-<!--                                       t-attf-href="/web#action=202">-->
-<!--                                        Open s</a>-->
+                                    <!--                                    <a class="btn btn-secondary"-->
+                                    <!--                                       t-attf-href="/web#action=202">-->
+                                    <!--                                        Open s</a>-->
 
                                 </div>
                             </div>
@@ -36,7 +38,6 @@
             </div>
         </div>
         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
-
     </template>
 
     <template id="registry_app_shop_form_template"
@@ -68,7 +69,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Identifiant de la boutique</label>
+                        <label class="col-form-label">Identifiant de la
+                            boutique</label>
                         <div>
                             <select name="shop" class="form-control"
                                     required="required">
@@ -79,7 +81,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Propriétaire de la boutique</label>
+                        <label class="col-form-label">Propriétaire de la
+                            boutique</label>
                         <div>
                             <select name="user_id" class="form-control"
                                     required="required">
@@ -91,6 +94,7 @@
                         </div>
                     </div>
                     <br/>
+
 
                     <div class="form-group">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -111,7 +115,8 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home"
-                                 role="tabpanel" aria-labelledby="home-tab" style="overflow-x: auto">
+                                 role="tabpanel" aria-labelledby="home-tab"
+                                 style="overflow-x: auto">
 
                                 <table id="myTable" class="table">
                                     <thead>
@@ -137,15 +142,17 @@
                                                     </t>
                                                 </select>
                                             </td>
-                                            <td style="width: 15%"><input type="number"
-                                                       name="price_0"
-                                                       id="price_0"
-                                                       class="form-control"
-                                                       step="0.01"/></td>
-                                            <td style="width: 15%"><input type="number"
-                                                       name="quantity_0"
-                                                       class="form-control"
-                                                       id="quantity_0"/></td>
+                                            <td style="width: 15%"><input
+                                                    type="number"
+                                                    name="price_0"
+                                                    id="price_0"
+                                                    class="form-control"
+                                                    step="0.01"/></td>
+                                            <td style="width: 15%"><input
+                                                    type="number"
+                                                    name="quantity_0"
+                                                    class="form-control"
+                                                    id="quantity_0"/></td>
                                             <td style="width: 35%">
                                                 <select name="client"
                                                         class="form-control"
@@ -196,15 +203,17 @@
                                                     </t>
                                                 </select>
                                             </td>
-                                            <td style="width: 15%"><input type="number"
-                                                       name="exp_quantity_0"
-                                                       class="form-control"
-                                                       id="exp_quantity_0"/></td>
-                                            <td style="width: 15%"><input type="number"
-                                                       name="cost_0"
-                                                       id="cost_0"
-                                                       class="form-control"
-                                                       step="0.01"/></td>
+                                            <td style="width: 15%"><input
+                                                    type="number"
+                                                    name="exp_quantity_0"
+                                                    class="form-control"
+                                                    id="exp_quantity_0"/></td>
+                                            <td style="width: 15%"><input
+                                                    type="number"
+                                                    name="cost_0"
+                                                    id="cost_0"
+                                                    class="form-control"
+                                                    step="0.01"/></td>
                                             <td style="width: 35%">
                                                 <select name="exp_client"
                                                         class="form-control"
@@ -227,7 +236,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label class="col-form-label">State</label>
@@ -285,6 +293,12 @@
                                name="name" required="True"/>
                     </div>
                     <br/>
+                    <!--                    <div class="form-group">-->
+                    <!--                       <label for="tag_ids" class="col-form-label">Tags</label>-->
+                    <!--                        <div class="select2-container select2-container-multi" id="s2id_tag_ids" style="width: 100%;"><ul class="select2-choices">  <li class="select2-search-choice">    <div>Exercises</div>    <a href="#" class="select2-search-choice-close" tabindex="-1"></a></li><li class="select2-search-field">    <label for="s2id_autogen2" class="select2-offscreen">Tags</label>    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen2" placeholder="" style="width: 20px;"/>  </li></ul></div>-->
+                    <!--            <input id="tag_ids" name="tag_ids" type="hidden"/>-->
+                    <!--                    </div>-->
+                    <!--                    <br/>-->
                     <div class="form-group">
                         <label for="shop_logo" class="form-label">Shop
                             Logo</label>
@@ -292,6 +306,20 @@
                                id="shop_logo" data-show-upload="true"
                                data-show-caption="true" data-show-preview="true"
                                accept="image/*"/>
+                    </div>
+                    <br/>
+
+                    <div class="form-group">
+                        <label for="user_id">Propriétaire de la
+                            boutique:</label>
+                        <select class="form-control" id="user_id"
+                                name="user_id">
+                            <option value="">Select a user...</option>
+                            <t t-foreach="users" t-as="user">
+                                <option t-att-value="user.id"><t
+                                        t-esc="user.name"/></option>
+                            </t>
+                        </select>
                     </div>
                     <br/>
 
@@ -308,37 +336,25 @@
                     </div>
                     <br/>
 
-                    <div class="form-group">
-                        <label for="user_id">Propriétaire de la boutique:</label>
-                        <select class="form-control" id="user_id"
-                                name="user_id">
-                            <option value="">Select a user...</option>
-                            <t t-foreach="users" t-as="user">
-                                <option t-att-value="user.id"><t
-                                        t-esc="user.name"/></option>
-                            </t>
-                        </select>
-                    </div>
-                    <br/>
-
-<!--                    <div class="form-group">-->
-<!--                        <label for="user_id">Utilisateur de la boutique:</label>-->
-<!--                        <select class="form-control" id="user_ids"-->
-<!--                                name="user_ids">-->
-<!--                            <option value="">Select shop users...</option>-->
-<!--                            <t t-foreach="users" t-as="user">-->
-<!--                                <option t-att-value="user.id"><t-->
-<!--                                        t-esc="user.name"/></option>-->
-<!--                            </t>-->
-<!--                        </select>-->
-<!--                    </div>-->
-                    <br/>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="user_id">Utilisateur de la boutique:</label>-->
+                    <!--                        <select class="form-control" id="user_ids"-->
+                    <!--                                name="user_ids">-->
+                    <!--                            <option value="">Select shop users...</option>-->
+                    <!--                            <t t-foreach="users" t-as="user">-->
+                    <!--                                <option t-att-value="user.id"><t-->
+                    <!--                                        t-esc="user.name"/></option>-->
+                    <!--                            </t>-->
+                    <!--                        </select>-->
+                    <!--                    </div>-->
+                    <input type="hidden" id="selectedUsers"
+                           name="selectedUsers[]"/>
 
                     <button type="submit" class="btn btn-success" id="sssubmit">
                         Soumettre</button>
                     <a class="btn btn-danger"
-                                       t-attf-href="/cooperative/{{ cooperative_id }}/shops">
-                                        Jeter</a>
+                       t-attf-href="/cooperative/{{ cooperative_id }}/shops">
+                        Jeter</a>
                 </form>
             </div>
         </div>
@@ -354,6 +370,227 @@
             console.log("s",s)
             });
             });
+            $(document).ready(function() {
+            // Event handler for option selection/deselection
+            $('#users').change(function() {
+            var selectedOptions = $(this).val(); // Get the selected option(s)
+
+            // Get the existing values from the hidden field
+            var existingValues = $('#selectedUsers').val() || [];
+            if (typeof existingValues === 'string') {
+            existingValues = [existingValues];
+            }
+
+            // Add selected options to the existing values
+            for (var i = 0; i &lt; selectedOptions.length; i++) {
+            var optionValue = selectedOptions[i];
+            if (!existingValues.includes(optionValue)) {
+            existingValues.push(optionValue);
+            }
+            }
+
+            // Remove deselected options from the existing values
+            var updatedValues = existingValues.filter(function(value) {
+            return selectedOptions.includes(value);
+            });
+
+            // Update the hidden field with the updated values
+            $('#selectedUsers').val(updatedValues);
+
+            // Log the selected users to the console
+            console.log(updatedValues);
+            });
+            });
         </script>
     </template>
+
+
+    <!--    <template id="registry_app_shop_edit_form_template" name="Shop Form">-->
+    <!--        <t t-call="registry_app.custom_header"/>-->
+    <!--        <div class="container">-->
+    <!--            <div>-->
+    <!--                <h1 class="text-center p-2">Créer une boutique</h1>-->
+    <!--                <form action="/shop_edit" method="POST"-->
+    <!--                      enctype="multipart/form-data">-->
+    <!--                    <input type="hidden" name="csrf_token"-->
+    <!--                           t-att-value="request.csrf_token()"/>-->
+    <!--                    <input type="hidden" name="cooperative_id"-->
+    <!--                           t-att-value="cooperative_id"/>-->
+    <!--                    <br/>-->
+    <!--                    <div class="form-group">-->
+    <!--                        <label for="name">Nom:</label>-->
+    <!--                        <input type="text" class="form-control" id="name"-->
+    <!--                               name="name" required="True"/>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                    <div class="form-group">-->
+    <!--                        <label for="shop_logo" class="form-label">Shop-->
+    <!--                            Logo</label>-->
+    <!--                        <input class="form-control" name="shop_logo" type="file"-->
+    <!--                               id="shop_logo" data-show-upload="true"-->
+    <!--                               data-show-caption="true" data-show-preview="true"-->
+    <!--                               accept="image/*"/>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+
+    <!--                    <div class="form-group">-->
+    <!--                        <label for="users">Utilisateurs:</label>-->
+    <!--                        <select class="js-example-basic-multiple form-control"-->
+    <!--                                id="users" name="users[]" multiple="multiple">-->
+    <!--                            <option value="">Select shop users...</option>-->
+    <!--                            <t t-foreach="users" t-as="user">-->
+    <!--                                <option t-att-value="user.id"><t-->
+    <!--                                        t-esc="user.name"/></option>-->
+    <!--                            </t>-->
+    <!--                        </select>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+
+    <!--                    <div class="form-group">-->
+    <!--                        <label for="user_id">Propriétaire de la-->
+    <!--                            boutique:</label>-->
+    <!--                        <select class="form-control" id="user_id"-->
+    <!--                                name="user_id">-->
+    <!--                            <option value="">Select a user...</option>-->
+    <!--                            <t t-foreach="users" t-as="user">-->
+    <!--                                <option t-att-value="user.id"><t-->
+    <!--                                        t-esc="user.name"/></option>-->
+    <!--                            </t>-->
+    <!--                        </select>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+
+    <!--                    &lt;!&ndash;                    <div class="form-group">&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                        <label for="user_id">Utilisateur de la boutique:</label>&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                        <select class="form-control" id="user_ids"&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                                name="user_ids">&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                            <option value="">Select shop users...</option>&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                            <t t-foreach="users" t-as="user">&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                                <option t-att-value="user.id"><t&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                                        t-esc="user.name"/></option>&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                            </t>&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                        </select>&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+    <!--                    <br/>-->
+
+    <!--                    <button type="submit" class="btn btn-success" id="sssubmit">-->
+    <!--                        Soumettre</button>-->
+    <!--                    <a class="btn btn-danger"-->
+    <!--                       t-attf-href="/cooperative/{{ cooperative_id }}/shops">-->
+    <!--                        Jeter</a>-->
+    <!--                </form>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
+    <!--        <script type="text/javascript">-->
+    <!--            $(document).ready(function() {-->
+    <!--            $('.js-example-basic-multiple').select2();-->
+    <!--            $('#sssubmit').click(function(){-->
+    <!--            var s = $('#users option[selected="selected"]').val();-->
+    <!--            var t = $('#users option:selected').val();-->
+    <!--            &lt;!&ndash;    alert("Set: " + s + ", Chosen: " + t);&ndash;&gt;-->
+    <!--            console.log("t",t)-->
+    <!--            console.log("s",s)-->
+    <!--            });-->
+    <!--            });-->
+    <!--        </script>-->
+    <!--    </template>-->
+
+
+    <template id="registry_report_template">
+        <t t-call="registry_app.custom_header"/>
+         <div class="page p-4" style="margin :0 auto;">
+            <div class="row mt-3">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <h3 class="text-center">Registry Report</h3>
+                </div>
+            </div>
+            <t t-foreach="datas" t-as="data">
+                <div class="row mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+                    <div class="col-md-12">
+                        <h4><t t-esc="data['name']"/></h4>
+                        <ul class="list-unstyled">
+                            <li>Salesperson: <strong><t t-esc="data['shop_owner']"/></strong></li>
+                            <li>Shop: <strong><t t-esc="data['shop']"/></strong></li>
+                        </ul>
+                    </div>
+                    <div class="container min-vw-80" style="padding-right:3rem;">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="pt-1">Sales</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-dark text-white">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Client</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['sale_app_ids']"
+                                       t-as="sale">
+                                        <tr>
+                                            <td><t t-esc="sale[0]"></t></td>
+                                            <td><t t-esc="sale[1]"></t></td>
+                                            <td><t t-esc="sale[2]"></t></td>
+                                            <td><t t-esc="sale[3]"></t></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td scope="row"
+                                            class="text-right"><strong>
+                                            Total Sales</strong></td>
+                                        <td><strong>
+                                            <t t-esc="data['total_sales']"></t>
+                                            </strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <h4 class="pt-1">Purchases</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-dark text-white">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Cost</th>
+                                        <!--    <th>Amount</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['purchase_app_ids']"
+                                       t-as="purchase">
+                                        <tr>
+                                            <td><t t-esc="purchase[0]"></t></td>
+                                            <!--                                            <td><t t-esc="data['total_purchase']"></t></td>-->
+                                            <!--                                            <td>[[ purchase.amount ]]</td>-->
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <td scope="row"
+                                            class="text-right"><strong>
+                                            Total Purchase</strong></td>
+                                        <td><strong><t
+                                                t-esc="data['total_purchase']"></t></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </t>
+        </div>
+        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+    </template>
+
+
 </odoo>

@@ -61,11 +61,11 @@
                                 name="validate" class="oe_highlight"
                                 groups="registry_app.registry_app_shop_owner"
                         />
-<!--                        <button string="Send SMS" type="object"-->
-<!--                                name="send_sms" class="oe_highlight"-->
-<!--                                attrs="{'invisible': [('state', '=', 'opened')]}"-->
-<!--                                groups="registry_app.registry_app_shop_owner"-->
-<!--                        />-->
+                        <!--                        <button string="Send SMS" type="object"-->
+                        <!--                                name="send_sms" class="oe_highlight"-->
+                        <!--                                attrs="{'invisible': [('state', '=', 'opened')]}"-->
+                        <!--                                groups="registry_app.registry_app_shop_owner"-->
+                        <!--                        />-->
                         <button string="Cancel" type="object" name="cancel"
                                 groups="registry_app.registry_app_shop_owner"
                         />
@@ -100,17 +100,20 @@
                             <page string="Sale">
                                 <field name="sale_app_ids">
                                     <tree editable="bottom">
-                                        <field name="product_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                        <field name="product_id"
+                                               options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                         <field name="price"/>
                                         <field name="quantity"/>
-                                        <field name="client_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                        <field name="client_id"
+                                               options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                     </tree>
                                 </field>
                             </page>
                             <page string="Expense">
                                 <field name="purchase_app_ids">
                                     <tree editable="bottom">
-                                        <field name="product_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                        <field name="product_id"
+                                               options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                         <field name="cost"/>
                                     </tree>
                                 </field>
@@ -127,16 +130,18 @@
         </record>
 
         <!--            registry app server action menu sms -->
-         <record model="ir.actions.server" id="action_reg_send_sms">
-       <field name="name">Send SMS</field>
-       <field name="model_id" ref="registry_app.model_registry_app_client"/>
-       <field name="binding_model_id" ref="registry_app.model_registry_app_client"/>
-       <field name="state">code</field>
-       <field name="code">
-           if records:
-                action = records.open_broadcastsms()
-       </field>
-   </record>
+        <record model="ir.actions.server" id="action_reg_send_sms">
+            <field name="name">Send SMS</field>
+            <field name="model_id"
+                   ref="registry_app.model_registry_app_client"/>
+            <field name="binding_model_id"
+                   ref="registry_app.model_registry_app_client"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.open_broadcastsms()
+            </field>
+        </record>
 
         <!--        registry_app.client tree view-->
         <record model="ir.ui.view" id="registry_app.client_tree_view">
@@ -144,10 +149,11 @@
             <field name="model">registry_app.client</field>
             <field name="arch" type="xml">
                 <tree>
-                    <header><button name="open_broadcastsms" string="Send SMS" type="object" class="btn-primary"/></header>
+                    <header><button name="open_broadcastsms" string="Send SMS"
+                                    type="object" class="btn-primary"/></header>
                     <field name="client_number"/>
                     <field name="name"/>
-                    <field name="phone"/>
+                    <field name="phone" widget="phone"/>
                     <field name="email"/>
                     <field name="street"/>
                 </tree>
@@ -232,17 +238,17 @@
                                 <field name="login"/>
                                 <field name="password"/>
                                 <field name="registry_user_group"
-                                       widget="radio"/>
+                                       widget="radio" groups="registry_app.registry_app_super_admin"/>
                                 <!--<field name="phone"/>-->
                             </group>
-<!--                            <group>-->
-<!--                                <field name="password_lock" widget="radio"/>-->
-<!--                                <field name="login_pswd"-->
-<!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
-<!--                                <field name="menus_to_lock"-->
-<!--                                       widget="many2many_tags"-->
-<!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
-<!--                            </group>-->
+                            <!--                            <group>-->
+                            <!--                                <field name="password_lock" widget="radio"/>-->
+                            <!--                                <field name="login_pswd"-->
+                            <!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
+                            <!--                                <field name="menus_to_lock"-->
+                            <!--                                       widget="many2many_tags"-->
+                            <!--                                       attrs="{'invisible': [('password_lock', '!=', 'single_password')]}"/>-->
+                            <!--                            </group>-->
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -350,7 +356,8 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="clients_ids" widget="many2many_tags" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                    <field name="clients_ids" widget="many2many_tags"
+                           options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                     <field name="message"/>
                     <field name="broadcast_date"/>
                     <field name="msg_sent" widget="boolean_toggle"/>
@@ -405,7 +412,7 @@
                 id="registry_app_cooperatives_action_window">
             <field name="name">Cooperatives</field>
             <field name="res_model">registry_app.cooperatives</field>
-<!--            <field name="domain"># ['|','|',('create_uid', '=', uid),('user_id', '=', uid),('id', '=', uid.cooperative_id)]</field>-->
+            <!--            <field name="domain"># ['|','|',('create_uid', '=', uid),('user_id', '=', uid),('id', '=', uid.cooperative_id)]</field>-->
             <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -438,9 +445,9 @@
                 id="registry_app_users_action_window">
             <field name="name">Registries App Users</field>
             <field name="res_model">registry_app.users</field>
-<!--            <field name="domain">['|','|',('create_uid', '=', uid),('user_id', '=', uid),-->
-<!--                                  ('cooperative_id', '=', uid.cooperative_id)]-->
-<!--            </field>-->
+            <!--            <field name="domain">['|','|',('create_uid', '=', uid),('user_id', '=', uid),-->
+            <!--                                  ('cooperative_id', '=', uid.cooperative_id)]-->
+            <!--            </field>-->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -473,7 +480,7 @@
             <field name="name">Registries App Product</field>
             <field name="res_model">registry_app.product</field>
             <field name="domain">['|', ('shop_id.user_id', '=', uid), (
-            'shop_id.shop_users_ids', 'in', [uid])] </field>
+                'shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -491,7 +498,7 @@
             <field name="name">Registries</field>
             <field name="res_model">registry_app.registry_app</field>
             <field name="domain">['|', ('shop_id.user_id', '=', uid), (
-            'shop_id.shop_users_ids', 'in', [uid])] </field>
+                'shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -533,7 +540,7 @@
             <field name="res_model">registry_app.client</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">['|', ('shop_id.user_id', '=', uid), (
-            'shop_id.shop_users_ids', 'in', [uid])] </field>
+                'shop_id.shop_users_ids', 'in', [uid])] </field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No Clients Available
@@ -688,7 +695,6 @@
             <field name="target">current</field>
         </record>
 
-
         <!--registry_app.cooperatives kanban -->
         <record id='registry_app_cooperative_view_kanban' model='ir.ui.view'>
             <field name="name">registry_app.cooperative.kanban</field>
@@ -747,6 +753,15 @@
             </field>
         </record>
 
+<!--                <record id="action_ProjectName_configuration"-->
+<!--                model="ir.actions.act_window">-->
+<!--            <field name="name">Settings</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">res.config.settings</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="target">inline</field>-->
+<!--&lt;!&ndash;            <field name="context">{'module': 'ProjectName'}</field>&ndash;&gt;-->
+<!--        </record>-->
         <!-- Top menu item -->
 
         <menuitem name="Registry" id="registry_app.menu_root"
@@ -780,6 +795,8 @@
         <menuitem name="SMS Log" id="registry_app_sms"
                   parent="registry_app.menu_root"
                   action="sms_broadcast"/>
+
+
 
     </data>
 </odoo>

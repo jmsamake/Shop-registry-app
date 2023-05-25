@@ -38,17 +38,17 @@ class RegistryAppShop(models.Model):
     _description = 'Registry App Shop'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string=_('Name'), required=True)
-    user_id = fields.Many2one('res.users', string='Shop Owner',
+    name = fields.Char(string=_('Name'), required=True,copy=False)
+    user_id = fields.Many2one('res.users', string='Shop Owner',copy=False,
                               help="If set,the shop is only visible for this user for this user.")
     shop_users_ids = fields.Many2many('res.users', copy=False,
                                       string=_("Users"))
     cooperative_id = fields.Many2one('registry_app.cooperatives',
                                      default=lambda self: self.env.context.get(
-                                         'cooperative_id', None),
+                                         'cooperative_id', None,copy=False),
                                      help="This shop belongs to this particular cooperative")
-    shop_logo = fields.Image(string=_("Logo"))
-    company_id = fields.Many2one('res.company', string=_('Company'),
+    shop_logo = fields.Image(string=_("Logo"),copy=False)
+    company_id = fields.Many2one('res.company', string=_('Company'),copy=False,
                                  default=lambda self: self.env.user.company_id,
                                  readonly=True, help="Logged in user Company")
     active = fields.Boolean(string=_('Active'), default=True)
@@ -76,7 +76,7 @@ class RegistryAppShop(models.Model):
     def open_tree_view(self):
         context = {'shop_id': self.id}
         domain = [('shop_id', '=', self.id)]
-        name = f'Registries for %s' % self.name
+        name = f'Registries for {self.name}'
         action = \
             self.env.ref(
                 'registry_app.registry_app_action_window').sudo().read()[0]
@@ -84,17 +84,6 @@ class RegistryAppShop(models.Model):
         action['domain'] = domain
         action['name'] = name
         return action
-        # view_id = self.env.ref('registry_app.registry_app_list').id,
-        # return {
-        #     'name': f'Registries for {self.name}' or 'Registries',
-        #     'res_model': 'registry_app.registry_app',
-        #     'type': 'ir.actions.act_window',
-        #     'view_mode': 'tree',
-        #     'target': 'current',
-        #     'view_id': view_id,
-        #     'context': {'shop_id': self.id},
-        #     'domain': [('shop_id', '=', self.id)]
-        # }
 
     @api.model
     def create(self, values):
@@ -141,51 +130,3 @@ class RegistryAppShop(models.Model):
                     'shop_id': self.id
                 })
         return super(RegistryAppShop, self).write(vals)
-
-# def login_btn(self):
-#     view_id = self.env.ref('registry_app.login_wizard_view').id
-#     return {
-#         'name': '',
-#         'res_model': 'login.wizard',
-#         'type': 'ir.actions.act_window',
-#         'view_mode': 'form',
-#         'target': 'new',
-#         'view_id': view_id,
-#         'context': {'shop_id': self.id},
-#     }
-
-# @api.constrains('password')
-# def check_password_strength(self):
-#     """password length check"""
-#     if self.password:
-#         if len(self.password) < 5:
-#             raise ValidationError(
-#                 'Please provide a password with at least 5 characters')
-
-
-# class LoginWizard(models.TransientModel):
-#     _name = 'login.wizard'
-#
-#     name = fields.Char(string="Username", )
-#     password = fields.Char(string="Password", )
-#
-#     def login(self):
-#         shop_details = self.env['registry_app.shop'].browse(
-#             self._context.get('shop_id'))
-#         # view_id = self.env.ref('registry_app.form').id
-#         context = self._context.copy()
-#         if self.name == shop_details.user_name and self.password == shop_details.password:
-#             print('successfully logged in')
-#             # return {
-#             #     'res_model': 'registry_app.registry_app',
-#             #     'type': 'ir.actions.act_window',
-#             #     'view_mode': 'form',
-#             #     'target': 'current',
-#             #     'view_id': view_id,
-#             #     'context': context,
-#             # }
-#             action = self.env.ref(
-#                 'registry_app.registry_app_past_login_action_window').read()[0]
-#             return action
-#         else:
-#             raise ValidationError(_('Invalid username or password'))

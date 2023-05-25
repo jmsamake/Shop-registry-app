@@ -60,7 +60,8 @@
                     </div>
                     <div class="form-group">
                         <label for="client_id">Clients:</label>
-                        <select class="form-control" id="client_id"
+                        <select class="js-example-basic-multiple form-control"
+                                id="client_id"
                                 name="client_id" multiple="multiple">
                             <option value="">Select a Client...</option>
                             <t t-foreach="clients" t-as="client">
@@ -76,15 +77,67 @@
                                name="message"/>
                         <br/>
                     </div>
-                    <a href="#" class="btn btn-secondary">Envoyer un SMS</a>
-                    <button type="submit" class="btn btn-success">
+                    <input type="hidden" id="selectedClients" name="selectedClients"/>
+
+                    <!--                    <a href="#" class="btn btn-secondary" name="submit_button"-->
+                    <!--                       value="send_sms">Envoyer un SMS</a>-->
+                    <button type="submit" class="btn btn-success"
+                            name="submit_button"
+                            value="send_sms">
+                        Envoyer un SMS
+                    </button>
+                    <button type="submit" class="btn btn-success"
+                            name="submit_button" value="create_record">
                         Soumettre</button>
-                    <a class="btn btn-danger"
-                                       t-attf-href="/reg_sms">
-                                        Jeter</a>
+                    <a class="btn btn-danger" t-attf-href="/reg_sms">Jeter</a>
+
                 </form>
             </div>
         </div>
         <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        <script type="text/javascript">
+            $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+            $('#sssubmit').click(function(){
+            var s = $('#users option[selected="selected"]').val();
+            var t = $('#users option:selected').val();
+            <!--    alert("Set: " + s + ", Chosen: " + t);-->
+            console.log("t",t)
+            console.log("s",s)
+            });
+            });
+            $(document).ready(function() {
+            // Event handler for option selection/deselection
+            $('#client_id').change(function() {
+            var selectedOptions = $(this).val(); // Get the selected option(s)
+
+            // Get the existing values from the hidden field
+            var existingValues = $('#selectedClients').val() || [];
+            if (typeof existingValues === 'string') {
+            existingValues = [existingValues];
+            }
+
+            // Add selected options to the existing values
+            for (var i = 0; i &lt; selectedOptions.length; i++) {
+            var optionValue = selectedOptions[i];
+            if (!existingValues.includes(optionValue)) {
+            existingValues.push(optionValue);
+            }
+            }
+
+            // Remove deselected options from the existing values
+            var updatedValues = existingValues.filter(function(value) {
+            return selectedOptions.includes(value);
+            });
+
+            // Update the hidden field with the updated values
+            $('#selectedClients').val(updatedValues);
+
+            // Log the selected clients to the console
+            console.log(updatedValues);
+            });
+            });
+
+        </script>
     </template>
 </odoo>
