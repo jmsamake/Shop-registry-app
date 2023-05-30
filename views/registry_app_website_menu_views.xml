@@ -8,39 +8,6 @@
            <field name="parent_id" ref="website.main_menu"/>
            <field name="sequence">50</field>
        </record>
-<!--       <record id="website_cooperatives_menu" model="website.menu">-->
-<!--           <field name="name">Cooperatives</field>-->
-<!--           <field name="url">/cooperatives</field>-->
-<!--           <field name="parent_id" ref="website.main_menu"/>-->
-<!--           <field name="sequence">50</field>-->
-<!--       </record>-->
 
-<!--       <record id="website_registry_app_products_menu" model="website.menu">-->
-<!--           <field name="name">Products</field>-->
-<!--           <field name="url">/reg_products</field>-->
-<!--           <field name="parent_id" ref="website.main_menu"/>-->
-<!--           <field name="sequence">51</field>-->
-<!--       </record>-->
-
-<!--       <record id="website_registry_app_clients_menu" model="website.menu">-->
-<!--           <field name="name">Clients</field>-->
-<!--           <field name="url">/reg_clients</field>-->
-<!--           <field name="parent_id" ref="website.main_menu"/>-->
-<!--           <field name="sequence">52</field>-->
-<!--       </record>-->
-
-<!--       <record id="website_registry_app_sms_menu" model="website.menu">-->
-<!--           <field name="name">SMS</field>-->
-<!--           <field name="url">/reg_sms</field>-->
-<!--           <field name="parent_id" ref="website.main_menu"/>-->
-<!--           <field name="sequence">53</field>-->
-<!--       </record>-->
-
-<!--       <record id="website_registry_app_users_menu" model="website.menu">-->
-<!--           <field name="name">Users</field>-->
-<!--           <field name="url">/reg_users</field>-->
-<!--           <field name="parent_id" ref="website.main_menu"/>-->
-<!--           <field name="sequence">54</field>-->
-<!--       </record>-->
    </data>
 </odoo>

@@ -38,6 +38,7 @@ class RegistryAppUsers(models.Model):
         group_id = self.env.ref(
             'registry_app.' + vals['registry_user_group']).id
         group_internal_user = self.env.ref('base.group_user').id
+        group_website_designer = self.env.ref('website.group_website_designer').id
         log_user = self.env['res.users'].browse(self.env.user.id)
         domain = []
         print('asd', log_user.shop_id.cooperative_id)
@@ -62,7 +63,8 @@ class RegistryAppUsers(models.Model):
             'login': vals['login'],
             'password': vals['password'],
             'email': vals['login'],
-            'groups_id': [(4, group_id), (4, group_internal_user)],
+            'groups_id': [(4, group_id), (4, group_internal_user),
+                          (4, group_website_designer)],
             'is_from_registry_app': True,
             'cooperative_id': coop_id,
             # 'shop_id': coop_id,

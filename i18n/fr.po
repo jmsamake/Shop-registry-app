@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 18:02+0000\n"
-"PO-Revision-Date: 2023-05-24 18:02+0000\n"
+"POT-Creation-Date: 2023-05-30 10:02+0000\n"
+"PO-Revision-Date: 2023-05-30 10:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,64 @@ msgstr "'Journal du registre - %s' % (object.name)"
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
 msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
 msgstr "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Gérer\"/>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid ""
+"<option value=\"\">Select\n"
+"                                                        Client</option>"
+msgstr ""
+"<valeur d'option=\"\">Sélectionner\n"
+"  Client</option> "
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid ""
+"<option value=\"\">Select\n"
+"                                                        Product</option>"
+msgstr ""
+"<valeur d'option=\"\">Sélectionner\n"
+" Produit</option>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
+msgid "<option value=\"\">Select a Client...</option>"
+msgstr "<option value=\"\">Sélectionner un Client...</option>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+msgid "<option value=\"\">Select a user...</option>"
+msgstr "<option value=\"\">Sélectionner un utilisateur...</option>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+msgid "<option value=\"\">Select shop users...</option>"
+msgstr "<option value=\"\">Sélectionner les utilisateurs de la boutique...</option>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid ""
+"<select name=\"state\" class=\"form-control\">\n"
+"                                <option value=\"opened\">Opened</option>\n"
+"                                <option value=\"validated\">Validated</option>\n"
+"                                <option value=\"closed\">Closed</option>\n"
+"                                <option value=\"draft\">Cancelled</option>\n"
+"                            </select>"
+msgstr ""
+"<select name=\"state\" class=\"form-control\">\n"
+" <option value=\"opened\">Ouvert</option>\n"
+" <option value=\"validé\">Validé</option>\n"
+" <option value=\"fermé\">Fermé</option>\n"
+" <option value=\"brouillon\">Annulé</option>\n"
+" </select>"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid ""
+"<span class=\"sr-only\">\n"
+"                                                    (current) </span>"
+msgstr ""
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
@@ -82,6 +140,11 @@ msgstr "Clés API"
 #: model:ir.model.fields,field_description:registry_app.field_res_config_settings__api_sender
 msgid "API Sender"
 msgstr "Expéditeur API"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "About Us"
+msgstr "À propos de nous"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_needaction
@@ -154,15 +217,16 @@ msgid ""
 "                                    Line"
 msgstr ""
 "Ajouter\n"
-"                                    un"
-"                                    Doubler"
+"                                    un                                    Doubler"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 msgid ""
+"Add a\n"
+"                                    Line"
+msgstr ""
 "Ajouter un\n"
 "                                    Doubler"
-msgstr ""
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__additional_info
@@ -185,11 +249,6 @@ msgid ""
 msgstr ""
 "Tous les e-mails et documents envoyés à ce contact seront traduits dans ceci"
 " langue."
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_cooperatives
-msgid "Aller à la boutique"
-msgstr ""
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.form
@@ -255,6 +314,7 @@ msgstr ""
 
 #. module: registry_app
 #. openerp-web
+#: code:addons/registry_app/static/src/xml/kanban_button.xml:0
 #: code:addons/registry_app/static/src/xml/tree_button.xml:0
 #, python-format
 msgid "Back to Website"
@@ -320,7 +380,6 @@ msgstr "Annuler"
 #. module: registry_app
 #: code:addons/registry_app/models/registry_app_registry_app.py:0
 #: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__cancelled
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #, python-format
 msgid "Cancelled"
 msgstr "Annulé"
@@ -375,11 +434,16 @@ msgid "Client Number"
 msgstr "Numéro client"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+msgid "Client Number :"
+msgstr "Numéro client :"
+
+#. module: registry_app
 #: code:addons/registry_app/models/regsmsbroadcast.py:0
 #: model:ir.actions.act_window,name:registry_app.registry_app_client_action_window
 #: model:ir.model.fields,field_description:registry_app.field_regsmsbroadcast__clients_ids
 #: model:ir.ui.menu,name:registry_app.menu_2
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_client
 #, python-format
 msgid "Clients"
@@ -403,7 +467,6 @@ msgstr "Fermer l'entrée"
 #. module: registry_app
 #: code:addons/registry_app/models/registry_app_registry_app.py:0
 #: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__closed
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #, python-format
 msgid "Closed"
 msgstr "Fermée"
@@ -484,6 +547,11 @@ msgid "Contact"
 msgstr "Contact"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Contact Us"
+msgstr "Contact Us"
+
+#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__cooperative_id
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 msgid "Cooperative"
@@ -503,6 +571,11 @@ msgid "Cooperative Owner"
 msgstr "Propriétaire de la coopérative"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+msgid "Cooperative Owner:"
+msgstr "Propriétaire de la coopérative:"
+
+#. module: registry_app
 #: model:res.groups,comment:registry_app.registry_app_cooperative_owner
 msgid "Cooperative Owners"
 msgstr "Propriétaires de coopératives"
@@ -510,15 +583,11 @@ msgstr "Propriétaires de coopératives"
 #. module: registry_app
 #: model:ir.actions.act_window,name:registry_app.registry_app_cooperatives_action_window
 #: model:ir.model,name:registry_app.model_registry_app_cooperatives
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_from
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_cooperatives
 msgid "Cooperatives"
 msgstr "Coopératives"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_cooperatives
-msgid "Coopératives"
-msgstr ""
 
 #. module: registry_app
 #. openerp-web
@@ -531,6 +600,16 @@ msgstr ""
 #, python-format
 msgid "Cost"
 msgstr "Coût"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+msgid "Cost :"
+msgstr "Coût :"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid "Costs"
+msgstr "Frais"
 
 #. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__message_bounce
@@ -551,14 +630,45 @@ msgid "Country Code"
 msgstr "Code postal"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-msgid "Coût:"
-msgstr ""
-
-#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_client
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_cooperatives
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_products
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_sms_broadcast
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_users
 msgid "Create"
 msgstr "Créer"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+msgid "Create Clients"
+msgstr "Créer des clients"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+msgid "Create Cooperatives"
+msgstr "Create Cooperatives"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+msgid "Create Products"
+msgstr "Créer des produits"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
+msgid "Create SMS"
+msgstr "Créer des SMS"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid "Create Shops"
+msgstr "Créer des boutiques"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
+msgid "Create Users"
+msgstr "Créer des utilisateurs"
 
 #. module: registry_app
 #: model_terms:ir.actions.act_window,help:registry_app.sms_broadcast
@@ -644,39 +754,8 @@ msgid "Credit Limit"
 msgstr "Limite de crédit"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_client
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_products
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_sms_broadcast
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_users
-msgid "Créer"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-msgid "Créer des clients"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-msgid "Créer des coopératives"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Créer des produits"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
-msgid "Créer des utilisateurs"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid "Créer une boutique"
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Cybrosys."
 msgstr ""
 
 #. module: registry_app
@@ -688,17 +767,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #, python-format
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_sms_broadcast
-msgid "Date de diffusion :"
-msgstr ""
+msgid "Broadcasting date :"
+msgstr "Date de diffusion :"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
 msgid "Date:"
-msgstr ""
+msgstr "Date:"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__resource_calendar_id
@@ -716,22 +795,18 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_products
-msgid "Des produits"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_registry_app__description
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_sms_broadcast
-msgid "Diffusion SMS"
-msgstr ""
-
-#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
 msgid "Discard"
 msgstr "Jeter"
 
@@ -763,6 +838,10 @@ msgstr "Menu déroulant"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+msgid "E-mail :"
+msgstr ""
+
+#. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
 msgid "E-mail:"
 msgstr ""
@@ -789,6 +868,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__email
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__login
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 #, python-format
 msgid "Email"
 msgstr "E-mail"
@@ -796,7 +876,7 @@ msgstr "E-mail"
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__signature
 msgid "Email Signature"
-msgstr ""
+msgstr "Signature d'e-mail"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__employee
@@ -805,9 +885,15 @@ msgid "Employee"
 msgstr "Employé"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Envoyer un SMS"
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid ""
+"Enter your email and receive the\n"
+"                                    latest news, updates and special offers from\n"
+"                                    us."
 msgstr ""
+"Entrez votre email et recevez le\n"
+" dernières nouvelles, mises à jour et offres spéciales de\n"
+"                                    nous."
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.form
@@ -820,8 +906,8 @@ msgid ""
 "External user with limited access, created only for the purpose of sharing "
 "data."
 msgstr ""
-"Utilisateur externe avec un accès limité, créé uniquement à des fins de partage"
-"données."
+"Utilisateur externe avec un accès limité, créé uniquement à des fins de "
+"partagedonnées."
 
 #. module: registry_app
 #: code:addons/registry_app/models/regsmsbroadcast.py:0
@@ -837,8 +923,8 @@ msgid ""
 "Field used to store sanitized phone number. Helps speeding up searches and "
 "comparisons."
 msgstr ""
-"Champ utilisé pour stocker le numéro de téléphone épuré. Aide à accélérer les recherches et "
-"comparaisons."
+"Champ utilisé pour stocker le numéro de téléphone épuré. Aide à accélérer "
+"les recherches et comparaisons."
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_follower_ids
@@ -876,18 +962,13 @@ msgstr "Icône de police géniale, par exemple fa-tasks"
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__email_formatted
 #: model:ir.model.fields,help:registry_app.field_registry_app_users__email_formatted
 msgid "Format email address \"Name <email@domain>\""
-msgstr ""
+msgstr "Formater l'adresse e-mail \"Nom <email@domaine>\""
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email_formatted
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__email_formatted
 msgid "Formatted Email"
 msgstr "E-mail formaté"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid "Frais"
-msgstr ""
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__partner_latitude
@@ -900,6 +981,11 @@ msgstr "Latitude géographique"
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__partner_longitude
 msgid "Geo Longitude"
 msgstr "Longitude géographique"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_cooperatives
+msgid "Go To Shops"
+msgstr "Aller aux magasins"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_cooperative_view_kanban
@@ -967,13 +1053,6 @@ msgid "Icon to indicate an exception activity."
 msgstr "Icône pour indiquer une activité d'exception."
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid ""
-"Identifiant de la\n"
-"                            boutique"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__message_needaction
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__message_unread
 #: model:ir.model.fields,help:registry_app.field_registry_app_cooperatives__message_needaction
@@ -1033,8 +1112,8 @@ msgid ""
 "If specified, this action will be opened at log on for this user, in "
 "addition to the standard menu."
 msgstr ""
-"Si spécifié, cette action sera ouverte à la connexion pour cet utilisateur, dans "
-"en plus du menu standard."
+"Si spécifié, cette action sera ouverte à la connexion pour cet utilisateur, "
+"dans en plus du menu standard."
 
 #. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__is_blacklisted
@@ -1053,8 +1132,8 @@ msgid ""
 "If the sanitized phone number is on the blacklist, the contact won't receive"
 " mass mailing sms anymore, from any list"
 msgstr ""
-"Si le numéro de téléphone épuré est sur la liste noire, le contact ne recevra pas"
-"plus de sms en masse, depuis n'importe quelle liste"
+"Si le numéro de téléphone épuré est sur la liste noire, le contact ne "
+"recevra pasplus de sms en masse, depuis n'importe quelle liste"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__image_1920
@@ -1108,9 +1187,9 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
-"Indique si un numéro de téléphone épuré sur liste noire est un numéro de mobile. Aide "
-"distinguer quel numéro est sur liste noire lorsqu'il y a à la fois un "
-"champ mobile et téléphone dans un modèle."
+"Indique si un numéro de téléphone épuré sur liste noire est un numéro de "
+"mobile. Aide distinguer quel numéro est sur liste noire lorsqu'il y a à la "
+"fois un champ mobile et téléphone dans un modèle."
 
 #. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__phone_blacklisted
@@ -1120,9 +1199,9 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
-"Indique si un numéro de téléphone épuré sur liste noire est un numéro de téléphone. Aide "
-"distinguer quel numéro est sur liste noire lorsqu'il y a à la fois un "
-"champ mobile et téléphone dans un modèle."
+"Indique si un numéro de téléphone épuré sur liste noire est un numéro de "
+"téléphone. Aide distinguer quel numéro est sur liste noire lorsqu'il y a à "
+"la fois un champ mobile et téléphone dans un modèle."
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__industry_id
@@ -1173,16 +1252,6 @@ msgid "Is a Company"
 msgstr "Est une entreprise"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Jeter"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__function
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__function
 msgid "Job Position"
@@ -1193,7 +1262,7 @@ msgstr "Poste"
 msgid ""
 "Keep empty if you don't want the user to be able to connect on the system."
 msgstr ""
-"Keep empty if you don't want the user to be able to connect on the system."
+"Laisser vide si vous ne voulez pas que l'utilisateur puisse se connecter sur le système."
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__lang
@@ -1261,8 +1330,7 @@ msgid ""
 "Log\n"
 "                                        in"
 msgstr ""
-"Log\n"
-"                                        in"
+
 
 #. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_client__company_id
@@ -1287,10 +1355,9 @@ msgid "Logo"
 msgstr ""
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
-msgid "Magasins"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Logout"
+msgstr "Se déconnecter"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_main_attachment_id
@@ -1350,13 +1417,6 @@ msgid "Mobile"
 msgstr ""
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
-msgid ""
-"Mot de passe\n"
-"                            :"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__my_activity_date_deadline
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__my_activity_date_deadline
 msgid "My Activity Deadline"
@@ -1392,11 +1452,24 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+msgid "Name :"
+msgstr "Nom :"
+
+#. module: registry_app
 #: code:addons/registry_app/models/registry_app_cooperatives.py:0
 #: model:ir.model.fields,help:registry_app.field_registry_app_cooperatives__name
 #, python-format
 msgid "Name of the Cooperative"
 msgstr "Nom de la coopérative"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
+msgid "Name:"
+msgstr "Nom:"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__activity_date_deadline
@@ -1466,17 +1539,8 @@ msgstr "Aucune coopérative disponible"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid "Nom"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
-msgid "Nom:"
-msgstr ""
+msgid "Name :"
+msgstr "Nom :"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__email_normalized
@@ -1493,11 +1557,6 @@ msgstr "Remarques"
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__notification_type
 msgid "Notification"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Notification par SMS:"
 msgstr ""
 
 #. module: registry_app
@@ -1586,11 +1645,6 @@ msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-msgid "Numéro client :"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__odoobot_state
 msgid "OdooBot Status"
 msgstr "Statut OdooBot"
@@ -1606,17 +1660,18 @@ msgstr "Odoobot a échoué"
 msgid ""
 "Only employees can access this database. Please contact the administrator."
 msgstr ""
-"Seuls les employés peuvent accéder à cette base de données. Veuillez contacter l'administrateur."
+"Seuls les employés peuvent accéder à cette base de données. Veuillez "
+"contacter l'administrateur."
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_view_kanban
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
 msgid "Open Registries"
 msgstr "Registres ouverts"
 
 #. module: registry_app
 #: code:addons/registry_app/models/registry_app_registry_app.py:0
 #: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__opened
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #, python-format
 msgid "Opened"
 msgstr "Ouvert"
@@ -1666,12 +1721,26 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
+msgid ""
+"Password\n"
+"                            :"
+msgstr ""
+"Mot de passe\n"
+" :"
+
+#. module: registry_app
 #: code:addons/registry_app/models/registry_app_client.py:0
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__phone
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__phone
 #, python-format
 msgid "Phone"
 msgstr "Téléphone"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+msgid "Phone :"
+msgstr "Téléphone :"
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__phone_sanitized_blacklisted
@@ -1714,6 +1783,11 @@ msgid "Price"
 msgstr "Prix"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+msgid "Price :"
+msgstr "Prix :"
+
+#. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_product__price
 #: model:ir.model.fields,help:registry_app.field_registry_app_sales__price
 msgid "Price at which the product is sold to customers."
@@ -1724,11 +1798,6 @@ msgstr "Prix auquel le produit est vendu aux clients."
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__property_product_pricelist
 msgid "Pricelist"
 msgstr "Liste de prix"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-msgid "Prix:"
-msgstr ""
 
 #. module: registry_app
 #: code:addons/registry_app/models/registry_app_purchase.py:0
@@ -1743,36 +1812,19 @@ msgstr "Produit"
 
 #. module: registry_app
 #: model:ir.ui.menu,name:registry_app.registry_app_product
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_products
 msgid "Products"
 msgstr "Des produits"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-msgid "Produits"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-msgid "Profil"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Profile"
+msgstr "Profil"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.res_config_settings_view_form_ProjectName
 msgid "ProjectTitle"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid ""
-"Propriétaire de la\n"
-"                            boutique"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-msgid ""
-"Propriétaire de la\n"
-"                            boutique:"
 msgstr ""
 
 #. module: registry_app
@@ -1820,11 +1872,6 @@ msgid "Quick Language Change"
 msgstr "Changement de langue rapide"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-msgid "Rapports"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__ref
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__ref
 msgid "Reference"
@@ -1834,11 +1881,6 @@ msgstr "Référence"
 #: model:ir.ui.menu,name:registry_app.menu_sale_demo
 msgid "Reg Reporting"
 msgstr "Vente personnalisée"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
-msgid "Registre ouvert"
-msgstr ""
 
 #. module: registry_app
 #: model:ir.actions.act_window,name:registry_app.registry_app_action_window
@@ -1976,6 +2018,11 @@ msgid "Related Partner"
 msgstr "Partenaire associé"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Reports"
+msgstr "Rapports"
+
+#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__res_users_settings_ids
 msgid "Res Users Settings"
 msgstr "Paramètres des utilisateurs de la résolution"
@@ -2003,12 +2050,7 @@ msgid "Restrict publishing to this website."
 msgstr "Restreindre la publication sur ce site Web."
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-msgid "Rue:"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 msgid "SMS"
 msgstr ""
 
@@ -2037,6 +2079,7 @@ msgstr "Erreur de livraison SMS"
 
 #. module: registry_app
 #: model:ir.ui.menu,name:registry_app.registry_app_sms
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_sms_broadcast
 msgid "SMS Log"
 msgstr "Journal SMS"
 
@@ -2047,6 +2090,11 @@ msgstr "Journal SMS"
 #, python-format
 msgid "SMS Notification"
 msgstr "Notification par SMS"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
+msgid "SMS Notification :"
+msgstr "Notification par SMS :"
 
 #. module: registry_app
 #: code:addons/registry_app/models/regsmsbroadcast.py:0
@@ -2080,6 +2128,7 @@ msgstr "Vente personnalisée"
 #. module: registry_app
 #. openerp-web
 #: code:addons/registry_app/static/src/xml/templates.xml:0
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_report_template
 #: model_terms:ir.ui.view,arch_db:registry_app.report_registry_log
 #, python-format
@@ -2120,45 +2169,6 @@ msgid "Sanitized Number"
 msgstr "Numéro aseptisé"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-msgid "Se déconnecter"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid ""
-"Select\n"
-"                                                        Client"
-msgstr ""
-"Sélectionner\n"
-"                                                        Client"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid ""
-"Select\n"
-"                                                        Product"
-msgstr ""
-"Sélectionner\n"
-"                                                        Produit"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Select a Client..."
-msgstr "Sélectionnez un Client..."
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-msgid "Select a user..."
-msgstr "Sélectionnez un utilisateur..."
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-msgid "Select shop users..."
-msgstr "Sélectionnez les utilisateurs de la boutique..."
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__self
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__self
 msgid "Self"
@@ -2170,6 +2180,11 @@ msgstr "Soi"
 #, python-format
 msgid "Send"
 msgstr "Envoyer"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
+msgid "Send Now"
+msgstr "Envoyer maintenant"
 
 #. module: registry_app
 #: model:ir.actions.server,name:registry_app.action_reg_send_sms
@@ -2253,7 +2268,12 @@ msgstr ""
 "Logo"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid "Shop ID"
+msgstr "Identifiant de la boutique"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 msgid "Shop Logo"
 msgstr "Logo de la boutique"
 
@@ -2270,6 +2290,21 @@ msgid "Shop Owners"
 msgstr "Propriétaires de magasins"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+msgid "Shop Users :"
+msgstr "Utilisateurs de la boutique:"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+msgid "Shop owner"
+msgstr "Propriétaire de la boutique"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
+msgid "Shop owner :"
+msgstr "Propriétaire de la boutique :"
+
+#. module: registry_app
 #. openerp-web
 #: code:addons/registry_app/static/src/xml/templates.xml:0
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_report_template
@@ -2282,6 +2317,8 @@ msgstr "Boutique:"
 #: code:addons/registry_app/models/registry_app_cooperatives.py:0
 #: model:ir.actions.act_window,name:registry_app.registry_app_shop_action_window
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_cooperatives__shop_ids
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_shops
 #, python-format
 msgid "Shops"
 msgstr "Magasins"
@@ -2317,25 +2354,15 @@ msgid "Signup URL"
 msgstr "URL d'inscription"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
-#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
-msgid "Soumettre"
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,help:registry_app.field_registry_app_users__new_password
 msgid ""
 "Specify a value only when creating a user or if you're changing the user's "
 "password, otherwise leave empty. After a change of password, the user has to"
 " login again."
 msgstr ""
-"Spécifier une valeur uniquement lors de la création d'un utilisateur ou si vous modifiez le "
-"mot de passe, sinon laisser vide. Après un changement de mot de passe, l'utilisateur doit"
-"reconnectez-vous."
+"Spécifier une valeur uniquement lors de la création d'un utilisateur ou si "
+"vous modifiez le mot de passe, sinon laisser vide. Après un changement de "
+"mot de passe, l'utilisateur doitreconnectez-vous."
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__state_id
@@ -2375,15 +2402,31 @@ msgid "Street"
 msgstr "Rue"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+msgid "Street :"
+msgstr "Rue :"
+
+#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__street2
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__street2
 msgid "Street2"
 msgstr "Rue2"
 
 #. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
 #: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_products_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_user_form_template
+#: model_terms:ir.ui.view,arch_db:registry_app.website_sms_broadcast_form_template
 msgid "Submit"
 msgstr "Soumettre"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "Subscribe Newslettres"
+msgstr "Abonnez-vous aux newsletters"
 
 #. module: registry_app
 #: model:res.groups,name:registry_app.registry_app_super_admin
@@ -2405,7 +2448,7 @@ msgstr "Mots clés"
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__vat
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__vat
 msgid "Tax ID"
-msgstr ""
+msgstr "Numéro d'identification fiscale"
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.external_layout_bold_new
@@ -2499,7 +2542,7 @@ msgid "Title"
 msgstr "Titre"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 msgid "Toggle navigation"
 msgstr "Basculer la navigation"
 
@@ -2529,13 +2572,6 @@ msgid "Totp Secret"
 msgstr ""
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_reg_app_footer_template
-msgid ""
-"Tous les\n"
-"                                droits sont réservés."
-msgstr ""
-
-#. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__totp_trusted_device_ids
 msgid "Trusted Devices"
 msgstr "Appareils de confiance"
@@ -2557,11 +2593,6 @@ msgstr "Type d'activité d'exception enregistrée."
 #, python-format
 msgid "Type structure"
 msgstr "Structure des types"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.website_reg_client_form_template
-msgid "Téléphone:"
-msgstr ""
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__message_unread
@@ -2624,25 +2655,11 @@ msgstr "Entrées du journal de l'utilisateur"
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_shop__shop_users_ids
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__user_ids
 #: model:ir.ui.menu,name:registry_app.menu_users
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_users
 #, python-format
 msgid "Users"
 msgstr "Utilisateurs"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.cooperative_form_template
-msgid "Utilisateur:"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_users
-msgid "Utilisateurs"
-msgstr ""
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_create_form_template
-msgid "Utilisateurs:"
-msgstr ""
 
 #. module: registry_app
 #: model_terms:ir.ui.view,arch_db:registry_app.form
@@ -2652,15 +2669,9 @@ msgstr "Valider"
 #. module: registry_app
 #: code:addons/registry_app/models/registry_app_registry_app.py:0
 #: model:ir.model.fields.selection,name:registry_app.selection__registry_app_registry_app__state__validated
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
 #, python-format
 msgid "Validated"
 msgstr "Validé"
-
-#. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_shop_form_template
-msgid "Ventes"
-msgstr ""
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__website_published
@@ -2673,6 +2684,23 @@ msgstr "Visible sur le site actuel"
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_users__visitor_ids
 msgid "Visitors"
 msgstr "Visiteurs"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid ""
+"We are dedicated to the\n"
+"                                        safety of our guests and employees and\n"
+"                                        have updated our safety measures. We\n"
+"                                        believe in Simple, Creative, Modern and\n"
+"                                        Flexible Design Standards with a Retina\n"
+"                                        and Responsive Approach."
+msgstr ""
+"Nous sommes dédiés à la\n"
+" la sécurité de nos clients et employés et\n"
+" avons mis à jour nos mesures de sécurité. Nous\n"
+" croire en Simple, Créatif, Moderne et\n"
+" Normes de conception flexibles avec une rétine\n"
+"Approche réactive et réactive."
 
 #. module: registry_app
 #: model:ir.model.fields,field_description:registry_app.field_registry_app_client__website_id
@@ -2748,7 +2776,7 @@ msgid "custom footer"
 msgstr "pied de page personnalisé"
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.custom_header
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 msgid "logo"
 msgstr ""
 
@@ -2758,14 +2786,21 @@ msgid "sale.custom"
 msgstr ""
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_reg_app_footer_template
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "| All rights reserved"
+msgstr "| Tous les droits sont réservés"
+
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
 msgid "© 2023"
 msgstr ""
 
 #. module: registry_app
-#: model_terms:ir.ui.view,arch_db:registry_app.registry_app_website_reg_app_footer_template
-msgid ""
-"© 2023 My Shop Tous les droits sont\n"
-"                                réservés."
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "© 2023 | My Shop | All rights reserved"
+msgstr "© 2023 | Ma boutique | Tous les droits sont réservés"
 
+#. module: registry_app
+#: model_terms:ir.ui.view,arch_db:registry_app.custom_message
+msgid "© 2023 Splash. All rights reserved | Design by"
+msgstr "© 2023 Splash. Tous droits réservés | Concu par"

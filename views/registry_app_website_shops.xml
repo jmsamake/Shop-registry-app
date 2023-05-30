@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_shops" name="Shops">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
-            <h1 class="text-center p-2">Magasins</h1>
+            <h1 class="text-center p-2">Shops</h1>
             <div class="mb-3">
                 <a t-attf-href="/registry_app_shop/{{ cooperative_id }}/form"
                    class="btn btn-secondary"
                    t-if="user.has_group('registry_app.registry_app_cooperative_owner')">
-                    Créer</a>
+                    Create</a>
             </div>
             <div class="row">
                 <t t-foreach="shops" t-as="shop">
@@ -25,7 +26,7 @@
                                 <div>
                                     <a class="btn btn-secondary"
                                        href="/reg_app/registries">
-                                        Registre ouvert</a>
+                                        Open Registries</a>
                                     <!--                                    <a class="btn btn-secondary"-->
                                     <!--                                       t-attf-href="/web#action=202">-->
                                     <!--                                        Open s</a>-->
@@ -37,22 +38,24 @@
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 
     <template id="registry_app_shop_form_template"
               name="Registry App Shop regstry Form">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Créer une boutique</h1>
+                <h1 class="text-center p-2">Create Shops</h1>
                 <form method="post"
                       t-attf-action="/registries/create"
                       class="container">
                     <input type="hidden" name="csrf_token"
                            t-att-value="request.csrf_token()"/>
                     <div class="form-group">
-                        <label class="col-form-label">Nom</label>
+                        <label class="col-form-label">Name :</label>
                         <div>
                             <input type="text" name="date" class="form-control"
                                    t-att-value="name" required="required"/>
@@ -69,8 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Identifiant de la
-                            boutique</label>
+                        <label class="col-form-label">Shop ID</label>
                         <div>
                             <select name="shop" class="form-control"
                                     required="required">
@@ -81,8 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Propriétaire de la
-                            boutique</label>
+                        <label class="col-form-label">Shop owner</label>
                         <div>
                             <select name="user_id" class="form-control"
                                     required="required">
@@ -94,8 +95,6 @@
                         </div>
                     </div>
                     <br/>
-
-
                     <div class="form-group">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -103,14 +102,14 @@
                                         data-bs-toggle="tab"
                                         data-bs-target="#home" type="button"
                                         role="tab" aria-controls="home"
-                                        aria-selected="true">Ventes</button>
+                                        aria-selected="true">Sales</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab"
                                         data-bs-toggle="tab"
                                         data-bs-target="#profile" type="button"
                                         role="tab" aria-controls="profile"
-                                        aria-selected="false">Frais</button>
+                                        aria-selected="false">Costs</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -272,14 +271,16 @@
         </div>
         <script type="text/javascript"
                 src="/registry_app/static/src/js/new.js"/>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 
     <template id="registry_app_shop_create_form_template" name="Shop Form">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Créer une boutique</h1>
+                <h1 class="text-center p-2">Create Shops</h1>
                 <form action="/registry_app/shop/create" method="POST"
                       enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token"
@@ -288,7 +289,7 @@
                            t-att-value="cooperative_id"/>
                     <br/>
                     <div class="form-group">
-                        <label for="name">Nom:</label>
+                        <label for="name">Name :</label>
                         <input type="text" class="form-control" id="name"
                                name="name" required="True"/>
                     </div>
@@ -310,8 +311,7 @@
                     <br/>
 
                     <div class="form-group">
-                        <label for="user_id">Propriétaire de la
-                            boutique:</label>
+                        <label for="user_id">Shop owner :</label>
                         <select class="form-control" id="user_id"
                                 name="user_id">
                             <option value="">Select a user...</option>
@@ -324,7 +324,7 @@
                     <br/>
 
                     <div class="form-group">
-                        <label for="users">Utilisateurs:</label>
+                        <label for="users">Shop Users :</label>
                         <select class="js-example-basic-multiple form-control"
                                 id="users" name="users[]" multiple="multiple">
                             <option value="">Select shop users...</option>
@@ -351,14 +351,15 @@
                            name="selectedUsers[]"/>
 
                     <button type="submit" class="btn btn-success" id="sssubmit">
-                        Soumettre</button>
+                        Submit</button>
                     <a class="btn btn-danger"
                        t-attf-href="/cooperative/{{ cooperative_id }}/shops">
-                        Jeter</a>
+                        Discard</a>
                 </form>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
         <script type="text/javascript">
             $(document).ready(function() {
             $('.js-example-basic-multiple').select2();
@@ -498,7 +499,8 @@
 
 
     <template id="registry_report_template">
-        <t t-call="registry_app.custom_header"/>
+        <t t-call="website.layout">
+<!--        <t t-call="registry_app.custom_header"/>-->
          <div class="page p-4" style="margin :0 auto;">
             <div class="row mt-3">
                 <div class="col-md-3 col-sm-12 mb-3">
@@ -589,7 +591,8 @@
 
             </t>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 
 

@@ -2,8 +2,11 @@
 <template xml:space="preserve">
  <t t-extend="ListView.buttons">
   <t t-jquery="button.o_list_button_add" t-operation="after">
-   <a t-if="widget.modelName == 'registry_app.registry_app'" href="/reg_products"
-    class="btn btn-primary ml-2 mr-1" type="button">Back to Website</a>
+   <a t-if="widget.modelName == 'registry_app.registry_app' or 'registry_app.users'"
+    href="/reg_products" class="btn btn-primary ml-2 mr-1" type="button">Back to Website</a>
+
   </t>
  </t>
  </template>
+
+

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_cooperatives" name="Cooperatives">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
-            <h1 class="text-center p-2">Coopératives</h1>
+            <h1 class="text-center p-2">Cooperatives</h1>
             <div class="mb-3">
                 <a href="/cooperatives/form"
                    class="btn btn-secondary"
@@ -21,7 +22,7 @@
                                 <div>
                                     <a class="btn btn-secondary"
                                        t-attf-href="/cooperative/{{ coop.id }}/shops">
-                                        Aller à la boutique</a>
+                                        Go To Shops</a>
                                 </div>
                             </div>
                         </div>
@@ -29,22 +30,24 @@
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
         <!--         <style>-->
         <!--        -->
         <!--    </style>-->
     </template>
 
     <template id="cooperative_form_template" name="Cooperative Form">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Créer des coopératives</h1>
+                <h1 class="text-center p-2">Create Cooperatives</h1>
                 <form action="/submit_cooperative" method="POST">
                     <input type="hidden" name="csrf_token"
                            t-att-value="request.csrf_token()"/>
                     <div class="form-group">
-                        <label for="name">Nom:</label>
+                        <label for="name">Name :</label>
                         <input type="text" class="form-control" id="name"
                                name="name" required="True"/>
                         <br/>
@@ -57,7 +60,7 @@
                     <!--                        <br/>-->
                     <!--                    </div>-->
                     <div class="form-group">
-                        <label for="user_id">Utilisateur:</label>
+                        <label for="user_id">Cooperative Owner:</label>
                         <select class="form-control" id="user_id"
                                 name="user_id">
                             <option value="">Select a user...</option>
@@ -69,13 +72,14 @@
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-success">
-                        Soumettre</button>
+                        Submit</button>
                     <a class="btn btn-danger"
                        t-attf-href="/cooperatives">
-                        Jeter</a>
+                        Discard</a>
                 </form>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 </odoo>

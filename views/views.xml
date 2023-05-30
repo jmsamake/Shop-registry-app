@@ -98,7 +98,7 @@
 
                         <notebook>
                             <page string="Sale">
-                                <field name="sale_app_ids">
+                                <field name="sale_app_ids" attrs="{'readonly': [('state', '=', 'validated')]}">
                                     <tree editable="bottom">
                                         <field name="product_id"
                                                options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
@@ -110,7 +110,7 @@
                                 </field>
                             </page>
                             <page string="Expense">
-                                <field name="purchase_app_ids">
+                                <field name="purchase_app_ids" attrs="{'readonly': [('state', '=', 'validated')]}">
                                     <tree editable="bottom">
                                         <field name="product_id"
                                                options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
@@ -412,7 +412,7 @@
                 id="registry_app_cooperatives_action_window">
             <field name="name">Cooperatives</field>
             <field name="res_model">registry_app.cooperatives</field>
-            <!--            <field name="domain"># ['|','|',('create_uid', '=', uid),('user_id', '=', uid),('id', '=', uid.cooperative_id)]</field>-->
+            <!--            <field name=""># ['|','|',('create_uid', '=', uid),('user_id', '=', uid),('id', '=', uid.cooperative_id)]</field>-->
             <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

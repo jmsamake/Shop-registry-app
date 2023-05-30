@@ -73,6 +73,14 @@ class RegistryApp(models.Model):
     def reset(self):
         self.state = 'opened'
 
+    def _compute_product_id(self):
+        for record in self:
+            shop_id = self.env.user.shop_id.id
+            products = self.env['registry_app.product'].search(
+                [('shop_id', '=', shop_id)])
+            record.filtered_product_name = products and products[
+                0].name or False
+
     @api.depends('purchase_app_ids')
     def _compute_registry_purchase_total(self):
         self.total_purchase = sum(self.purchase_app_ids.mapped('cost'))

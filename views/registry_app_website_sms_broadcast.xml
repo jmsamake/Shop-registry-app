@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_sms_broadcast" name="Clients">
-        <t t-call="registry_app.custom_header"/>
+<!--        <t t-call="registry_app.custom_header"/>-->
+        <t t-call="website.layout">
         <div class="container">
-            <h1 class="text-center p-2">Diffusion SMS</h1>
+            <h1 class="text-center p-2">SMS Log</h1>
             <div class="mb-3">
                 <a href="/sms_broadcast/form"
-                   class="btn btn-secondary">Créer</a>
+                   class="btn btn-secondary">Create</a>
             </div>
             <div class="row">
                 <t t-foreach="sms_broadcasts" t-as="sb">
@@ -17,7 +18,7 @@
                                 <h5 class="card-title"
                                     t-esc="sb.name"></h5>
                                 <div>
-                                    <p>Date de diffusion : <span
+                                    <p>Broadcasting date : <span
                                             t-esc="sb.broadcast_date"/></p>
                                     <br/>
                                     <p>Clients : <t
@@ -32,20 +33,22 @@
                 </t>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 
-    <template id="website_sms_broadcast_form_template" name="Products Form">
-        <t t-call="registry_app.custom_header"/>
+    <template id="website_sms_broadcast_form_template" name="SMS Form">
+        <t t-call="website.layout">
+<!--        <t t-call="registry_app.custom_header"/>-->
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Créer des produits</h1>
+                <h1 class="text-center p-2">Create SMS</h1>
                 <form action="/submit_sms_broadcast" method="POST">
                     <input type="hidden" name="csrf_token"
                            t-att-value="request.csrf_token()"/>
 
                     <div class="form-group">
-                        <label for="name">Notification par SMS:</label>
+                        <label for="name">SMS Notification :</label>
                         <input type="text" class="form-control" id="name"
                                name="name" required="True"/>
                         <br/>
@@ -84,17 +87,19 @@
                     <button type="submit" class="btn btn-success"
                             name="submit_button"
                             value="send_sms">
-                        Envoyer un SMS
+                        Send Now
                     </button>
                     <button type="submit" class="btn btn-success"
                             name="submit_button" value="create_record">
-                        Soumettre</button>
-                    <a class="btn btn-danger" t-attf-href="/reg_sms">Jeter</a>
+                        Submit</button>
+                    <a class="btn btn-danger" t-attf-href="/reg_sms">Discard</a>
 
                 </form>
             </div>
         </div>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
+<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
+
         <script type="text/javascript">
             $(document).ready(function() {
             $('.js-example-basic-multiple').select2();

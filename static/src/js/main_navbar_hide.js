@@ -3,9 +3,12 @@ odoo.define('registry_app.main_navbar_hide', function (require) {
   var rpc = require('web.rpc');
   var session = require('web.session');
 
-  console.log('adsad');
-
   $(document).ready(function () {
+    var loadingOverlay = $('#loading-overlay');
+
+    // Show the loading overlay
+    loadingOverlay.show();
+
     rpc.query({
       model: 'sale.custom',
       method: 'get_user_details',
@@ -17,9 +20,14 @@ odoo.define('registry_app.main_navbar_hide', function (require) {
       var isFromRegistryApp = result[0].is_from_registry_app;
       if (isFromRegistryApp) {
         $('.o_main_navbar').hide();
-        // $('.o_connected_user').addClass('registry-app-connected-user'); // Add !important here
-        // $('#oe_main_menu_navbar').hide();
+        $('.o_connected_user').addClass('registry-app-connected-user');
+        $('#oe_main_menu_navbar').hide();
       }
+
+      // Delay hiding the loading overlay by 3 seconds
+      setTimeout(function () {
+        loadingOverlay.hide();
+      }, 500);
     });
   });
 });

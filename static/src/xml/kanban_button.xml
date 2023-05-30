@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-extend="KanbanView.buttons" t-name="button_near_create.button">
+       <t t-jquery="button" t-operation="after">
+               <a t-if="widget.modelName == 'registry_app.registry_app'or 'registry_app.users'"
+                   class="btn btn-primary" href="/reg_products"
+                   type="button">Back to Website</a>
+       </t>
+   </t>
+</templates>

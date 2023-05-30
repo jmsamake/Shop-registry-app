@@ -482,6 +482,16 @@ class RegistryAppSmsController(http.Controller):
             f'/web?&#min=1&limit=80&view_type=form&active_id=1&model=registry_app.shop'
         )
 
+    @http.route('/reg_app/user', type='http', auth='user', website=True)
+    def reg_web_users   (self):
+        view_id = request.env.ref(
+            'registry_app.registry_app_users_web_action_window')
+        print(view_id, 'df')
+        if view_id:
+            return request.redirect(
+                '/web?&#min=1&limit=80&view_type=list&model=registry_app.users&action=%s' % (
+                    view_id.id))
+
     @http.route('/reg_app/reporting', type='http', auth='user', website=True)
     def reg_reporting(self):
         print('sdsd')

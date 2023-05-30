@@ -41,7 +41,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'registry_app/static/src/css/style.scss',
+            'registry_app/static/src/css/style.css',
             # 'registry_app/static/src/css/menu_lock.css',
             'registry_app/static/src/js/sale_cust.js',
             'registry_app/static/src/js/main_navbar_hide.js',
@@ -51,6 +51,7 @@
             # 'registry_app/static/src/js/security_pin.js',
         ],
         'web.assets_frontend': [
+            'registry_app/static/src/css/style.css',
             'registry_app/static/src/js/main_navbar_hide.js',
         ],
         'web.assets_qweb': [
