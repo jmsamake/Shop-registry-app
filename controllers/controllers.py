@@ -492,16 +492,87 @@ class RegistryAppSmsController(http.Controller):
                 '/web?&#min=1&limit=80&view_type=list&model=registry_app.users&action=%s' % (
                     view_id.id))
 
+    @http.route('/report_data', type='http', auth="public",
+                website=True)
+    def report_data(self, **kw):
+        user = request.env['res.users'].browse(request.uid)
+        shops = request.env['registry_app.shop'].sudo().search(
+            [('cooperative_id', '=', user.cooperative_id.id), ])
+
+        users = request.env['res.users'].search(
+            ['|', '|', ('create_uid', '=', request.uid),
+             ('user_id', '=', request.uid),
+             ('cooperative_id', '=', user.cooperative_id.id)])
+
+        print(kw)
+        domain = []
+        if kw.get('select_shops'):
+            domain.append(('shop_id', '=', int(kw.get('select_shops'))))
+        if kw.get('registry_log_date'):
+            domain.append(('date', '<=', kw.get('registry_log_date')))
+        # if kw.get('select_users'):
+        #     domain.append(kw.get('select_users'))
+        if kw.get('registry_log_status'):
+            domain.append(('state', '=', str(kw.get('registry_log_status'))))
+        print(domain, 'jjhg')
+
+        ret_list = []
+        registry_logs = request.env['registry_app.registry_app'].search(domain)
+        print('registry_logs', registry_logs)
+        for rec in registry_logs:
+            print(rec)
+            sale_list = []
+            purchase_list = []
+            sale_list.clear()
+            purchase_list.clear()
+            for item in rec.sale_app_ids:
+                sale_list.append((item.product_id.display_name, item.price,
+                                  item.quantity, item.client_id.name))
+            for exp in rec.purchase_app_ids:
+                purchase_list.append((exp.product_id.display_name, exp.cost))
+            print(sale_list, "sale_list")
+            print(purchase_list, "purchase_list")
+            reg_dict = {
+                'name': rec.name,
+                'sale_app_ids': sale_list,
+                'purchase_app_ids': purchase_list,
+                'total_sales': rec.total_sales,
+                'total_purchase': rec.total_purchase,
+                'shop_owner': rec.registry_user_id.name,
+                'shop': rec.shop_id.name,
+                'state': rec.state
+            }
+            ret_list.append(reg_dict)
+
+        print(ret_list, "ret_list")
+        vals = {
+            'datas': ret_list,
+            'user': user,
+            'users': users,
+            'shops': shops,
+        }
+        # return ret_list
+        return http.request.render('registry_app.registry_report_template',
+                                   vals)
+
+
     @http.route('/reg_app/reporting', type='http', auth='user', website=True)
     def reg_reporting(self):
         print('sdsd')
         data = request.env['sale.custom'].get_registry_log()
         user = request.env['res.users'].browse(request.uid)
-        print(data,'data')
-        return http.request.render('registry_app.registry_report_template', {
+        shops = request.env['registry_app.shop'].sudo().search(
+            [('cooperative_id', '=', user.cooperative_id.id),])
+
+        users = request.env['res.users'].search(['|','|',('create_uid', '=', request.uid),('user_id', '=', request.uid),('cooperative_id', '=', user.cooperative_id.id)])
+        vals = {
             'datas': data,
-            'user':user
-        })
+            'user': user,
+            'users':users,
+            'shops':shops,
+        }
+        print(data,'data')
+        return http.request.render('registry_app.registry_report_template',vals )
 
 
     @http.route('/reg_app/registries', type='http', auth='user', website=True)

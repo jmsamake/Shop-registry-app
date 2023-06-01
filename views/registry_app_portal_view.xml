@@ -11,7 +11,7 @@
     </template>
 
     <template id="registry_app_list_view_portal">
-        <t t-call="registry_app.custom_header"/>
+        <t t-call="portal.portal_layout">
             <t t-call="portal.portal_table">
                 <div>
                 <thead>
@@ -38,7 +38,7 @@
                 </tbody>
                 </div>
             </t>
-        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>
+        </t>
     </template>
 
     <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
