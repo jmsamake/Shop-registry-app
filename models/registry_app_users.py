@@ -74,3 +74,21 @@ class RegistryAppUsers(models.Model):
         vals['cooperative_id'] = coop_id
         print(vals,'vals')
         return super(RegistryAppUsers, self).create(vals)
+
+    @api.model
+    def write(self, values):
+        # Update the related user record
+        user_values = {
+            'name': values.get('name'),
+            'login': values.get('login'),
+            'email': values.get('login'),
+            'password': values.get('password'),
+        }
+        print(self.user_id)
+        self.user_id.write(user_values)
+        return super(RegistryAppUsers, self).write(values)
+
+
+    # def unlink(self):
+    #     self.user_id.unlink()
+    #     return super(RegistryAppUsers, self).unlink()

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension" owl="1">
+        <xpath expr="//nav[hasclass('o_main_navbar')]" position="replace">
+            <t t-if="isRegistryAppUser">
+                <nav class="o_main_navbar my_cus_nav my_cus_nav_hidden my_cus_nav_hidden"
+                     t-on-dropdown-item-selected="onNavBarDropdownItemSelection"
+                     data-command-category="navbar">
+
+                </nav>
+            </t>
+            <t t-else="">
+                <nav class="o_main_navbar my_cus_nav my_cus_nav_hidden"
+                     t-on-dropdown-item-selected="onNavBarDropdownItemSelection"
+                     data-command-category="navbar">
+                <!-- Apps Menu -->
+                    <t t-call="web.NavBar.AppsMenu">
+                        <t t-set="apps" t-value="menuService.getApps()"/>
+                    </t>
+
+                <!-- App Brand -->
+                    <MenuItem
+                            t-if="currentApp and !env.isSmall"
+                            href="getMenuItemHref(currentApp)"
+                            payload="currentApp"
+                            t-esc="currentApp.name"
+                            class="o_menu_brand"
+                            t-ref="menuBrand"
+                    />
+
+                <!-- Current App Sections -->
+                    <t t-if="currentAppSections.length and !env.isSmall"
+                       t-call="web.NavBar.SectionsMenu">
+                        <t t-set="sections" t-value="currentAppSections"/>
+                    </t>
+
+                <!-- Systray -->
+                    <div class="o_menu_systray" role="menu">
+                        <t t-foreach="systrayItems" t-as="item" t-key="item.key">
+                            <NotUpdatable>
+                                <ErrorHandler onError="error => handleItemError(error, item)">
+                                    <t t-component="item.Component" t-props="item.props"/>
+                                </ErrorHandler>
+                            </NotUpdatable>
+                        </t>
+                    </div>
+                </nav>
+            </t>
+        </xpath>
+    </t>
+</templates>

@@ -1,33 +1,26 @@
 odoo.define('registry_app.main_navbar_hide', function (require) {
   var ajax = require('web.ajax');
   var rpc = require('web.rpc');
-  var session = require('web.session');
 
-  $(document).ready(function () {
-    var loadingOverlay = $('#loading-overlay');
-
-    // Show the loading overlay
-    loadingOverlay.show();
-
+  function checkHideNavbar() {
     rpc.query({
       model: 'sale.custom',
       method: 'get_user_details',
       domain: [],
       args: [],
     }).then(function (result) {
-      console.log('result', result[0]);
-      console.log('test');
       var isFromRegistryApp = result[0].is_from_registry_app;
-      if (isFromRegistryApp) {
-        $('.o_main_navbar').hide();
-        $('.o_connected_user').addClass('registry-app-connected-user');
-        $('#oe_main_menu_navbar').hide();
+      if (!isFromRegistryApp) {
+        $('#oe_main_menu_navbar').show();
+        $('#oe_main_menu_navbar').css("z-index", "1040");
       }
-
-      // Delay hiding the loading overlay by 3 seconds
-      setTimeout(function () {
-        loadingOverlay.hide();
-      }, 500);
     });
-  });
+  }
+
+
+    // Run the function initially
+    checkHideNavbar();
+
+    // Run the function periodically
+    // setInterval(checkHideNavbar, 1000); // Run every second (adjust the interval as needed)
 });

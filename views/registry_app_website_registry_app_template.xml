@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-
     <template id="custom_message" inherit_id="website.layout"
               name="Custom Header and Footer">
         <xpath expr="//div[@id='wrapwrap']/main" position="before">
@@ -22,10 +20,9 @@
                                 integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
                                 crossorigin="anonymous"
                                 referrerpolicy="no-referrer"></script>
-<!--                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"-->
-<!--                              rel="stylesheet"></link>-->
+                        <!--                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"-->
+                        <!--                              rel="stylesheet"></link>-->
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
                         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
                               rel="stylesheet"/>
@@ -33,7 +30,7 @@
                             #wrapwrap main {
                                 overflow-x: hidden;
                                 overflow-y: auto;
-                                max-height: 70vh;
+                                max-height: 80vh;
                                 padding-bottom: 20px;
                             }
 
@@ -41,17 +38,16 @@
                                 padding-top: 0px !important;
                             }
 
-                            #oe_main_menu_navbar, .o_main_navbar {
-                                /*background:#685563 !important;*/
-                                opacity: 0;
-                                display: none;
-                            }
+                            /*#oe_main_menu_navbar, .o_main_navbar {*/
+                            /*    !*background:#685563 !important;*!*/
+                            /*    opacity: 0;*/
+                            /*    display: none;*/
+                            /*}*/
 
                             /*.js_language_selector button {*/
                             /*    border: 1px solid white !important;*/
                             /*    color: #fff !important;*/
                             /*}*/
-
                             #loading-overlay {
                                 position: fixed;
                                 top: 0;
@@ -68,7 +64,8 @@
                             .nav-link {
                                 color: #fff !important;
                             }
-                            .select2{
+
+                            .select2 {
                                 max-width: 100%;
                             }
 
@@ -90,7 +87,6 @@
                                 }
                             }
 
-
                             /*header{*/
                             /*    position: fixed;*/
                             /*    top: 0;*/
@@ -111,13 +107,13 @@
                         <link rel="stylesheet"
                               href="/registry_app/static/src/css/style.css"/>
                         <link rel="stylesheet"
-                              href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-                              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-                              crossorigin="anonymous"/>
+                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+                              integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+                              crossorigin="anonymous"
+                              referrerpolicy="no-referrer"/>
                         <!--                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"-->
                         <!--                              rel="stylesheet"></link>-->
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
                                 integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
                                 crossorigin="anonymous"
@@ -129,16 +125,16 @@
                 </html>
             </t>
         </xpath>
-        <xpath expr="//main" position="after">
-            <div id="loading-overlay">
-                <div class="spinner"></div>
-            </div>
-        </xpath>
+<!--        <xpath expr="//main" position="after">-->
+<!--            <div id="loading-overlay">-->
+<!--                <div class="spinner"></div>-->
+<!--            </div>-->
+<!--        </xpath>-->
 
         <!--         Header  -->
         <xpath expr="//header" position="replace">
             <t t-if="request.env.user.is_from_registry_app">
-                <header>
+                <header style="z-index: 9999">
                     <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary py-3">
                         <div class="container ps-2 pe-2">
                             <a class="navbar-brand" href="#">
@@ -160,7 +156,9 @@
                                     aria-controls="navbarSupportedContent"
                                     aria-expanded="false"
                                     aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
+<!--                                <span class="navbar-toggler-icon"></span>-->
+                                <span class="fa fa-bars"/>
+                                    <span/>
                             </button>
 
                             <div class="collapse navbar-collapse"
@@ -193,8 +191,10 @@
                                            href="/reg_app/reporting">Reports</a>
                                     </li>
                                     <li class="nav-item">
+<!--                                        <a class="nav-link text-white"-->
+<!--                                           href="/reg_app/user">Users</a>-->
                                         <a class="nav-link text-white"
-                                           href="/reg_app/user">Users</a>
+                                           href="/reg_app/users">Users</a>
                                     </li>
                                 </ul>
                                 <div class="nav navbar-nav ml-auto">
@@ -219,8 +219,6 @@
                         </div>
                     </nav>
                 </header>
-
-
             </t>
             <t t-else="">
                 <header>
@@ -284,11 +282,6 @@
                                                t-value="'nav-link font-weight-bold'"/>
                                         </t>
                                     </div>
-                                    <!--                                    <div class="quote">-->
-                                    <!--                                        <a href="/contactus"-->
-                                    <!--                                           class="btn btn-qut">-->
-                                    <!--                                            Contact Us </a>-->
-                                    <!--                                    </div>-->
                                 </div>
                             </nav>
                         </div>
@@ -304,17 +297,17 @@
                     <div class="text-white p-1 w-100">
                         <div class="d-flex justify-content-around align-center text-white">
                             <div>
-                                <t t-if="user and user.shop_id">
-                                    <p>
-                                        © 2023
-                                        <span t-esc="user.shop_id.name"/> | All
-                                        rights reserved
-                                    </p>
-                                </t>
-                                <t t-else="">
+<!--                                <t t-if="user and user.shop_id">-->
+<!--                                    <p>-->
+<!--                                        © 2023-->
+<!--                                        <span t-esc="user.shop_id.name"/> | All-->
+<!--                                        rights reserved-->
+<!--                                    </p>-->
+<!--                                </t>-->
+<!--                                <t t-else="">-->
                                     <p>© 2023 | My Shop | All rights
                                         reserved</p>
-                                </t>
+<!--                                </t>-->
                             </div>
                             <span>
                                 <t t-call="website.language_selector"/>
@@ -383,7 +376,6 @@
                                                    aria-label="Email"/>
                                         </div>
                                     </form>
-                                    <!--                                    <a class="btn btn-sub">Subscribe</a>-->
                                 </div>
                             </div>
                         </div>
@@ -401,21 +393,4 @@
             </t>
         </xpath>
     </template>
-
 </odoo>
-
-        <!--<div class="d-flex justify-content-center align-center text-white">-->
-        <!--                            <div>-->
-        <!--                                <t t-if="user and user.shop_id">-->
-        <!--                                    <p>&#169; 2023 <span-->
-        <!--                                            t-esc="user.shop_id.name"></span> Tous-->
-        <!--                                        les-->
-        <!--                                        droits sont réservés.</p>-->
-
-        <!--                                </t>-->
-        <!--                                <t t-else="">-->
-        <!--                                    <p>&#169; 2023 My Shop Tous les droits sont-->
-        <!--                                        réservés.</p>-->
-        <!--                                </t>-->
-        <!--                            </div>-->
-        <!--                        </div>-->

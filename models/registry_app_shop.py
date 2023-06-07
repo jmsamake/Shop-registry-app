@@ -14,14 +14,9 @@ class ResUsers(models.Model):
     is_from_registry_app = fields.Boolean(
         string='Is User created from Registry App', default=False)
 
-    # @api.model
-    # def create(self, vals):
-    #     vals['is_from_registry_app'] = bool(vals.get('is_from_registry_app'))
-    #     return super(ResUsers, self).create(vals)
 
     def get_pref(self):
         if self.env.user:
-            # return self.env['ir.actions.act_window']._for_xml_id('base.view_users_form_simple_modif')
             domain = [('id', '=', self.env.user.id)]
             action = \
                 self.env.ref(
@@ -30,7 +25,6 @@ class ResUsers(models.Model):
             for rec in action:
                 print('rec  %', rec)
             return action
-        # return super(ResUsers, self).get_pref()
 
 
 class RegistryAppShop(models.Model):
@@ -53,10 +47,6 @@ class RegistryAppShop(models.Model):
                                  readonly=True, help="Logged in user Company")
     active = fields.Boolean(string=_('Active'), default=True)
 
-    # user_name = fields.Char(string='User Name',
-    #                         help="Provide a user name for login")
-    # password = fields.Char(string='Password',
-    #                        help="Provide a Password for login")
 
     def open_registry_shop(self):
         """Open each shops registry interface."""
@@ -121,12 +111,12 @@ class RegistryAppShop(models.Model):
     def write(self, vals):
         """Adding the shop_id to users model"""
         if self.user_id:
-            self.user_id.write({
+            self.user_id.update({
                 'shop_id': self.id
             })
         if self.shop_users_ids:
             for user in self.shop_users_ids:
-                user.write({
+                user.update({
                     'shop_id': self.id
                 })
         return super(RegistryAppShop, self).write(vals)

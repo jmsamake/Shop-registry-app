@@ -10,3 +10,4 @@ from . import registry_app_product
 from . import registry_app_users
 from . import regsmsbroadcast
 from . import res_config_settings
+from . import ir_http

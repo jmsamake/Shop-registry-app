@@ -1,104 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_sms_broadcast" name="Clients">
-<!--        <t t-call="registry_app.custom_header"/>-->
         <t t-call="website.layout">
-        <div class="container">
-            <h1 class="text-center p-2">SMS Log</h1>
-            <div class="mb-3">
-                <a href="/sms_broadcast/form"
-                   class="btn btn-secondary">Create</a>
-            </div>
-            <div class="row">
-                <t t-foreach="sms_broadcasts" t-as="sb">
-                    <div class="col-sm-4 mb-3">
-                        <div class="card h-100 bg-light border"
-                             t-att-data-coop-id="sb.id">
-                            <div class="card-body">
-                                <h5 class="card-title"
-                                    t-esc="sb.name"></h5>
-                                <div>
-                                    <p>Broadcasting date : <span
-                                            t-esc="sb.broadcast_date"/></p>
-                                    <br/>
-                                    <p>Clients : <t
-                                            t-foreach="sb.clients_ids"
-                                            t-as="client">
-                                        <span t-esc="client.name"/>
-                                    </t></p>
-                                </div>
+            <div class="container">
+                <h1 class="text-center p-2">SMS Log</h1>
+                <div class="mb-3">
+                    <a href="/sms_broadcast/form"
+                       class="btn btn-secondary">Create</a>
+                </div>
+                <div class="row">
+                    <t t-foreach="sms_broadcasts" t-as="sb">
+                        <div class="col-sm-4 mb-3">
+                            <div class="card h-100 bg-light border"
+                                 t-att-data-coop-id="sb.id">
+                                <a t-attf-href="/sms/edit/{{sb.id}}"
+                                   style="text-decoration: none">
+                                    <div class="card-body reg_app_kanban_view"
+                                         t-att-title="'Edit ' + sb.name">
+                                        <h5 class="card-title"
+                                            t-esc="sb.name"></h5>
+                                        <div>
+                                            <p>Broadcasting date : <span
+                                                    t-esc="sb.broadcast_date"/></p>
+                                            <br/>
+                                            <p>Clients : <t
+                                                    t-foreach="sb.clients_ids"
+                                                    t-as="client">
+                                                <span t-esc="client.name"/>
+                                            </t></p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </div>
-                </t>
+                    </t>
+                </div>
             </div>
-        </div>
         </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 
     <template id="website_sms_broadcast_form_template" name="SMS Form">
         <t t-call="website.layout">
-<!--        <t t-call="registry_app.custom_header"/>-->
-        <div class="container">
-            <div>
-                <h1 class="text-center p-2">Create SMS</h1>
-                <form action="/submit_sms_broadcast" method="POST">
-                    <input type="hidden" name="csrf_token"
-                           t-att-value="request.csrf_token()"/>
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Create SMS</h1>
+                    <form action="/submit_sms_broadcast" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
 
-                    <div class="form-group">
-                        <label for="name">SMS Notification :</label>
-                        <input type="text" class="form-control" id="name"
-                               name="name" required="True"/>
-                        <br/>
-                    </div>
+                        <div class="form-group">
+                            <label for="name">SMS Notification :</label>
+                            <input type="text" class="form-control" id="name"
+                                   name="name" required="True"/>
+                            <br/>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="broadcast_date">Date:</label>
-                        <input type="datetime-local" class="form-control"
-                               id="broadcast_date"
-                               name="broadcast_date"/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <label for="client_id">Clients:</label>
-                        <select class="js-example-basic-multiple form-control"
-                                id="client_id"
-                                name="client_id" multiple="multiple">
-                            <option value="">Select a Client...</option>
-                            <t t-foreach="clients" t-as="client">
-                                <option t-att-value="client.id"><t
-                                        t-esc="client.partner_id.name"/></option>
-                            </t>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="broadcast_date">Date:</label>
+                            <input type="datetime-local" class="form-control"
+                                   id="broadcast_date"
+                                   name="broadcast_date"/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_id">Clients:</label>
+                            <select class="js-example-basic-multiple form-control"
+                                    id="client_id"
+                                    name="client_id" multiple="multiple">
+                                <option value="">Select a Client...</option>
+                                <t t-foreach="clients" t-as="client">
+                                    <option t-att-value="client.id"><t
+                                            t-esc="client.partner_id.name"/></option>
+                                </t>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="message">Message:</label>
-                        <input type="text" class="form-control" id="message"
-                               name="message"/>
-                        <br/>
-                    </div>
-                    <input type="hidden" id="selectedClients" name="selectedClients"/>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <input type="text" class="form-control" id="message"
+                                   name="message"/>
+                            <br/>
+                        </div>
+                        <input type="hidden" id="selectedClients"
+                               name="selectedClients"/>
 
-                    <!--                    <a href="#" class="btn btn-secondary" name="submit_button"-->
-                    <!--                       value="send_sms">Envoyer un SMS</a>-->
-                    <button type="submit" class="btn btn-success"
-                            name="submit_button"
-                            value="send_sms">
-                        Send Now
-                    </button>
-                    <button type="submit" class="btn btn-success"
-                            name="submit_button" value="create_record">
-                        Submit</button>
-                    <a class="btn btn-danger" t-attf-href="/reg_sms">Discard</a>
+                        <!--                    <a href="#" class="btn btn-secondary" name="submit_button"-->
+                        <!--                       value="send_sms">Envoyer un SMS</a>-->
+                        <button type="submit" class="btn btn-success"
+                                name="submit_button"
+                                value="send_sms">
+                            Send Now
+                        </button>
+                        <button type="submit" class="btn btn-success"
+                                name="submit_button" value="create_record">
+                            Submit</button>
+                        <a class="btn btn-danger" t-attf-href="/reg_sms">
+                            Discard</a>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
         </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
 
         <script type="text/javascript">
             $(document).ready(function() {
@@ -145,4 +147,171 @@
 
         </script>
     </template>
+
+    <!--    Edit SMS Broadcast-->
+    <template id="registry_app_website_sms_broadcast_edit" name="SMS Edit">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Edit SMS</h1>
+                    <form action="/update_sms_broadcast" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="sms_broadcast_id"
+                               t-att-value="sms_broadcast.id"/>
+
+                        <div class="form-group">
+                            <label for="name">SMS Notification:</label>
+                            <input type="text" class="form-control" id="name"
+                                   name="name" required="True"
+                                   t-att-value="sms_broadcast.name"/>
+                            <br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="broadcast_date">Date:</label>
+                            <input type="datetime-local" class="form-control"
+                                   id="broadcast_date" name="broadcast_date"
+                                   t-att-value="sms_broadcast.broadcast_date"/>
+                            <br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="client_id">Clients:</label>
+                            <select class="js-example-basic-multiple form-control"
+                                    id="client_id"
+                                    name="client_id" multiple="multiple">
+<!--                                <option value="">Select a Client...</option>-->
+                                <t t-foreach="clients" t-as="client">
+                                    <option t-att-value="client.id"><t
+                                            t-esc="client.partner_id.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <input type="hidden" class="form-control" id="sel_clients"
+                           required="True"
+                           t-att-value="sms_broadcast.clients_ids.ids"/>
+                        <input type="hidden" id="selectedClients"
+                               name="selectedClients"/>
+
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <input type="text" class="form-control" id="message"
+                                   name="message"
+                                   t-att-value="sms_broadcast.message"/>
+                            <br/>
+                        </div>
+
+                        <button type="submit" class="btn btn-success"
+                                name="submit_button"
+                                value="send_sms">
+                            Send Now
+                        </button>
+
+                        <button type="submit" class="btn btn-success"
+                                name="submit_button"
+                                value="update_sms_broadcast">Update</button>
+                        <a class="btn btn-danger" t-attf-href="/reg_sms">
+                            Discard</a>
+                    </form>
+                </div>
+            </div>
+        </t>
+        <script type="text/javascript">
+            $(document).ready(function() {
+            $('.js-example-basic-multiple').select2({
+            placeholder: 'Select Clients...',
+            multiple: true
+            });
+
+            var selectedClientIds = JSON.parse($('#sel_clients').val());
+            console.log(selectedClientIds,'selected client')
+            $('.js-example-basic-multiple').select2({
+            placeholder: 'Select shop users...',
+            multiple: true
+            });
+
+            $.each(selectedClientIds, function(index, clientId) {
+            var params = {
+            jsonrpc: '2.0',
+            method: 'call',
+            params: {
+            model: 'registry_app.client',
+            method: 'search_read',
+            args: [[['id', '=', clientId]], ['name']],
+            kwargs: {}
+            },
+            id: index + 1
+            };
+
+            $.ajax({
+            url: '/web/dataset/call_kw',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(params),
+            contentType: 'application/json',
+            async: false,
+            success: function(result) {
+            if (result.result &amp;&amp; result.result.length > 0) {
+            var clientName = result.result[0].name;
+            var option = new Option(clientName, clientId, true, true);
+            console.log(option)
+            // Remove existing option with the same ID
+            $('.js-example-basic-multiple option[value="' + clientId +
+            '"]').remove();
+
+            $('.js-example-basic-multiple').append(option).trigger('change');
+            }
+            },
+            error: function() {
+            console.error('Error occurred while fetching client data.');
+            }
+            });
+            });
+
+
+            $('#sssubmit').click(function(){
+            var s = $('#users option[selected="selected"]').val();
+            var t = $('#users option:selected').val();
+            <!--    alert("Set: " + s + ", Chosen: " + t);-->
+            console.log("t",t)
+            console.log("s",s)
+            });
+            });
+            $(document).ready(function() {
+            // Event handler for option selection/deselection
+            $('#client_id').change(function() {
+            var selectedOptions = $(this).val(); // Get the selected option(s)
+
+            // Get the existing values from the hidden field
+            var existingValues = $('#selectedClients').val() || [];
+            if (typeof existingValues === 'string') {
+            existingValues = [existingValues];
+            }
+
+            // Add selected options to the existing values
+            for (var i = 0; i &lt; selectedOptions.length; i++) {
+            var optionValue = selectedOptions[i];
+            if (!existingValues.includes(optionValue)) {
+            existingValues.push(optionValue);
+            }
+            }
+
+            // Remove deselected options from the existing values
+            var updatedValues = existingValues.filter(function(value) {
+            return selectedOptions.includes(value);
+            });
+
+            // Update the hidden field with the updated values
+            $('#selectedClients').val(updatedValues);
+
+            // Log the selected clients to the console
+            console.log(updatedValues);
+            });
+            });
+
+        </script>
+    </template>
+
+
 </odoo>

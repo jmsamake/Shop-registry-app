@@ -46,16 +46,12 @@ class RegistryApp(models.Model):
     active = fields.Boolean(string=_('Active'), default=True)
 
     def close_input(self):
-        print('entereed')
         self.state = 'closed'
 
     def validate(self):
         self.state = 'validated'
 
     def send_sms(self):
-        # my_sms = self.env['sms.composer'].create({'numbers':
-        # '+916282717330', 'body': 'New lead has been created in Odoo'})
-        # print('my_sms', my_sms) my_sms.action_send_sms()
         view_id = self.env.ref('registry_app.view_sms_broadcast_form').id
 
         return {
@@ -64,7 +60,6 @@ class RegistryApp(models.Model):
             'view_mode': 'form',
             'target': 'new',
             'view_id': view_id,
-            # 'context': {'shop_id': self.id},
         }
 
     def cancel(self):
@@ -93,17 +88,16 @@ class RegistryApp(models.Model):
     @api.model
     def create(self, values):
         """Override default Odoo create function and extend."""
-        print('context', self._context.get('shop_id'))
-        print('usr shop',self.env.user.shop_id)
         values.update({
             'shop_id': self.env.user.shop_id.id
         })
-        print(values, 'values')
+        print(values, 'new values')
         return super(RegistryApp, self).create(values)
 
     @api.constrains('date')
     def _check_unique_per_day(self):
         """Restrict One record per day"""
+        print('cont')
         for record in self:
             domain = [
                 ('date', '=', record.date),

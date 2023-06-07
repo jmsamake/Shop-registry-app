@@ -248,7 +248,7 @@ html {
 
 
 .filter_req_report {
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 1rem 1rem 0 !important;
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -283,3 +283,36 @@ html {
 
 }
 
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, .9);
+}
+
+/*#oe_main_menu_navbar, .o_main_navbar {*/
+/*    opacity: 0;*/
+/*    display: none;*/
+/*}*/
+
+#oe_main_menu_navbar {
+    display: none;
+    z-index:0
+}

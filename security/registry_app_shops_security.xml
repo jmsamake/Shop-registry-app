@@ -26,17 +26,17 @@
 <!--        <field name="active" eval="False"/> &lt;!&ndash; opw-2027005: this rules breaks sale "see own document" &ndash;&gt;-->
     </record>
 
-        <record id="registry_app_shop_rule_shop_owner" model="ir.rule">
-        <field name="name">Registry app shop owner can view his records</field>
-        <field ref="registry_app.model_registry_app_shop" name="model_id"/>
-        <field name="domain_force">[('user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('registry_app.registry_app_shop_owner'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-<!--        <field name="active" eval="False"/> &lt;!&ndash; opw-2027005: this rules breaks sale "see own document" &ndash;&gt;-->
-    </record>
+<!--        <record id="registry_app_shop_rule_shop_owner" model="ir.rule">-->
+<!--        <field name="name">Registry app shop owner can view his records</field>-->
+<!--        <field ref="registry_app.model_registry_app_shop" name="model_id"/>-->
+<!--        <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('registry_app.registry_app_shop_owner'))]"/>-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="False"/>-->
+<!--        <field name="perm_create" eval="False"/>-->
+<!--        <field name="perm_unlink" eval="False"/>-->
+<!--&lt;!&ndash;        <field name="active" eval="False"/> &lt;!&ndash; opw-2027005: this rules breaks sale "see own document" &ndash;&gt;&ndash;&gt;-->
+<!--    </record>-->
 
         <record id="registry_app_shop_rule_shop_user" model="ir.rule">
         <field name="name">Registry app shop users can view his records</field>

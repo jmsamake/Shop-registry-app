@@ -1,185 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_client" name="Clients">
-<!--        <t t-call="registry_app.custom_header"/>-->
-        <t t-call="website.layout">
+    <t t-call="website.layout">
+        <style>
+            .edit-icon {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+            }
+        </style>
         <div class="container">
             <h1 class="text-center p-2">Clients</h1>
             <div class="mb-3">
-                <a href="/clients/form"
-                   class="btn btn-secondary">Create</a>
+                <a href="/clients/form" class="btn btn-secondary">Create</a>
             </div>
             <div class="row">
                 <t t-foreach="clients" t-as="cl">
                     <div class="col-sm-4 mb-3">
-                        <a t-attf-href="/web#id={{cl.id}}&amp;view_type=form&amp;model=registry_app.client" style="text-decoration: none">
-                        <div class="card h-100 bg-light border"
-                             t-att-data-coop-id="cl.id">
-                            <div class="card-body reg_app_kanban_view" t-att-title="'Edit ' + cl.partner_id.name">
-                                <h5 class="card-title"
-                                    t-esc="cl.partner_id.name"></h5>
-                                <!--                                    <div>-->
-                                <!--                                        <a class="btn btn-secondary"-->
-                                <!--                                           t-attf-href="/cooperative/{{ prod.id }}/shops">-->
-                                <!--                                            Go to Shop</a>-->
-                                <!--                                    </div>-->
+                        <a t-attf-href="/clients/edit/{{cl.id}}"
+                           style="text-decoration: none">
+                            <div class="card h-100 bg-light border" t-att-data-coop-id="cl.id">
+                                <div class="card-body reg_app_kanban_view" t-att-title="'Edit ' + cl.partner_id.name">
+<!--                                    <a t-attf-href="/clients/edit/{{cl.id}}">-->
+<!--                                    <i class="fas fa-edit edit-icon">-->
+<!--                                    </i>-->
+<!--                                    </a>-->
+                                    <h5 class="card-title" t-esc="cl.partner_id.name"></h5>
+                                </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 </t>
             </div>
         </div>
-        </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
-        <!--         <style>-->
-        <!--        -->
-        <!--    </style>-->
-    </template>
+    </t>
+</template>
 
-    <template id="website_reg_client_form_template" name="Client Form">
-<!--        <t t-call="registry_app.custom_header"/>-->
-        <t t-call="website.layout">
+
+
+    <template id="website_edit_client_template" name="Edit Client">
+    <t t-call="website.layout">
         <div class="container">
             <div>
-                <h1 class="text-center p-2">Create Clients</h1>
-                <form action="/submit_clients" method="POST">
-                    <input type="hidden" name="csrf_token"
-                           t-att-value="request.csrf_token()"/>
-
+                <h1 class="text-center p-2">Edit Client</h1>
+                <form action="/update_client" method="POST">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="client_id" t-att-value="client.id"/>
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name"
-                               name="name" required="True"/>
+                        <input type="text" class="form-control" id="name" name="name"
+                               t-att-value="client.partner_id.name" required="True"/>
                     </div>
-
                     <div class="form-group">
                         <label for="client_number">Client Number :</label>
-                        <input type="text" class="form-control"
-                               id="client_number"
-                               name="client_number"/>
+                        <input type="text" class="form-control" id="client_number"
+                               name="client_number" t-att-value="client.client_number"/>
                     </div>
-
                     <div class="form-group">
                         <label for="phone">Phone :</label>
-                        <input type="tel" class="form-control" id="phone"
-                               name="phone"/>
+                        <input type="tel" class="form-control" id="phone" name="phone"
+                               t-att-value="client.phone"/>
                     </div>
-
                     <div class="form-group">
                         <label for="email">E-mail :</label>
-                        <input type="email" class="form-control" id="email"
-                               name="email"/>
+                        <input type="email" class="form-control" id="email" name="email"
+                               t-att-value="client.email"/>
                     </div>
-
                     <div class="form-group">
                         <label for="street">Street :</label>
-                        <input type="test" class="form-control" id="street"
-                               name="street"/>
+                        <input type="test" class="form-control" id="street" name="street"
+                               t-att-value="client.street"/>
                     </div>
-                    <button type="submit" class="btn btn-success">
-                        Submit</button>
-                    <a class="btn btn-danger"
-                       t-attf-href="/reg_clients">
-                        Discard</a>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a class="btn btn-danger" t-attf-href="/reg_clients">Cancel</a>
                 </form>
             </div>
         </div>
-        </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
-    </template>
+    </t>
+</template>
 
+
+    <template id="website_reg_client_form_template" name="Client Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Create Clients</h1>
+                    <form action="/submit_clients" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name"
+                                   name="name"
+                                   required="True"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_number">Client Number :</label>
+                            <input type="text" class="form-control"
+                                   id="client_number"
+                                   name="client_number"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone :</label>
+                            <input type="tel" class="form-control" id="phone"
+                                   name="phone"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail :</label>
+                            <input type="email" class="form-control" id="email"
+                                   name="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Street :</label>
+                            <input type="test" class="form-control" id="street"
+                                   name="street"/>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Submit</button>
+                        <a class="btn btn-danger" t-attf-href="/reg_clients">
+                            Discard</a>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
 
     <!--    USERS-->
+<!--    <template id="registry_app_website_users" name="Users">-->
+<!--        <t t-call="website.layout">-->
+<!--            <div class="container">-->
+<!--                <h1 class="text-center p-2">Users</h1>-->
+<!--                <div class="mb-3">-->
+<!--                    <a href="/users/form" class="btn btn-secondary">Create</a>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <t t-foreach="users" t-as="user">-->
+<!--                        <div class="col-sm-4 mb-3">-->
+<!--                            <div class="card h-100 bg-light border"-->
+<!--                                 t-att-data-coop-id="user.id">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title"-->
+<!--                                        t-esc="user.name"></h5>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+
+
     <template id="registry_app_website_users" name="Users">
-<!--        <t t-call="registry_app.custom_header"/>-->
         <t t-call="website.layout">
-        <div class="container">
-            <h1 class="text-center p-2">Users</h1>
-            <div class="mb-3">
-                <a href="/users/form"
-                   class="btn btn-secondary">Create</a>
-            </div>
-            <div class="row">
-                <t t-foreach="users" t-as="user">
-                    <div class="col-sm-4 mb-3">
-                        <div class="card h-100 bg-light border"
-                             t-att-data-coop-id="user.id">
-                            <div class="card-body">
-                                <h5 class="card-title"
-                                    t-esc="user.name"></h5>
-                            </div>
-                        </div>
-                    </div>
-                </t>
-            </div>
-        </div>
-        </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
-    </template>
-
-
-    <template id="website_reg_user_form_template" name="Users Form">
-<!--        <t t-call="registry_app.custom_header"/>-->
-        <t t-call="website.layout">
-        <div class="container">
-
-            <div>
-                <h1 class="text-center p-2">Create Users</h1>
-
-
-                <form action="/submit_users" method="POST">
-                    <input type="hidden" name="csrf_token"
-                           t-att-value="request.csrf_token()"/>
-
-                    <div class="text-center form-group col-sm-8 mb-4">
-                    <t t-if="error_msg">
-                        <div class="alert alert-danger">
-                            <p t-esc="error_msg"/>
+            <div class="container">
+                <h1 class="text-center p-2">Users</h1>
+                <div class="mb-3">
+                    <a href="/users/form"
+                       class="btn btn-secondary">Create</a>
+                </div>
+                <div class="row">
+                    <t t-foreach="users" t-as="user">
+                        <div class="col-sm-4 mb-3">
+                            <a t-attf-href="/user/edit/{{user.id}}"
+                               style="text-decoration: none">
+<!--                            <a t-attf-href="/web#id={{user.id}}&amp;view_type=form&amp;model=registry_app.users"-->
+<!--                               style="text-decoration: none">-->
+                                <div class="card h-100 bg-light border"
+                                     t-att-data-coop-id="user.id">
+                                    <div class="card-body reg_app_kanban_view"
+                                         t-att-title="'Edit ' + user.name">
+                                        <h5 class="card-title"
+                                            t-esc="user.name"></h5>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </t>
                 </div>
+            </div>
+        </t>
+    </template>
 
+
+
+    <template id="website_reg_user_form_template" name="Users Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h1 class="text-center p-2">Create Users</h1>
+                    <form action="/submit_users" method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <div class="text-center form-group col-sm-8 mb-4">
+                            <t t-if="error_msg">
+                                <div class="alert alert-danger">
+                                    <p t-esc="error_msg"/>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                Name:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control"
+                                       id="user_name" name="name"
+                                       required="True"/>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label for="email" class="col-sm-2 col-form-label">
+                                E-mail:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control"
+                                       id="user_email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label for="user_password"
+                                   class="col-sm-2 col-form-label">Password
+                                :</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control"
+                                       id="user_password" name="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <div class="col-sm-6 offset-sm-2">
+                                <button type="submit" class="btn btn-success">
+                                    Submit</button>
+                                <a class="btn btn-danger"
+                                   t-attf-href="/reg_app/users">Discard</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+<!--    User Edit Form-->
+    <template id="registry_app_website_users_edit" name="Edit User">
+    <t t-call="website.layout">
+        <div class="container">
+            <div>
+                <h1 class="text-center p-2">Edit User</h1>
+                <form action="/update_user" method="POST">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="user_id" t-att-value="user.id"/>
                     <div class="form-group row mb-4">
-                        <label for="name" class="col-sm-2 col-form-label">
-                            Name:</label>
+                        <label for="name" class="col-sm-2 col-form-label">Name:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control"
-                                   id="user_name" name="name" required="True"/>
+                            <input type="text" class="form-control" id="user_name" name="name" required="True"
+                                   t-att-value="user.name"/>
                         </div>
                     </div>
-
                     <div class="form-group row mb-4">
-                        <label for="email" class="col-sm-2 col-form-label">
-                            E-mail:</label>
+                        <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control"
-                                   id="user_email" name="email"/>
+                            <input type="text" class="form-control" id="user_email" name="login"
+                                   t-att-value="user.email"/>
                         </div>
                     </div>
-
                     <div class="form-group row mb-4">
-                        <label for="user_password"
-                               class="col-sm-2 col-form-label">Password
-                            :</label>
+                        <label for="user_password" class="col-sm-2 col-form-label">Password:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control"
-                                   id="user_password" name="password"/>
+                            <input type="password" class="form-control" id="user_password" name="password"
+                                   t-att-value="user.password"/>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <div class="col-sm-6 offset-sm-2">
-                            <button type="submit" class="btn btn-success">
-                                Submit</button>
-                            <a class="btn btn-danger"
-                               t-attf-href="/reg_app/users">Discard</a>
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <a class="btn btn-danger" t-attf-href="/reg_app/users">Discard</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
-    </template>
+    </t>
+</template>
+
 
 </odoo>

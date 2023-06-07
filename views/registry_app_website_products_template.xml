@@ -12,9 +12,7 @@
                     <div class="row">
                         <t t-foreach="products" t-as="prod">
                             <div class="col-sm-4 mb-3">
-                                <!--                                t-attf-href="/edit_product/{{prod.id}}"-->
-
-                                <a t-attf-href="/web#id={{prod.id}}&amp;view_type=form&amp;model=registry_app.product"
+                                <a t-attf-href="/reg_products/edit/{{prod.id}}"
                                    style="text-decoration: none">
                                     <div class="card h-100 bg-light border"
                                          t-att-data-coop-id="prod.id">
@@ -26,7 +24,6 @@
                                     </div>
                                 </a>
                             </div>
-
                         </t>
                     </div>
                 </div>
@@ -36,7 +33,6 @@
 
 
     <template id="website_reg_products_form_template" name="Products Form">
-        <!--        <t t-call="registry_app.custom_header"/>-->
         <t t-call="website.layout">
             <div class="container">
                 <div>
@@ -44,37 +40,66 @@
                     <form action="/submit_products" method="POST">
                         <input type="hidden" name="csrf_token"
                                t-att-value="request.csrf_token()"/>
-
                         <div class="form-group">
                             <label for="name">Name :</label>
                             <input type="text" class="form-control" id="name"
                                    name="name" required="True"/>
                             <br/>
                         </div>
-
                         <div class="form-group">
                             <label for="price">Price :</label>
                             <input type="text" class="form-control" id="price"
                                    name="price"/>
                             <br/>
                         </div>
-
                         <div class="form-group">
                             <label for="cost">Cost :</label>
                             <input type="text" class="form-control" id="cost"
                                    name="price"/>
                             <br/>
                         </div>
-
                         <button type="submit" class="btn btn-success">Submit
                         </button>
-                        <a class="btn btn-danger"
-                           t-attf-href="/reg_products">
+                        <a class="btn btn-danger" t-attf-href="/reg_products">
                             Discard</a>
                     </form>
                 </div>
             </div>
         </t>
-        <!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
+
+
+    <template id="website_reg_products_edit_template" name="Product Edit Form">
+    <t t-call="website.layout">
+        <div class="container">
+            <div>
+                <h1 class="text-center p-2">Edit Product</h1>
+                <form action="/update_reg_product" method="POST">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                    <div class="form-group">
+                        <label for="name">Name :</label>
+                        <input type="text" class="form-control" id="name" name="name" t-att-value="product.product_id.name" required="True"/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price :</label>
+                        <input type="text" class="form-control" id="price" name="price" t-att-value="product.price"/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost">Cost :</label>
+                        <input type="text" class="form-control" id="cost" name="cost" t-att-value="product.cost"/>
+                        <br/>
+                    </div>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a class="btn btn-danger" t-attf-href="/reg_products">Discard</a>
+                </form>
+            </div>
+        </div>
+    </t>
+</template>
+
+
+
 </odoo>

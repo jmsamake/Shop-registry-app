@@ -63,10 +63,26 @@ class RegistryAppClient(models.Model):
         })
         print(new_partner, 'new_partner')
         print('shop_id', self.env.user.shop_id)
-        # values['shop_id'] = shop_id
         values.update({
             'shop_id': self.env.user.shop_id.id,
             'partner_id': new_partner.id
         })
         print(values, 'values')
         return super(RegistryAppClient, self).create(values)
+
+    @api.model
+    def write(self, values):
+        # Update the related partner record
+        partner_values = {
+            'name': values.get('name'),
+            'phone': values.get('phone'),
+            'email': values.get('email'),
+            'street': values.get('street'),
+        }
+        self.partner_id.write(partner_values)
+        return super(RegistryAppClient, self).write(values)
+
+
+    def unlink(self):
+        self.partner_id.unlink()
+        return super(RegistryAppClient, self).unlink()

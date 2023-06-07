@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registry_app_website_registry_log" name="Registry Log">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1 class="text-center p-2">Registry Log</h1>
+                <div class="mb-3">
+                    <a class="btn btn-secondary"
+                       t-attf-href="/shops/{{user.shop_id.id}}/registries">
+                        Create</a>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Created by</th>
+                            <th class="text-center">Total Sales</th>
+                            <th class="text-center">Total Purchase</th>
+                            <th class="text-center">State</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="registry_log" t-as="reg_log">
+                            <tr>
+                                <td class="text-center"
+                                    t-esc="reg_log.name"></td>
+                                <td class="text-center"
+                                    t-esc="reg_log.date"></td>
+                                <td class="text-center"
+                                    t-esc="reg_log.create_uid.name"></td>
+                                <td class="text-center"
+                                    t-esc="reg_log.total_sales"></td>
+                                <td class="text-center"
+                                    t-esc="reg_log.total_purchase"></td>
+                                <td class="text-center"
+                                    t-esc="reg_log.state"></td>
+                                <td class="text-center">
+                                    <a class="btn btn-secondary"
+                                       t-attf-href="/report/pdf/registry_app.report_registry_log/#{reg_log.id}">
+                                        <i class="fa fa-download"></i>
+                                    </a>
+                                    <!--                                    <a class="btn btn-secondary" t-attf-href="/registry_log/{{ reg_log.id }}/download">-->
+                                    <!--                                        <i class="fa fa-download"></i>-->
+                                    <!--                                    </a>-->
+                                    <a class="btn btn-secondary"
+                                       t-attf-href="/registry_log/{{ reg_log.id }}/edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="registry_app_shop_edit_form_template"
+              name="Registry App Shop Edit Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <div id="notificationContainer"
+                     style="position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>
+                <div>
+                    <h1 class="text-center p-2">Edit Shop</h1>
+                    <form id="registry_web_form" method="post"
+                          t-attf-action="/registries/edit"
+                          class="container mr-2">
+
+                        <input type="hidden" name="reg_log_id"
+                               t-att-value="reg_log.id"/>
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <div class="form-group">
+                            <label class="col-form-label">Name :</label>
+                            <div>
+                                <input type="text" class="form-control"
+                                       t-att-value="reg_log.name"
+                                       required="required" readonly="True"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Date</label>
+                            <div>
+                                <input type="text" name="date"
+                                       class="form-control" t-att-value="date"
+                                       required="required" readonly="True"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item text-primary"
+                                    role="presentation">
+                                    <button class="nav-link active"
+                                            id="home-tab" data-bs-toggle="tab"
+                                            data-bs-target="#home" type="button"
+                                            role="tab" aria-controls="home"
+                                            aria-selected="true">Sales</button>
+                                </li>
+                                <li class="nav-item text-primary"
+                                    role="presentation">
+                                    <button class="nav-link" id="profile-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#profile"
+                                            type="button" role="tab"
+                                            aria-controls="profile"
+                                            aria-selected="false">Costs</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home"
+                                     role="tabpanel" aria-labelledby="home-tab"
+                                     style="overflow-x: auto">
+                                    <table id="myTable" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Client</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="reg_log.sale_app_ids"
+                                               t-as="sale">
+                                                <tr>
+                                                    <td style="width: 35%">
+                                                        <select name="product_sale"
+                                                                id="product_sale"
+                                                                class="form-control">
+                                                            <option value="">
+                                                                Select
+                                                                Product</option>
+                                                            <t t-foreach="products"
+                                                               t-as="prod">
+                                                                <option t-att-value="prod.id"
+                                                                        t-att-selected="prod.id == sale.product_id.id"><t
+                                                                        t-esc="prod.product_id.name"/></option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td style="width: 15%"><input
+                                                            type="number"
+                                                            name="price_sale"
+                                                            id="price_sale"
+                                                            class="form-control"
+                                                            t-att-value="sale.price"/></td>
+                                                    <td style="width: 15%"><input
+                                                            type="number"
+                                                            name="quantity_sale"
+                                                            class="form-control"
+                                                            id="quantity_sale"
+                                                            t-att-value="sale.quantity"/></td>
+                                                    <td style="width: 35%">
+                                                        <select name="client_sale"
+                                                                id="client_sale"
+                                                                class="form-control">
+                                                            <option value="">
+                                                                Select
+                                                                Client</option>
+                                                            <t t-foreach="clients"
+                                                               t-as="cli">
+                                                                <option t-att-value="cli.id"
+                                                                        t-att-selected="cli.id == sale.client_id.id"><t
+                                                                        t-esc="cli.name"/></option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-danger deleteRowBtn"><i
+                                                                class="fas fa-times"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <a type="button" class="text-primary"
+                                       id="addRowBtn">Add a Line</a>
+                                </div>
+                                <div class="tab-pane fade" id="profile"
+                                     role="tabpanel"
+                                     aria-labelledby="profile-tab"
+                                     style="overflow-x: auto">
+                                    <table id="expenseTable" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="th-lg">Product</th>
+                                                <th>Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="reg_log.purchase_app_ids"
+                                               t-as="expense">
+                                                <!--                                                <tr>-->
+                                                <!--                                                    <td style="width: 50%">-->
+                                                <!--                                                        <select name="product_expense"-->
+                                                <!--                                                                id="product_expense"-->
+                                                <!--                                                                class="form-control">-->
+                                                <!--                                                            <option value="">-->
+                                                <!--                                                                Select-->
+                                                <!--                                                                Product</option>-->
+                                                <!--                                                            <t t-foreach="products"-->
+                                                <!--                                                               t-as="prod">-->
+                                                <!--                                                                <option t-att-value="prod.id"-->
+                                                <!--                                                                        t-att-selected="prod.id == expense.product_id.id"><t-->
+                                                <!--                                                                        t-esc="prod.product_id.name"/></option>-->
+                                                <!--                                                            </t>-->
+                                                <!--                                                        </select>-->
+                                                <!--                                                    </td>-->
+                                                <!--                                                    <td style="width: 50%"><input-->
+                                                <!--                                                            type="number"-->
+                                                <!--                                                            name="cost_expense"-->
+                                                <!--                                                            id="cost_expense"-->
+                                                <!--                                                            class="form-control"-->
+                                                <!--                                                            t-att-value="expense.cost"/></td>-->
+                                                <!--                                                    <td><button-->
+                                                <!--                                                            class="btn btn-danger deleteExpenseRowBtn"><i-->
+                                                <!--                                                            class="fas fa-times"></i></button></td>-->
+                                                <!--                                                </tr>-->
+
+                                                <tr>
+                                                    <td style="width: 35%">
+                                                        <select name="exp_product"
+                                                                id="exp_product"
+                                                                class="form-control">
+                                                            <option value="">
+                                                                Select
+                                                                Product</option>
+                                                            <t t-foreach="products"
+                                                               t-as="prod">
+                                                                <option t-att-value="prod.id"
+                                                                        t-att-selected="prod.id == expense.product_id.id"><t
+                                                                        t-esc="prod.product_id.name"/></option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td style="width: 15%"><input
+                                                            type="number"
+                                                            name="exp_cost"
+                                                            id="exp_cost"
+                                                            class="form-control"
+                                                            t-att-value="expense.cost"
+                                                            step="0.01"/>
+                                                    </td>
+                                                    <td><button
+                                                            class="btn btn-danger deleteExpenseRowBtn"><i
+                                                            class="fas fa-times"></i></button></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <a type="button" class="text-primary"
+                                       id="addExpenseRowBtn">Add a Line</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group"
+                             t-if="request.env.user.has_group('registry_app.registry_app_shop_owner')">
+                            <label class="col-form-label">State</label>
+                            <div>
+                                <select name="state" class="form-control"
+                                        t-value="reg_log.state">
+                                    <option value="opened"
+                                            t-att-selected="reg_log.state == 'opened'">
+                                        Opened</option>
+                                    <option value="validated"
+                                            t-att-selected="reg_log.state == 'validated'">
+                                        Validated</option>
+                                    <option value="closed"
+                                            t-att-selected="reg_log.state == 'closed'">
+                                        Closed</option>
+                                    <option value="draft"
+                                            t-att-selected="reg_log.state == 'draft'">
+                                        Cancelled</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">
+                            Save</button>
+                        <a class="btn btn-danger"
+                           t-attf-href="/registry_log">
+                            Discard</a>
+                    </form>
+                </div>
+            </div>
+
+            <style>
+                ul.nav.nav-tabs li.nav-item button.nav-link.active {
+                    background-color: #0A58CA !important;
+                }
+
+                ul.nav.nav-tabs li.nav-item button.nav-link:not(.active) {
+                    /*background-color: white;*/
+                    color: black !important;
+                }
+
+                /* Chrome, Safari, Edge, Opera */
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                /* Firefox */
+                input[type=number] {
+                    -moz-appearance: textfield;
+                }
+
+            </style>
+            <script type="text/javascript"
+                    src="/registry_app/static/src/js/new.js"/>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                $('#registry_web_form').on('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                $.ajax({
+                type: 'POST',
+                url: '/registries/edit',
+                data: $(this).serialize(),
+                success: function(response) {
+                if (response.error) {
+                console.log(response.error)
+                // Display the error message as a sticky notification
+                <!--                var alertHtml = '<div-->
+                <!--                    class="alert alert-danger alert-dismissible fade show"-->
+                <!--                    role="alert">' +-->
+                <!--                '  <strong>Error : </strong>'+ response.error +-->
+                <!--                ' <button type="button" class="close" data-dismiss="alert"-->
+                <!--                          aria-label="Close">' +-->
+                <!--                    ' <span aria-hidden="true"><i-->
+                <!--                            class="fas fa-times"></i></span>' +-->
+                <!--                    '    <span class="sr-only">Close</span>' +-->
+                <!--                    ' </button>' +-->
+                <!--                '</div>';-->
+                <!--                $('#notificationContainer').append(alertHtml);-->
+                } else {
+                // Success handling
+                // ...
+                }
+                },
+                error: function() {
+                // Error handling
+                // ...
+                }
+                });
+                });
+                });
+            </script>
+        </t>
+    </template>
+
+
+</odoo>

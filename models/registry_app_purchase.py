@@ -8,9 +8,8 @@ class RegistryAppPurchase(models.Model):
     _description = 'Purchase Registries'
     _inherit = ['mail.thread']
 
-    # name = fields.Char(string='Name', required=True)
     product_id = fields.Many2one('registry_app.product', string=_('Product'),copy=False, domain=lambda self: [('shop_id', '=', self.env.user.shop_id.id)])
-    cost = fields.Float(related='product_id.cost', readonly=False,copy=False)
+    cost = fields.Float(string='Cost', readonly=False,copy=False)
     registry_app_id = fields.Many2one('registry_app.registry_app',copy=False)
     client_id = fields.Many2one('registry_app.client', string=_('Client'),copy=False,domain=lambda self: [('shop_id', '=', self.env.user.shop_id.id)])
     company_id = fields.Many2one('res.company', string='Company',

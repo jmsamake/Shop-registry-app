@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registry_app_website_cooperatives" name="Cooperatives">
-<!--        <t t-call="registry_app.custom_header"/>-->
         <t t-call="website.layout">
         <div class="container">
             <h1 class="text-center p-2">Cooperatives</h1>
@@ -14,6 +13,8 @@
             <div class="row">
                 <t t-foreach="cooperatives" t-as="coop">
                     <div class="col-sm-4 mb-3">
+                        <a t-attf-href="/web#id={{coop.id}}&amp;view_type=form&amp;model=registry_app.cooperatives"
+                                   style="text-decoration: none">
                         <div class="card h-100 bg-light border"
                              t-att-data-coop-id="coop.id">
                             <div class="card-body">
@@ -26,60 +27,44 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </t>
             </div>
         </div>
         </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
-        <!--         <style>-->
-        <!--        -->
-        <!--    </style>-->
     </template>
 
     <template id="cooperative_form_template" name="Cooperative Form">
-<!--        <t t-call="registry_app.custom_header"/>-->
         <t t-call="website.layout">
         <div class="container">
             <div>
                 <h1 class="text-center p-2">Create Cooperatives</h1>
                 <form action="/submit_cooperative" method="POST">
-                    <input type="hidden" name="csrf_token"
-                           t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     <div class="form-group">
                         <label for="name">Name :</label>
-                        <input type="text" class="form-control" id="name"
-                               name="name" required="True"/>
+                        <input type="text" class="form-control" id="name" name="name" required="True"/>
                         <br/>
                     </div>
                     <br/>
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="shop_ids">Shops:</label>-->
-                    <!--                        <input type="text" class="form-control" id="shop_ids"-->
-                    <!--                               name="shop_ids"/>-->
-                    <!--                        <br/>-->
-                    <!--                    </div>-->
                     <div class="form-group">
                         <label for="user_id">Cooperative Owner:</label>
-                        <select class="form-control" id="user_id"
-                                name="user_id">
+                        <select class="form-control" id="user_id" name="user_id">
                             <option value="">Select a user...</option>
                             <t t-foreach="users" t-as="user">
-                                <option t-att-value="user.id"><t
-                                        t-esc="user.name"/></option>
+                                <option t-att-value="user.id">
+                                    <t t-esc="user.name"/>
+                                </option>
                             </t>
                         </select>
                     </div>
                     <br/>
-                    <button type="submit" class="btn btn-success">
-                        Submit</button>
-                    <a class="btn btn-danger"
-                       t-attf-href="/cooperatives">
-                        Discard</a>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a class="btn btn-danger" t-attf-href="/cooperatives">Discard</a>
                 </form>
             </div>
         </div>
         </t>
-<!--        <t t-call="registry_app.registry_app_website_reg_app_footer_template"/>-->
     </template>
 </odoo>
